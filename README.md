@@ -1,1 +1,371 @@
-# shrimplines.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neuro Thinker | Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for minimalist look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb {
+            background-color: #A7C49D; /* Matcha Green */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #e6e6e6; /* Base background */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5; /* Muji Light Background */
+        }
+        /* Base Neomorphic style for elements (The Hospital/Muji Core) */
+        .neuo-card {
+            background: #F5F5F5;
+            box-shadow: 8px 8px 16px #e0e0e0, -8px -8px 16px #ffffff;
+            transition: all 0.2s ease-in-out;
+        }
+        .neuo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 12px 12px 24px #d1d1d1, -12px -12px 24px #ffffff;
+        }
+        .neuo-button {
+            background: #F5F5F5;
+            box-shadow: 4px 4px 8px #e0e0e0, -4px -4px 8px #ffffff;
+        }
+        .neuo-button:active {
+            box-shadow: inset 2px 2px 5px #c4c4c4, inset -2px -2px 5px #ffffff;
+            transform: translateY(1px);
+        }
+        /* Inner Neomorphic for selected states (Matcha/Bamboo Accent) */
+        .neuo-active-inner {
+            box-shadow: inset 4px 4px 8px #d1d1d1, inset -4px -4px 8px #ffffff;
+            color: #A7C49D; /* Matcha Green accent */
+            font-weight: 600;
+        }
+    </style>
+    <script>
+        // Custom Tailwind Config for the Neomorphic/Muji palette
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'muji-bg': '#F5F5F5',
+                        'matcha-green': '#A7C49D',
+                        'wood-accent': '#B8B3A8', /* Updated to a cooler, bamboo-like wood tone */
+                        'bamboo-accent': '#92AC7D', /* New accent color */
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-muji-bg min-h-screen text-gray-800">
+
+    <div class="flex flex-col md:flex-row max-w-7xl mx-auto p-4 md:p-8 space-y-8 md:space-y-0 md:space-x-8">
+
+        <!-- Sidebar / Navigation (Neomorphic Base) -->
+        <aside id="sidebar" class="md:w-1/4 p-6 rounded-3xl neuo-card sticky top-8 h-fit">
+            
+            <!-- Branding Area: Brains + Chill -->
+            <header class="pb-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <!-- Brain/Neurosurgery Icon (Inline SVG) -->
+                    <svg class="w-10 h-10 text-matcha-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 0 0-4.9 18.97c-.75-.02-1.4-.41-1.74-1.01-.27-.47-.44-.9-.44-1.46 0-1.8.8-3.4 2.2-4.6.4-.3.9-.5 1.4-.5h.1c.5 0 1 .2 1.4.5.4.3.7.8.8 1.3.1.5.2 1.1.2 1.6 0 1.3-.2 2.6-.6 3.8A10 10 0 0 0 12 2z"></path>
+                        <path d="M12 2a10 10 0 0 1 4.9 18.97c.75-.02 1.4-.41 1.74-1.01.27-.47.44-.9.44-1.46 0-1.8-.8-3.4-2.2-4.6-.4-.3-.9-.5-1.4-.5h-.1c-.5 0-1 .2-1.4.5-.4.3-.7.8-.8 1.3-.1.5-.2 1.1-.2 1.6 0 1.3.2 2.6.6 3.8A10 10 0 0 1 12 2z"></path>
+                        <line x1="12" y1="18" x2="12" y2="22"></line>
+                    </svg>
+                    <h1 class="text-2xl font-extrabold text-bamboo-accent">NEURO THINKER</h1>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">Implants & The Irreverent</p>
+            </header>
+
+            <!-- Navigation Links -->
+            <nav class="mt-6 space-y-2" id="main-nav">
+                <a href="#" id="nav-home" onclick="navigateTo('home', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
+                    Home (The Overthinker)
+                </a>
+                <a href="#" id="nav-posts" onclick="navigateTo('posts', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
+                    Artifacts & Thoughts
+                </a>
+                <a href="#" id="nav-projects" onclick="navigateTo('projects', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
+                    Project Portfolio (Bugs & Pi)
+                </a>
+                <a href="#" id="nav-about" onclick="navigateTo('about', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
+                    About Me (Matcha, Frogs, Muji)
+                </a>
+            </nav>
+
+            <!-- Layout Switcher (The Core Feature) -->
+            <div id="layout-switcher-container" class="mt-8 pt-6 border-t border-gray-200 hidden">
+                <h3 class="text-sm font-semibold mb-3 text-gray-500 uppercase">View Modes</h3>
+                <div class="flex space-x-3">
+                    <!-- Layout 1: The Thinker's Desk (List View) -->
+                    <button id="layout-1-btn" onclick="switchLayout(1)" class="p-3 rounded-xl neuo-button flex-1 transition-all">
+                        <!-- List/Desk Icon (Inline SVG) -->
+                        <svg class="w-6 h-6 mx-auto text-gray-400" id="icon-layout-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="9"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                    </button>
+                    <!-- Layout 2: The Implant View (Grid View) -->
+                    <button id="layout-2-btn" onclick="switchLayout(2)" class="p-3 rounded-xl neuo-button flex-1 transition-all">
+                        <!-- Grid/Component Icon (Inline SVG) -->
+                        <svg class="w-6 h-6 mx-auto text-gray-400" id="icon-layout-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-xs text-center mt-3 text-gray-400">Layout: <span id="current-layout-name"></span></p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="md:w-3/4">
+            <h2 id="main-title" class="text-3xl md:text-4xl font-light mb-6"></h2>
+            <div id="content-area">
+                <!-- Content will be rendered here by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentLayout = 1;
+        let currentPage = 'home';
+        const contentArea = document.getElementById('content-area');
+        const layout1Btn = document.getElementById('layout-1-btn');
+        const layout2Btn = document.getElementById('layout-2-btn');
+        const layoutName = document.getElementById('current-layout-name');
+        const mainTitle = document.getElementById('main-title');
+        const iconLayout1 = document.getElementById('icon-layout-1');
+        const iconLayout2 = document.getElementById('icon-layout-2');
+        const layoutSwitcherContainer = document.getElementById('layout-switcher-container');
+
+        // Mock Data: Combining all your interests
+        const posts = [
+            { id: 1, type: 'essay', title: "The Ethics of Wetware: Building Better Nerves or Better People?", date: "Nov 9, 2025", summary: "A deep dive into the moral implications of neural interface technology and transhumanism, inspired by a late-night coding session.", tags: ["Technology", "Implants", "Ethics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>` },
+            { id: 2, type: 'thought', title: "Why are frogs the ultimate minimalist architecture?", date: "Nov 7, 2025", summary: "Shower thought: Amphibians, particularly the wood frog, represent a perfect, chill design philosophy. Low-profile, high-impact.", tags: ["Frogs", "Muji", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 19c-1.33-1.33-3.33-2.67-6-2.67S8.33 17.67 7 19c-2.67-2.67-3-7.33 0-11s7-4 10 0 2 8.33 0 11z"></path></svg>` },
+            { id: 3, type: 'essay', title: "The Neomorphic Revolution: Making Surgical Suites Feel Less Terrifying", date: "Nov 5, 2025", summary: "Exploring how soft UI design (neomorphism) can translate into physical hospital design to reduce patient anxiety and improve surgical focus. It's 'hospital room core' theory.", tags: ["Surgery", "Design", "Aesthetics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>` },
+            { id: 4, type: 'thought', title: "Matcha is just a bio-sensor in a cup.", date: "Nov 3, 2025", summary: "The ritualistic preparation of matcha is a self-administered calibration test for my focus and patience. Spontaneous realization while waiting for the kettle.", tags: ["Matcha", "Spontaneous", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M10 21V3a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4z"></path><path d="M13 17h6"></path><path d="M13 11h6"></path></svg>` },
+        ];
+
+        // --- Content Rendering Functions ---
+
+        function renderHome() {
+            mainTitle.textContent = "Welcome to the Neuro Thinker's Lab";
+            contentArea.innerHTML = `
+                <div class="space-y-8">
+                    
+                    <!-- New: Placeholder Gallery for Visual Themes -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-matcha-green/30">
+                            <p class="text-sm font-semibold text-matcha-green">Matcha/Chill Image</p>
+                            <img src="https://placehold.co/150x150/A7C49D/FFFFFF?text=Matcha" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Matcha Image Placeholder">
+                        </div>
+                        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-wood-accent/30">
+                            <p class="text-sm font-semibold text-wood-accent">Frog/Wood Image</p>
+                            <img src="https://placehold.co/150x150/B8B3A8/FFFFFF?text=Frog" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Frog Image Placeholder">
+                        </div>
+                        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-gray-300/30">
+                            <p class="text-sm font-semibold text-gray-700">Implant/Pi Image</p>
+                            <img src="https://placehold.co/150x150/CCCCCC/666666?text=Implant" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Implant Image Placeholder">
+                        </div>
+                    </div>
+
+                    <article class="p-8 rounded-2xl neuo-card">
+                        <h3 class="text-2xl font-bold mb-4 text-bamboo-accent">The Thesis Statement</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            This space is where **spontaneity meets surgery**. I'm a nostalgic overthinker—someone who sees a frog and immediately ponders its perfect, minimalist design (Muji-core nature!), then pivots to how that same efficiency could apply to a neural implant interface. My mind is a constant loop of **connections and references**, linking the chill ritual of matcha to the precise control required in the operating room.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed mt-4">
+                            I'm ambitiously pursuing STEM—whether it’s implants, tech, or surgery—but I recognize that creativity and philosophical depth are just as vital as code and schematics. This blog is the artifact of that collision: a place for deep **Artifacts** (essays) and quick, often random **Thoughts** (shower thoughts). Welcome to the junction of the brain and the bamboo grove.
+                        </p>
+                    </article>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Quick Link 1 -->
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('posts')">
+                            <h4 class="text-xl font-semibold text-matcha-green">See the Artifacts</h4>
+                            <p class="text-sm text-gray-500 mt-1">From long essays to spontaneous sparks.</p>
+                        </div>
+                        <!-- Quick Link 2 -->
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('projects')">
+                            <h4 class="text-xl font-semibold text-matcha-green">Check the Projects</h4>
+                            <p class="text-sm text-gray-500 mt-1">From game dev bugs to Arduino wire-ups.</p>
+                        </div>
+                         <!-- Quick Link 3 -->
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('about')">
+                            <h4 class="text-xl font-semibold text-matcha-green">My Personal Code</h4>
+                            <p class="text-sm text-gray-500 mt-1">Why matcha, why frogs, and why implants.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderProjects() {
+            mainTitle.textContent = "Project Portfolio: Bugs & Raspberry Pi";
+            contentArea.innerHTML = `
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        I used to be obsessed with game development, but now I'm transitioning that energy into hardware projects. The joy of solving a complex bug (a software implant) is similar to wiring an Arduino for a clean, efficient function (a hardware implant).
+                    </p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <article class="p-6 rounded-2xl neuo-card">
+                            <h3 class="text-xl font-bold mb-2 text-bamboo-accent">Project: Modular Frog Habitat Sensor</h3>
+                            <p class="text-sm text-gray-600 mb-3">**Tech:** Arduino Uno, DHT22 sensor, Python logging.</p>
+                            <p class="text-gray-700">A physical computation project inspired by my love for frogs and clean design. It logs temperature and humidity data for a simulated wood frog habitat, focusing on minimalistic circuit design and reliable data transmission.</p>
+                        </article>
+                        <article class="p-6 rounded-2xl neuo-card">
+                            <h3 class="text-xl font-bold mb-2 text-bamboo-accent">Retrospective: Game Dev to Hardware</h3>
+                            <p class="text-sm text-gray-600 mb-3">**Theme:** Efficiency in Code vs. Efficiency in Circuitry.</p>
+                            <p class="text-gray-700">An analysis of how my experience debugging and optimizing game physics code directly applies to finding the most efficient, low-power solution for a Raspberry Pi application, highlighting the universal principles of engineering.</p>
+                        </article>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAbout() {
+            mainTitle.textContent = "About Me: Matcha, Muji, and My Manifesto";
+            contentArea.innerHTML = `
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-700 leading-relaxed p-6 rounded-2xl neuo-card">
+                        I’m a deeply **nostalgic girlie** who loves clean lines and quiet contemplation (hence the Muji obsession). My biggest conflict is being **ambitious as hell but a bit lazy**—I want to solve big problems, but I need the perfect, chill environment to start. This leads to a lot of **overthinking**, but that usually leads to a surprising connection between, say, the color of **matcha** and the soothing green of a surgical light.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-2xl neuo-card">
+                            <h4 class="text-xl font-bold mb-2 text-matcha-green">The Matcha Principle</h4>
+                            <p class="text-sm text-gray-700">Matcha is the perfect blend of ritual and energy. It represents the focused, clean energy I want to bring to **implants and surgery**. Clean fuel for precise thinking.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl neuo-card">
+                            <h4 class="text-xl font-bold mb-2 text-bamboo-accent">The Frog & Bamboo Connection</h4>
+                            <p class="text-sm text-gray-700">Frogs are spontaneous and minimal. Bamboo is strong, flexible, and essential to Chinese culture. Together, they symbolize my approach: being **spontaneous** (like jumping to a new idea) but rooted in **strength and structure**.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Layout 1: The Thinker's Desk (List/Essay View) ---
+        function renderLayout1() {
+            mainTitle.textContent = "The Thinker's Desk: Deep Artifacts (List View)";
+            contentArea.innerHTML = posts.map(post => `
+                <article class="p-6 mb-6 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
+                    <div class="flex items-center text-sm font-semibold mb-1 text-matcha-green">
+                        ${post.icon || ''}
+                        ${post.type.toUpperCase()}
+                        <span class="text-gray-400 ml-auto">${post.date}</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 hover:text-bamboo-accent transition">${post.title}</h3>
+                    <p class="text-gray-600 mb-3">${post.summary}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${post.tags.map(tag => `<span class="text-xs font-medium px-3 py-1 rounded-full bg-wood-accent/10 text-wood-accent">${tag}</span>`).join('')}
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // --- Layout 2: The Implant View (Grid/Component View) ---
+        function renderLayout2() {
+            mainTitle.textContent = "The Implant View: Spontaneous Components (Grid)";
+            contentArea.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                ${posts.map(post => `
+                    <article class="p-5 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
+                        <div class="flex items-start mb-2">
+                            <div class="p-2 rounded-full bg-matcha-green/20 text-matcha-green">
+                                ${post.icon || ''}
+                            </div>
+                            <span class="text-xs ml-auto text-gray-500">${post.date}</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">${post.title}</h3>
+                        <p class="text-sm text-gray-600 mb-3">${post.summary.substring(0, 70)}...</p>
+                        <div class="text-xs text-wood-accent font-medium">${post.tags.join(', ')}</div>
+                    </article>
+                `).join('')}
+            </div>`;
+        }
+
+        // --- Layout Switching Logic (Applies only to 'posts' page) ---
+        function switchLayout(layout) {
+            currentLayout = layout;
+            
+            // Reset button styles
+            layout1Btn.classList.remove('neuo-active-inner');
+            layout2Btn.classList.remove('neuo-active-inner');
+            iconLayout1.classList.remove('text-matcha-green');
+            iconLayout2.classList.remove('text-matcha-green');
+            iconLayout1.classList.add('text-gray-400');
+            iconLayout2.classList.add('text-gray-400');
+
+            if (layout === 1) {
+                renderLayout1();
+                layout1Btn.classList.add('neuo-active-inner');
+                iconLayout1.classList.add('text-matcha-green');
+                iconLayout1.classList.remove('text-gray-400');
+                layoutName.textContent = "Desk View";
+            } else {
+                renderLayout2();
+                layout2Btn.classList.add('neuo-active-inner');
+                iconLayout2.classList.add('text-matcha-green');
+                iconLayout2.classList.remove('text-gray-400');
+                layoutName.textContent = "Component View";
+            }
+        }
+
+        // Neomorphic Active Class for Navigation
+        function setActiveNav(pageId) {
+            document.querySelectorAll('#main-nav a').forEach(a => {
+                a.classList.remove('neuo-active-inner');
+            });
+            const activeLink = document.getElementById(`nav-${pageId}`);
+            if (activeLink) {
+                activeLink.classList.add('neuo-active-inner');
+            }
+        }
+
+        // --- Primary Navigation Handler ---
+        function navigateTo(page, event) {
+            if (event) event.preventDefault();
+            // We removed the conditional return here to ensure the navigation works even if currentPage === page
+            
+            currentPage = page;
+            setActiveNav(page);
+            
+            // Handle layout switcher visibility
+            layoutSwitcherContainer.classList.add('hidden');
+            contentArea.innerHTML = ''; // Clear content area
+
+            switch (page) {
+                case 'home':
+                    renderHome();
+                    break;
+                case 'posts':
+                    layoutSwitcherContainer.classList.remove('hidden');
+                    // Renders the posts using the currently selected layout
+                    switchLayout(currentLayout); 
+                    break;
+                case 'projects':
+                    renderProjects();
+                    break;
+                case 'about':
+                    renderAbout();
+                    break;
+                default:
+                    renderHome();
+            }
+        }
+
+        // FIX: Removed window.onload and call navigateTo directly.
+        // This ensures the content renders immediately after the script loads.
+        navigateTo('home'); 
+    </script>
+</body>
+</html>
