@@ -33,7 +33,7 @@
         .neuo-card {
             background: #F5F5F5;
             box-shadow: 8px 8px 16px #e0e0e0, -8px -8px 16px #ffffff;
-            transition: all 0.2s ease-in-out, background 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease-in-out, background 0.3s, box-shadow 0.3s;
         }
         .neuo-card:hover {
             transform: translateY(-2px);
@@ -42,7 +42,7 @@
         .neuo-button {
             background: #F5F5F5;
             box-shadow: 4px 4px 8px #e0e0e0, -4px -4px 8px #ffffff;
-            transition: all 0.2s ease-in-out, background 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease-in-out, background 0.3s, box-shadow 0.3s;
         }
         .neuo-button:active {
             box-shadow: inset 2px 2px 5px #c4c4c4, inset -2px -2px 5px #ffffff;
@@ -54,64 +54,6 @@
             font-weight: 600;
         }
 
-        /* --- COLLAPSIBLE SIDEBAR STYLES --- */
-        .sidebar-collapsed {
-            /* Fix: Collapse to a small, centered circle on desktop/tablet */
-            width: 4rem !important; /* w-16 */
-            height: 4rem !important; /* h-16 */
-            padding: 0.5rem !important; /* p-2 */
-            border-radius: 9999px !important; /* rounded-full */
-            display: flex; /* To center content */
-            align-items: center;
-            justify-content: center;
-            overflow: hidden; /* Hide anything that overflows */
-            position: relative; /* Ensure children are positioned correctly */
-        }
-        .sidebar-collapsed #sidebar-content {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none;
-            width: 0;
-            height: 0;
-        }
-        
-        /* Ensure the button is fully clickable and sits perfectly inside the collapsed circle */
-        .sidebar-collapsed #sidebar-toggle-btn {
-             position: absolute !important; /* Use absolute to overlay the entire circle */
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             padding: 0;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             background: none !important;
-             box-shadow: none !important;
-             z-index: 20; /* Ensure it's above any latent background elements */
-        }
-        
-        /* Mobile: Sidebar should remain expanded */
-        @media (max-width: 767px) {
-            .sidebar-collapsed {
-                width: 100% !important; 
-                height: auto !important; 
-                padding: 1.5rem !important;
-                border-radius: 1.5rem !important;
-                /* Restore flex layout for mobile content */
-                display: block; 
-            }
-            .sidebar-collapsed #sidebar-content {
-                opacity: 1 !important;
-                visibility: visible !important;
-                pointer-events: all;
-                width: auto;
-                height: auto;
-            }
-            #sidebar-toggle-btn {
-                display: none !important; /* Hide toggle on mobile, let it be full screen */
-            }
-        }
         /* --- 5. Sepia Mode Overrides --- */
         .sepia-mode {
             /* Sepia Color Variables */
@@ -133,12 +75,9 @@
         .sepia-mode .border-gray-200 { border-color: var(--color-divider); }
         .sepia-mode .text-bamboo-accent { color: var(--color-text); }
         .sepia-mode .text-matcha-green { color: var(--color-text); } 
-        .sepia-mode .sidebar-collapsed #sidebar-toggle-btn { background: none; box-shadow: none; }
-
-
+        .sepia-mode .neuo-card, .sepia-mode .neuo-button { background: var(--bg-base); }
         .sepia-mode .neuo-card,
         .sepia-mode .neuo-button {
-            background: var(--bg-base);
             box-shadow: 8px 8px 16px var(--color-shadow-dark), -8px -8px 16px var(--color-shadow-light);
         }
         .sepia-mode .neuo-button:active,
@@ -178,7 +117,8 @@
         .dark-mode .text-bamboo-accent,
         .dark-mode .text-matcha-green { color: #A7C49D; } 
         
-        .dark-mode .neuo-card {
+        .dark-mode .neuo-card,
+        .dark-mode .neuo-button {
             background: var(--bg-base);
             box-shadow: 8px 8px 16px var(--color-shadow-dark), -8px -8px 16px var(--color-shadow-light);
         }
@@ -186,7 +126,6 @@
             box-shadow: 12px 12px 24px var(--color-shadow-dark), -12px -12px 24px var(--color-shadow-light);
         }
         .dark-mode .neuo-button {
-            background: var(--bg-base);
             box-shadow: 4px 4px 8px var(--color-shadow-dark), -4px -4px 8px var(--color-shadow-light);
         }
         .dark-mode .neuo-button:active {
@@ -198,9 +137,6 @@
         .dark-mode ::-webkit-scrollbar-track {
              background-color: #3A3A3A;
         }
-        .dark-mode .sidebar-collapsed #sidebar-toggle-btn { background: none; box-shadow: none; }
-
-
         /* ----------------------------------------------- */
         /* --- 7. Theme Slider (Custom Styling) --- */
 
@@ -271,7 +207,7 @@
 
     <div class="flex flex-col md:flex-row max-w-7xl mx-auto p-4 md:p-8 space-y-8 md:space-y-0 md:space-x-8">
 
-        <!-- Sidebar - Changed to md:w-[250px] for consistent collapse and added transition-all -->
+        <!-- Sidebar - Changed to md:w-1/4 for consistent collapse and added transition-all -->
         <aside id="sidebar" class="md:w-1/4 p-6 rounded-3xl neuo-card sticky top-8 h-fit transition-all duration-300">
             
             <!-- Toggle Button for Collapse (Visible on Desktop/Tablet) -->
@@ -282,8 +218,8 @@
                 </svg>
             </button>
 
-            <!-- Sidebar Content - Will be hidden when collapsed -->
-            <div id="sidebar-content" class="transition-opacity duration-300">
+            <!-- Sidebar Content - Visibility is managed by JS to ensure smooth collapse -->
+            <div id="sidebar-content" class="transition-opacity duration-300 opacity-100">
                 <header class="pb-6 border-b border-gray-200">
                     <div class="flex items-center space-x-3">
                         <svg class="w-10 h-10 text-matcha-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -309,6 +245,11 @@
                         <a href="#" id="nav-projects" onclick="navigateTo('projects', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
                             Project Portfolio (Bugs & Pi)
                         </a>
+                        <!-- NEW SPOTLIGHTS TAB -->
+                        <a href="#" id="nav-spotlights" onclick="navigateTo('spotlights', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
+                            Spotlights (Wiki FYP)
+                        </a>
+                        <!-- END NEW TAB -->
                         <a href="#" id="nav-about" onclick="navigateTo('about', event)" class="block p-3 rounded-xl neuo-button text-base font-medium hover:text-matcha-green">
                             About Me (Matcha, Frogs, Muji)
                         </a>
@@ -375,8 +316,6 @@
         // --- State Variables ---
         let currentLayout = 1; // Default layout for posts page (1 = List, 2 = Grid)
         let currentPage = 'home'; // Tracks the current page shown
-        // NEW: Implementing click counter for sidebar state (0 = Open, 1, 3, 5... = Closed)
-        let sidebarClickCount = 0; 
         
         // --- DOM Element References ---
         const contentArea = document.getElementById('content-area');
@@ -395,39 +334,87 @@
 
         // --- Mock Data (Replace with real content later!) ---
         const posts = [
-            { id: 1, type: 'essay', title: "The Ethics of Wetware: Building Better Nerves or Better People?", date: "Nov 9, 2025", summary: "A deep dive into the moral implications of neural interface technology and transhumanism, inspired by a late-night coding session.", tags: ["Technology", "Implants", "Ethics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>` },
-            { id: 2, type: 'thought', title: "Why are frogs the ultimate minimalist architecture?", date: "Nov 7, 2025", summary: "Shower thought: Amphibians, particularly the wood frog, represent a perfect, chill design philosophy. Low-profile, high-impact.", tags: ["Frogs", "Muji", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 19c-1.33-1.33-3.33-2.67-6-2.67S8.33 17.67 7 19c-2.67-2.67-3-7.33 0-11s7-4 10 0 2 8.33 0 11z"></path></svg>` },
-            { id: 3, type: 'essay', title: "The Neomorphic Revolution: Making Surgical Suites Feel Less Terrifying", date: "Nov 5, 2025", summary: "Exploring how soft UI design (neomorphism) can translate into physical hospital design to reduce patient anxiety and improve surgical focus. It's 'hospital room core' theory.", tags: ["Surgery", "Design", "Aesthetics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>` },
-            { id: 4, type: 'thought', title: "Matcha is just a bio-sensor in a cup.", date: "Nov 3, 2025", summary: "The ritualistic preparation of matcha is a self-administered calibration test for my focus and patience. Spontaneous realization while waiting for the kettle.", tags: ["Matcha", "Spontaneous", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M10 21V3a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4z"></path><path d="M13 17h6"></path><path d="M13 11h6"></path></svg>` },
+            { id: 1, type: 'essay', title: "The Ethics of Wetware: Building Better Nerves or Better People?", date: "Nov 9, 2025", summary: "A deep dive into the moral implications of neural interface technology and transhumanism, inspired by a late-night coding session.", tags: ["Technology", "Implants", "Ethics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>`, 
+                fullContent: "This essay explores the boundary between therapeutic use and human augmentation. If we can cure paralysis with neural links, what ethical framework guides the use of those same links to enhance memory or cognitive speed? The core conflict lies in equality: who gets access to \"better people\" technology, and what does it do to the concept of natural human variation? The consensus needs to be built on accessibility and non-discrimination, ensuring that technology serves all, not just the privileged few. The fear isn't in the tech itself, but in the social stratification it might accelerate. Wetware must improve lives, not just market share."
+            },
+            { id: 2, type: 'thought', title: "Why are frogs the ultimate minimalist architecture?", date: "Nov 7, 2025", summary: "Shower thought: Amphibians, particularly the wood frog, represent a perfect, chill design philosophy. Low-profile, high-impact.", tags: ["Frogs", "Muji", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 19c-1.33-1.33-3.33-2.67-6-2.67S8.33 17.67 7 19c-2.67-2.67-3-7.33 0-11s7-4 10 0 2 8.33 0 11z"></path></svg>`,
+                fullContent: "Consider the wood frog. It survives by freezing solid, then thawing. This is pure, low-maintenance design. No excessive heating systems, no complex insulation. It's the ultimate 'less is more' approach. We, as developers and thinkers, often over-engineer solutions. The frog is a reminder that the most elegant solution is often the most simple, adaptable, and resilient. My focus on Muji and simple aesthetics is directly inspired by this biological minimalism. Design should disappear and allow function to shine."
+            },
+            { id: 3, type: 'essay', title: "The Neomorphic Revolution: Making Surgical Suites Feel Less Terrifying", date: "Nov 5, 2025", summary: "Exploring how soft UI design (neomorphism) can translate into physical hospital design to reduce patient anxiety and improve surgical focus. It's 'hospital room core' theory.", tags: ["Surgery", "Design", "Aesthetics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`,
+                fullContent: "Hospital rooms, especially surgical suites, are inherently stressful due to the harsh, functional design. Neomorphism, with its soft shadows, rounded corners, and gentle lighting, is an attempt to make digital interfaces feel more like physical, tactile objects. Applying this 'soft design' principle to surgical room architecture—using diffused lighting, non-reflective surfaces, and subtle, natural color palettes—could drastically lower patient stress and potentially improve focus for the surgical team. It's an exploration of how emotional comfort impacts high-stakes human performance."
+            },
+            { id: 4, type: 'thought', title: "Matcha is just a bio-sensor in a cup.", date: "Nov 3, 2025", summary: "The ritualistic preparation of matcha is a self-administered calibration test for my focus and patience. Spontaneous realization while waiting for the kettle.", tags: ["Matcha", "Spontaneous", "Chill"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M10 21V3a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4z"></path><path d="M13 17h6"></path><path d="M13 11h6"></path></svg>`,
+                fullContent: "The entire process—heating the water, sifting the powder, the measured whisking—demands attention. If my hand shakes too much, or if I rush the process, the matcha is clumpy and bitter. Therefore, the perfect cup of matcha is proof of my present focus. It's a quick, self-administered test of my mental state before a long coding session or a demanding study period. It's the ultimate 'chill' biofeedback mechanism, linking my state of mind to a perfect, soothing green beverage."
+            },
+        ];
+        
+        // --- NEW SPOTLIGHTS DATA ---
+        const spotlights = [
+            { id: 1, type: 'artist', title: "Artist Spotlight: The Lo-Fi King", date: "Nov 15, 2025", summary: "Exploring the chill beats and creative process of our monthly featured artist, perfect for coding sessions or just relaxing.", tags: ["Music", "Chill", "Lo-Fi"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 18l-6-5.8c-2-2-4-2.8-6-2.4a6 6 0 1 0 4 11.2V12"></path><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>`,
+                fullContent: "The Lo-Fi King, known simply as 'Bambu,' masters the art of ambient noise and forgotten samples. His music is the auditory equivalent of this blog's aesthetic: calming, unobtrusive, and deeply structured. We analyze his use of field recordings (rain on tin) and subtle jazz chords to create an immersive, focused sonic environment. Bambu proves that productivity doesn't require high-tempo noise; sometimes, the best fuel for thought is simply a gentle, recurring loop. His commitment to pure, functional music is a mirror to Muji's design philosophy."
+            },
+            { id: 2, type: 'philosopher', title: "Philosopher: The Stoic Teen", date: "Oct 28, 2025", summary: "A look into how ancient Stoicism can help manage modern school stress and overwhelming ambition. A true 'Focus Your Portal' topic.", tags: ["Philosophy", "Study", "Mental Health"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
+                fullContent: "Modern education and social media bombard us with uncontrollable variables. Stoicism, particularly the concept of the 'dichotomy of control' (focusing only on what you can change), is the ultimate mental implant for today's high-pressure environment. This spotlight looks at applying Marcus Aurelius's teachings not to imperial management, but to managing deadlines, test anxiety, and the fear of failure. It turns out that ancient wisdom is the best debugging tool for a chaotic young mind."
+            },
+            { id: 3, type: 'dev', title: "CS Dev: The Tailwind Minimalist", date: "Sep 1, 2025", summary: "Spotlighting a developer who builds incredibly complex apps using only single-file, minimalist setups. Inspired by Muji design principles.", tags: ["Code", "Design", "CSS"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
+                fullContent: "We showcase a developer who adheres to the 'single-file mandate,' proving that complex web applications don't need sprawling file structures. This minimalist approach, heavily reliant on utility-first frameworks like Tailwind CSS, mirrors the efficiency found in Raspberry Pi programming: maximum output with minimal overhead. It's a deep dive into component composition and CSS strategy that prioritizes readability, portability, and zero external dependencies—the ultimate clean code."
+            },
         ];
 
 
-        // --- Sidebar Collapse Logic ---
+        // --- Sidebar Collapse Logic (Updated for stability) ---
         function toggleSidebar() {
-            // Only allow collapse on desktop/tablet views
+            // Only execute on desktop/tablet views (md breakpoint or wider)
             if (window.innerWidth < 768) return;
 
-            sidebarClickCount++;
+            // Toggle a simple state class that we use for button positioning/icon
+            const isCollapsed = sidebar.classList.toggle('is-collapsed-desktop');
             
-            // Odd clicks (1, 3, 5...) are the COLLAPSED state
-            const isCollapsing = (sidebarClickCount % 2 !== 0); 
+            // 1. Sidebar width and shape
+            sidebar.classList.toggle('md:w-1/4');
+            sidebar.classList.toggle('md:w-16'); 
+            sidebar.classList.toggle('rounded-3xl');
+            sidebar.classList.toggle('rounded-full');
+            sidebar.classList.toggle('p-6');
+            sidebar.classList.toggle('p-2'); // Small padding for collapsed state
 
-            if (isCollapsing) {
-                // ACTION: COLLAPSE
-                sidebar.classList.add('sidebar-collapsed');
-                mainContent.classList.remove('md:w-3/4');
-                mainContent.classList.add('md:w-full');
-                // Icon: Hamburger lines (Click me to OPEN/Expand)
-                if (toggleIcon) toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>`;
-            } else {
-                // ACTION: EXPAND
-                sidebar.classList.remove('sidebar-collapsed');
-                mainContent.classList.remove('md:w-full');
-                mainContent.classList.add('md:w-3/4');
-                // Icon: Double chevron left (Click me to CLOSE/Collapse)
-                if (toggleIcon) toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>`;
+            // 2. Main content width
+            mainContent.classList.toggle('md:w-3/4');
+            mainContent.classList.toggle('md:w-full');
+
+            // 3. Inner content visibility 
+            // Add/remove pointer-events-none to prevent clicking invisible links
+            sidebarContent.classList.toggle('opacity-100');
+            sidebarContent.classList.toggle('opacity-0');
+            sidebarContent.classList.toggle('pointer-events-none'); 
+
+            // 4. Button/Icon Aesthetics
+            const toggleBtn = document.getElementById('sidebar-toggle-btn');
+            if (toggleIcon && toggleBtn) {
+                if (isCollapsed) {
+                    // COLLAPSED State: Show Hamburger, center the button, make it full circle
+                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>`;
+                    
+                    // Change button shape/position to fill the collapsed circle
+                    toggleBtn.classList.remove('top-4', 'right-4', 'p-2', 'rounded-full');
+                    toggleBtn.classList.add('inset-0', 'm-auto', 'w-full', 'h-full', 'rounded-full', 'p-0');
+                    // Override the neuomorphic shadow when fully collapsed into a simple circle
+                    toggleBtn.style.boxShadow = 'none'; 
+                    toggleBtn.style.backgroundColor = 'transparent';
+
+                } else {
+                    // EXPANDED State: Show chevron, button in the corner, regular size
+                    toggleIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>`;
+                    
+                    // Reset button appearance
+                    toggleBtn.classList.add('top-4', 'right-4', 'p-2', 'rounded-full');
+                    toggleBtn.classList.remove('inset-0', 'm-auto', 'w-full', 'h-full', 'p-0');
+                    toggleBtn.style.boxShadow = ''; // Restore neuo-button box-shadow
+                    toggleBtn.style.backgroundColor = ''; // Restore neuo-button background
+                }
             }
         }
+
 
         // --- Content Rendering Functions ---
 
@@ -502,6 +489,31 @@
                 </div>
             `;
         }
+        
+        // --- NEW RENDER SPOTLIGHTS FUNCTION ---
+        function renderSpotlights() {
+            mainTitle.textContent = "Spotlights: Wiki FYP (For Your Portal)";
+            contentArea.innerHTML = `
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed p-6 rounded-2xl neuo-card">
+                        This is where I focus my energy on one topic a month—a musician, a developer, a philosopher, or a random piece of tech. It’s like a personalized 'For You Page' but for the things that genuinely catch my attention and deserve a deep dive.
+                    </p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        ${spotlights.map((item, i) => `
+                            <article onclick="renderDetail(spotlights[${i}], 'spotlights')" class="p-6 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
+                                <h3 class="text-xl font-bold mb-2 text-bamboo-accent flex items-center">
+                                    ${item.icon || ''}
+                                    ${item.title}
+                                </h3>
+                                <p class="text-sm text-gray-600 mb-3">**Category:** ${item.type.charAt(0).toUpperCase() + item.type.slice(1)} | ${item.date}</p>
+                                <p class="text-gray-700">${item.summary}</p>
+                            </article>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        // --- END NEW RENDER SPOTLIGHTS FUNCTION ---
 
         function renderAbout() {
             mainTitle.textContent = "About Me: Matcha, Muji, and My Manifesto";
@@ -523,13 +535,50 @@
                 </div>
             `;
         }
+        
+        // --- DETAIL VIEW RENDERER ---
+        function renderDetail(item, previousPage) {
+            mainTitle.textContent = item.title;
+            
+            // Set the navigation back to the correct list view upon returning
+            const backButtonHandler = previousPage === 'posts' ? 
+                `MapsTo('${previousPage}'); switchLayout(${currentLayout})` :
+                `MapsTo('${previousPage}')`;
+
+            contentArea.innerHTML = `
+                <div class="neuo-card p-8 rounded-2xl space-y-6">
+                    <div class="flex items-center justify-between border-b pb-4 mb-4 border-gray-200">
+                        <div class="flex items-center text-lg font-semibold text-matcha-green">
+                            ${item.icon || ''}
+                            ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                        </div>
+                        <span class="text-sm text-gray-500">${item.date}</span>
+                    </div>
+
+                    <article class="text-gray-700 leading-relaxed">
+                        <p class="text-base leading-relaxed whitespace-pre-wrap">${item.fullContent}</p>
+                        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-200 mt-6">
+                            <span class="text-sm font-semibold text-gray-700">Tags:</span>
+                            ${item.tags.map(tag => `<span class="text-xs font-medium px-3 py-1 rounded-full bg-wood-accent/10 text-wood-accent">${tag}</span>`).join(' ')}
+                        </div>
+                    </article>
+
+                    <button onclick="${backButtonHandler}" class="neuo-button mt-6 p-3 rounded-xl inline-flex items-center text-sm font-medium hover:text-bamboo-accent">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to List
+                    </button>
+                </div>
+            `;
+        }
 
         // --- Layout 1: The Thinker's Desk (List/Essay View) ---
         function renderLayout1() {
             mainTitle.textContent = "The Thinker's Desk: Deep Artifacts (List View)";
             // Use .map() to loop through the 'posts' array and generate HTML for each one
-            contentArea.innerHTML = posts.map(post => `
-                <article class="p-6 mb-6 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
+            contentArea.innerHTML = posts.map((post, i) => `
+                <article onclick="renderDetail(posts[${i}], 'posts')" class="p-6 mb-6 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
                     <div class="flex items-center text-sm font-semibold mb-1 text-matcha-green">
                         ${post.icon || ''}
                         ${post.type.toUpperCase()}
@@ -549,8 +598,8 @@
             mainTitle.textContent = "The Implant View: Spontaneous Components (Grid)";
             // Use .map() to loop through the 'posts' array and render them in a grid layout
             contentArea.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                ${posts.map(post => `
-                    <article class="p-5 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
+                ${posts.map((post, i) => `
+                    <article onclick="renderDetail(posts[${i}], 'posts')" class="p-5 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
                         <div class="flex items-start mb-2">
                             <div class="p-2 rounded-full bg-matcha-green/20 text-matcha-green">
                                 ${post.icon || ''}
@@ -617,9 +666,10 @@
             setActiveNav(page); // Update the active navigation link style
             
             // Handle layout switcher visibility: only show on the 'posts' page
-            layoutSwitcherContainer.classList.add('hidden');
+            const showLayoutSwitcher = page === 'posts';
+            layoutSwitcherContainer.classList.toggle('hidden', !showLayoutSwitcher);
+
             contentArea.innerHTML = ''; // Clear the main content area before loading new content
-            // Update the static title placeholder
             mainTitle.textContent = 'Loading...'; 
 
             switch (page) {
@@ -627,12 +677,14 @@
                     renderHome();
                     break;
                 case 'posts':
-                    layoutSwitcherContainer.classList.remove('hidden');
                     // Renders the posts using the currently selected layout (1 or 2)
                     switchLayout(currentLayout); 
                     break;
                 case 'projects':
                     renderProjects();
+                    break;
+                case 'spotlights': // NEW CASE
+                    renderSpotlights();
                     break;
                 case 'about':
                     renderAbout();
