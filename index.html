@@ -245,6 +245,7 @@
                 </div>
                 <p class="text-xs text-center mt-3 text-gray-400">Theme: <span id="current-theme-name">Light Mode</span></p>
             </div>
+
             <div id="layout-switcher-container" class="mt-8 pt-6 border-t border-gray-200 hidden">
                 <h3 class="text-sm font-semibold mb-3 text-gray-500 uppercase">View Modes</h3>
                 <div class="flex space-x-3">
@@ -268,148 +269,13 @@
             </div>
         </aside>
         <main class="md:w-3/4">
-            <h2 class="text-3xl font-bold mb-6">Welcome to The Neuro Thinker</h2>
-            <div id="content-area" class="neuo-card p-8 rounded-3xl min-h-[400px]">
-                <p class="text-gray-600">This is the main content area. Content will load dynamically when you click a navigation link. Try dragging the theme slider to experience Light, Sepia, and Dark modes!</p>
-            </div>
+            <h2 id="main-title" class="text-3xl md:text-4xl font-light mb-6"></h2>
+            
+            <div id="content-area">
+                </div>
         </main>
         </div>
 
-    <script>
-        // --- Theme Logic ---
-
-        const THEMES = {
-            '0': { name: 'Light Mode', class: '' },
-            '1': { name: 'Sepia Mode', class: 'sepia-mode' },
-            '2': { name: 'Dark Mode', class: 'dark-mode' }
-        };
-
-        // 1. Function to handle the theme change based on slider value (0, 1, or 2)
-        function updateTheme(value) {
-            const body = document.body;
-            const themeData = THEMES[value];
-            const themeNameElement = document.getElementById('current-theme-name');
-            const lightIcon = document.getElementById('light-icon');
-            const darkIcon = document.getElementById('dark-icon');
-
-            // 1. Remove all theme classes and apply the new one
-            body.classList.remove('sepia-mode', 'dark-mode');
-            if (themeData.class) {
-                body.classList.add(themeData.class);
-            }
-
-            // 2. Update status text
-            themeNameElement.textContent = themeData.name;
-            
-            // 3. Update active icons
-            lightIcon.classList.remove('text-matcha-green');
-            darkIcon.classList.remove('text-matcha-green');
-
-            if (value == 0) {
-                lightIcon.classList.add('text-matcha-green');
-            } else if (value == 2) {
-                darkIcon.classList.add('text-matcha-green');
-            } else if (value == 1) {
-                // Optionally make both gray for sepia if you don't have a sepia icon
-                // Or you could make both a neutral accent color
-            }
-
-            // 4. Save preference
-            localStorage.setItem('themeValue', value);
-        }
-        
-        // --- Utility Functions ---
-
-        function navigateTo(pageId, event) {
-            event.preventDefault();
-            document.querySelectorAll('#main-nav a').forEach(link => {
-                link.classList.remove('neuo-active-inner', 'text-matcha-green', 'font-semibold');
-                link.classList.add('neuo-button');
-            });
-
-            const activeLink = document.getElementById(`nav-${pageId}`);
-            activeLink.classList.add('neuo-active-inner', 'text-matcha-green', 'font-semibold');
-            activeLink.classList.remove('neuo-button');
-            
-            const layoutSwitcher = document.getElementById('layout-switcher-container');
-            if (pageId === 'posts') {
-                layoutSwitcher.classList.remove('hidden');
-            } else {
-                layoutSwitcher.classList.add('hidden');
-            }
-        }
-        
-        function switchLayout(layoutNumber) {
-            const nameElement = document.getElementById('current-layout-name');
-            const btn1 = document.getElementById('layout-1-btn');
-            const btn2 = document.getElementById('layout-2-btn');
-            const icon1 = document.getElementById(`icon-layout-1`);
-            const icon2 = document.getElementById(`icon-layout-2`);
-
-            [btn1, btn2].forEach(btn => btn.classList.remove('neuo-active-inner'));
-            [icon1, icon2].forEach(icon => {
-                icon.classList.remove('text-matcha-green');
-                icon.classList.add('text-gray-400');
-            });
-
-            if (layoutNumber === 1) {
-                btn1.classList.add('neuo-active-inner');
-                icon1.classList.add('text-matcha-green');
-                icon1.classList.remove('text-gray-400');
-                nameElement.textContent = 'List/Desk View';
-            } else {
-                btn2.classList.add('neuo-active-inner');
-                icon2.classList.add('text-matcha-green');
-                icon2.classList.remove('text-gray-400');
-                nameElement.textContent = 'Grid/Component View';
-            }
-        }
-
-        // --- Initialization ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeSlider = document.getElementById('theme-slider');
-            const savedThemeValue = localStorage.getItem('themeValue');
-            
-            let initialValue = '0'; // Default to Light Mode
-
-            if (savedThemeValue !== null && THEMES.hasOwnProperty(savedThemeValue)) {
-                // Use saved preference
-                initialValue = savedThemeValue;
-            } else {
-                // Fallback to OS preference for Dark/Light if no saved preference
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (prefersDark) {
-                    initialValue = '2'; // Dark Mode
-                }
-            }
-
-            themeSlider.value = initialValue;
-            updateTheme(initialValue); // Apply the initial theme
-
-            // Initialize navigation and layout
-            navigateTo('home', { preventDefault: () => {} });
-            switchLayout(1);
-        });
-    </script>
-</body>
-        <!-- --- END: Sidebar / Navigation Area --- -->
-
-
-        <!-- --- START: Main Content Area --- -->
-        <main class="md:w-3/4">
-            <!-- Dynamic Page Title (e.g., "Welcome to the Lab") -->
-            <h2 id="main-title" class="text-3xl md:text-4xl font-light mb-6"></h2>
-            
-            <!-- Main area where all the page content is injected -->
-            <div id="content-area">
-                <!-- Content will be rendered here by JavaScript -->
-            </div>
-        </main>
-        <!-- --- END: Main Content Area --- -->
-    </div>
-
-    <!-- START: Core Application Logic (JavaScript) -->
     <script>
         // --- State Variables ---
         let currentLayout = 1; // Default layout for posts page (1 = List, 2 = Grid)
@@ -445,27 +311,21 @@
             contentArea.innerHTML = `
                 <div class="space-y-8">
                     
-                    <!-- Placeholder Gallery for Visual Themes (The 'space for pics') -->
                     <div class="grid grid-cols-3 gap-4">
-                        <!-- Card 1: Matcha/Chill -->
                         <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-matcha-green/30">
                             <p class="text-sm font-semibold text-matcha-green">Matcha/Chill Image</p>
-                            <!-- Image URL Placeholder (Replace with your own image URLs later!) -->
                             <img src="https://placehold.co/150x150/A7C49D/FFFFFF?text=Matcha" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Matcha Image Placeholder">
                         </div>
-                        <!-- Card 2: Frog/Wood -->
                         <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-wood-accent/30">
                             <p class="text-sm font-semibold text-wood-accent">Frog/Wood Image</p>
                             <img src="https://placehold.co/150x150/B8B3A8/FFFFFF?text=Frog" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Frog Image Placeholder">
                         </div>
-                        <!-- Card 3: Implant/Pi -->
                         <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-gray-300/30">
                             <p class="text-sm font-semibold text-gray-700">Implant/Pi Image</p>
                             <img src="https://placehold.co/150x150/CCCCCC/666666?text=Implant" class="absolute w-full h-full object-cover opacity-0" onerror="this.onerror=null; this.style.opacity='1'; this.style.position='static';" alt="Implant Image Placeholder">
                         </div>
                     </div>
 
-                    <!-- Main Introduction/Thesis Statement -->
                     <article class="p-8 rounded-2xl neuo-card">
                         <h3 class="text-2xl font-bold mb-4 text-bamboo-accent">The Thesis Statement</h3>
                         <p class="text-lg text-gray-700 leading-relaxed">
@@ -476,9 +336,7 @@
                         </p>
                     </article>
 
-                    <!-- Quick Navigation Links -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Links use the navigateTo() function to change the page -->
                         <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('posts')">
                             <h4 class="text-xl font-semibold text-matcha-green">See the Artifacts</h4>
                             <p class="text-sm text-gray-500 mt-1">From long essays to spontaneous sparks.</p>
@@ -504,13 +362,11 @@
                         I used to be obsessed with game development, but now I'm transitioning that energy into hardware projects. The joy of solving a complex bug (a software implant) is similar to wiring an Arduino for a clean, efficient function (a hardware implant).
                     </p>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Project 1: Frog Habitat Sensor -->
                         <article class="p-6 rounded-2xl neuo-card">
                             <h3 class="text-xl font-bold mb-2 text-bamboo-accent">Project: Modular Frog Habitat Sensor</h3>
                             <p class="text-sm text-gray-600 mb-3">**Tech:** Arduino Uno, DHT22 sensor, Python logging.</p>
                             <p class="text-gray-700">A physical computation project inspired by my love for frogs and clean design. It logs temperature and humidity data for a simulated wood frog habitat, focusing on minimalistic circuit design and reliable data transmission.</p>
                         </article>
-                        <!-- Project 2: Retrospective Essay -->
                         <article class="p-6 rounded-2xl neuo-card">
                             <h3 class="text-xl font-bold mb-2 text-bamboo-accent">Retrospective: Game Dev to Hardware</h3>
                             <p class="text-sm text-gray-600 mb-3">**Theme:** Efficiency in Code vs. Efficiency in Circuitry.</p>
@@ -525,17 +381,14 @@
             mainTitle.textContent = "About Me: Matcha, Muji, and My Manifesto";
             contentArea.innerHTML = `
                 <div class="space-y-6">
-                    <!-- Main About Text -->
                     <p class="text-lg text-gray-700 leading-relaxed p-6 rounded-2xl neuo-card">
                         I’m a deeply **nostalgic girlie** who loves clean lines and quiet contemplation (hence the Muji obsession). My biggest conflict is being **ambitious as hell but a bit lazy**—I want to solve big problems, but I need the perfect, chill environment to start. This leads to a lot of **overthinking**, but that usually leads to a surprising connection between, say, the color of **matcha** and the soothing green of a surgical light.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Theme Card 1: Matcha -->
                         <div class="p-6 rounded-2xl neuo-card">
                             <h4 class="text-xl font-bold mb-2 text-matcha-green">The Matcha Principle</h4>
                             <p class="text-sm text-gray-700">Matcha is the perfect blend of ritual and energy. It represents the focused, clean energy I want to bring to **implants and surgery**. Clean fuel for precise thinking.</p>
                         </div>
-                        <!-- Theme Card 2: Frog & Bamboo -->
                         <div class="p-6 rounded-2xl neuo-card">
                             <h4 class="text-xl font-bold mb-2 text-bamboo-accent">The Frog & Bamboo Connection</h4>
                             <p class="text-sm text-gray-700">Frogs are spontaneous and minimal. Bamboo is strong, flexible, and essential to Chinese culture. Together, they symbolize my approach: being **spontaneous** (like jumping to a new idea) but rooted in **strength and structure**.</p>
@@ -558,7 +411,6 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2 hover:text-bamboo-accent transition">${post.title}</h3>
                     <p class="text-gray-600 mb-3">${post.summary}</p>
-                    <!-- Displaying the tags as small, rounded pills -->
                     <div class="flex flex-wrap gap-2">
                         ${post.tags.map(tag => `<span class="text-xs font-medium px-3 py-1 rounded-full bg-wood-accent/10 text-wood-accent">${tag}</span>`).join('')}
                     </div>
@@ -619,12 +471,14 @@
         function setActiveNav(pageId) {
             // Remove active class from all links first
             document.querySelectorAll('#main-nav a').forEach(a => {
-                a.classList.remove('neuo-active-inner');
+                a.classList.remove('neuo-active-inner', 'text-matcha-green', 'font-semibold');
+                a.classList.add('neuo-button'); // Ensure it has the default button style
             });
             // Add active class to the selected link
             const activeLink = document.getElementById(`nav-${pageId}`);
             if (activeLink) {
-                activeLink.classList.add('neuo-active-inner');
+                activeLink.classList.remove('neuo-button');
+                activeLink.classList.add('neuo-active-inner', 'text-matcha-green', 'font-semibold');
             }
         }
 
@@ -660,12 +514,67 @@
             }
         }
 
-        // --- Initial Load Command ---
-        // This is the line that fixes the initial 'home doesn't show up' bug.
-        // It runs the navigation function immediately to load the home page content.
-        navigateTo('home'); 
+        // --- Theme Logic (Kept from previous response, just relocated inside the single script tag) ---
+        const THEMES = {
+            '0': { name: 'Light Mode', class: '' },
+            '1': { name: 'Sepia Mode', class: 'sepia-mode' },
+            '2': { name: 'Dark Mode', class: 'dark-mode' }
+        };
+
+        function updateTheme(value) {
+            const body = document.body;
+            const themeData = THEMES[value];
+            const themeNameElement = document.getElementById('current-theme-name');
+            const lightIcon = document.getElementById('light-icon');
+            const darkIcon = document.getElementById('dark-icon');
+
+            body.classList.remove('sepia-mode', 'dark-mode');
+            if (themeData.class) {
+                body.classList.add(themeData.class);
+            }
+
+            themeNameElement.textContent = themeData.name;
+            
+            lightIcon.classList.remove('text-matcha-green');
+            darkIcon.classList.remove('text-matcha-green');
+
+            if (value == 0) {
+                lightIcon.classList.add('text-matcha-green');
+            } else if (value == 2) {
+                darkIcon.classList.add('text-matcha-green');
+            }
+
+            localStorage.setItem('themeValue', value);
+        }
+        
+        // --- Initialization ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSlider = document.getElementById('theme-slider');
+            const savedThemeValue = localStorage.getItem('themeValue');
+            
+            let initialValue = '0'; // Default to Light Mode
+
+            if (savedThemeValue !== null && THEMES.hasOwnProperty(savedThemeValue)) {
+                // Use saved preference
+                initialValue = savedThemeValue;
+            } else {
+                // Fallback to OS preference for Dark/Light if no saved preference
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    initialValue = '2'; // Dark Mode
+                }
+            }
+
+            themeSlider.value = initialValue;
+            updateTheme(initialValue); // Apply the initial theme
+
+            // Initialize navigation (This now loads the home content)
+            navigateTo('home');
+            // Initialize layout state for the posts page
+            switchLayout(1);
+        });
+
     </script>
 </body>
-
 </html>
-
