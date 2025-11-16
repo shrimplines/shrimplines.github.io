@@ -24,8 +24,9 @@
             font-family: 'Inter', sans-serif;
             background-color: #F5F5F5; /* Muji Light Background */
             transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
-            /* FIX: Remove horizontal scrollbar */
-            overflow-x: hidden;
+            /* Ensure text color is set globally for light mode */
+            color: #374151; /* Default Tailwind text-gray-700 equivalent */
+            overflow-x: hidden; /* Fix for horizontal scroll */
         }
         
         /* --- 3. Neomorphic Base Styles (Light Mode Defaults) --- */
@@ -69,11 +70,14 @@
             background-color: var(--bg-base);
             color: var(--color-text);
         }
-        .sepia-mode .text-gray-800 { color: var(--color-text); }
-        .sepia-mode .text-gray-700 { color: var(--color-text); }
-        .sepia-mode .text-gray-500 { color: var(--color-text-sub); }
+        /* FIX: Ensure all text shades inherit the main sepia text color */
+        .sepia-mode .text-gray-800,
+        .sepia-mode .text-gray-700,
+        .sepia-mode .text-gray-600 { color: var(--color-text); } 
+        .sepia-mode .text-gray-500, /* FIX: This changes the sidebar text color */
+        .sepia-mode .text-gray-400 { color: var(--color-text-sub); } 
         .sepia-mode .border-gray-200 { border-color: var(--color-divider); }
-        .sepia-mode .text-bamboo-accent { color: var(--color-text); }
+        .sepia-mode .text-bamboo-accent { color: var(--color-text); } /* Bamboo accent is dark in sepia */
 
         .sepia-mode .neuo-card,
         .sepia-mode .neuo-button {
@@ -90,7 +94,7 @@
 
 
         /* ----------------------------------------------- */
-        /* --- 6. Dark Mode Overrides --- */
+        /* --- 6. Dark Mode Overrides (High Contrast) --- */
         .dark-mode {
             /* Dark Color Variables */
             --bg-base: #2C2C2C; /* Dark background */
@@ -108,12 +112,14 @@
             background-color: var(--bg-base);
             color: var(--color-text); /* Ensures body text is light */
         }
-        /* FIX: Ensure specific text classes also become light */
-        .dark-mode .text-gray-800 { color: var(--color-text); }
-        .dark-mode .text-gray-700 { color: var(--color-text); }
-        .dark-mode .text-gray-500 { color: var(--color-text-sub); }
+        /* FIX: Ensure specific text classes also become light and readable */
+        .dark-mode .text-gray-800,
+        .dark-mode .text-gray-700,
+        .dark-mode .text-gray-600 { color: var(--color-text); }
+        .dark-mode .text-gray-500, /* FIX: This changes the sidebar text color */
+        .dark-mode .text-gray-400 { color: var(--color-text-sub); }
         .dark-mode .border-gray-200 { border-color: var(--color-divider); }
-        .dark-mode .text-bamboo-accent { color: var(--color-text); } /* Make accents white in dark mode */
+        .dark-mode .text-bamboo-accent { color: var(--color-text); } /* Make accents light in dark mode */
         
         .dark-mode .neuo-card {
             background: var(--bg-base);
@@ -250,28 +256,9 @@
                 </div>
                 <p class="text-xs text-center mt-3 text-gray-400">Theme: <span id="current-theme-name">Light Mode</span></p>
             </div>
+            
+            <div id="layout-switcher-container" class="hidden"></div>
 
-            <div id="layout-switcher-container" class="mt-8 pt-6 border-t border-gray-200 hidden">
-                <h3 class="text-sm font-semibold mb-3 text-gray-500 uppercase">View Modes</h3>
-                <div class="flex space-x-3">
-                    <button id="layout-1-btn" onclick="switchLayout(1)" class="p-3 rounded-xl neuo-button flex-1 transition-all">
-                        <svg class="w-6 h-6 mx-auto text-gray-400" id="icon-layout-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="9" y1="9" x2="15" y2="9"></line>
-                            <line x1="9" y1="15" x2="15" y2="15"></line>
-                        </svg>
-                    </button>
-                    <button id="layout-2-btn" onclick="switchLayout(2)" class="p-3 rounded-xl neuo-button flex-1 transition-all">
-                        <svg class="w-6 h-6 mx-auto text-gray-400" id="icon-layout-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="7" height="7"></rect>
-                            <rect x="14" y="3" width="7" height="7"></rect>
-                            <rect x="14" y="14" width="7" height="7"></rect>
-                            <rect x="3" y="14" width="7" height="7"></rect>
-                        </svg>
-                    </button>
-                </div>
-                <p class="text-xs text-center mt-3 text-gray-400">Layout: <span id="current-layout-name"></span></p>
-            </div>
         </aside>
         <main class="md:w-3/4">
             <h2 id="main-title" class="text-3xl md:text-4xl font-light mb-6"></h2>
@@ -283,21 +270,14 @@
 
     <script>
         // --- State Variables ---
-        let currentLayout = 1; // Default layout for posts page (1 = List, 2 = Grid)
         let currentPage = 'home'; // Tracks the current page shown
         
         // --- DOM Element References ---
         const contentArea = document.getElementById('content-area');
-        const layout1Btn = document.getElementById('layout-1-btn');
-        const layout2Btn = document.getElementById('layout-2-btn');
-        const layoutName = document.getElementById('current-layout-name');
         const mainTitle = document.getElementById('main-title');
-        const iconLayout1 = document.getElementById('icon-layout-1');
-        const iconLayout2 = document.getElementById('icon-layout-2');
-        const layoutSwitcherContainer = document.getElementById('layout-switcher-container');
+        const layoutSwitcherContainer = document.getElementById('layout-switcher-container'); // Still needed for logic, but hidden
 
         // --- Mock Data (Replace with real content later!) ---
-        // This array holds all the blog posts/thoughts
         const posts = [
             // id 1: Implant/Ethics Essay
             { id: 1, type: 'essay', title: "The Ethics of Wetware: Building Better Nerves or Better People?", date: "Nov 9, 2025", summary: "A deep dive into the moral implications of neural interface technology and transhumanism, inspired by a late-night coding session.", tags: ["Technology", "Implants", "Ethics"], icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>` },
@@ -310,10 +290,15 @@
         ];
 
         // --- Content Rendering Functions ---
+        
+        // This is the new universal list/desk view used for Posts, Projects, and About cards
+        function renderListView(title, htmlContent) {
+            mainTitle.textContent = title;
+            contentArea.innerHTML = htmlContent;
+        }
 
         function renderHome() {
-            mainTitle.textContent = "Welcome to the Neuro Thinker's Lab";
-            contentArea.innerHTML = `
+            renderListView("Welcome to the Neuro Thinker's Lab", `
                 <div class="space-y-8">
                     
                     <div class="grid grid-cols-3 gap-4">
@@ -342,31 +327,30 @@
                     </article>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('posts')">
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('posts', event)">
                             <h4 class="text-xl font-semibold text-matcha-green">See the Artifacts</h4>
                             <p class="text-sm text-gray-500 mt-1">From long essays to spontaneous sparks.</p>
                         </div>
-                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('projects')">
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('projects', event)">
                             <h4 class="text-xl font-semibold text-matcha-green">Check the Projects</h4>
                             <p class="text-sm text-gray-500 mt-1">From game dev bugs to Arduino wire-ups.</p>
                         </div>
-                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('about')">
+                        <div class="p-6 rounded-2xl neuo-card text-center cursor-pointer hover:bg-matcha-green/10" onclick="navigateTo('about', event)">
                             <h4 class="text-xl font-semibold text-matcha-green">My Personal Code</h4>
                             <p class="text-sm text-gray-500 mt-1">Why matcha, why frogs, and why implants.</p>
                         </div>
                     </div>
                 </div>
-            `;
+            `);
         }
         
         function renderProjects() {
-            mainTitle.textContent = "Project Portfolio: Bugs & Raspberry Pi";
-            contentArea.innerHTML = `
+            renderListView("Project Portfolio: Bugs & Raspberry Pi", `
                 <div class="space-y-6">
-                    <p class="text-gray-700 leading-relaxed">
+                    <p class="text-gray-700 leading-relaxed p-6 rounded-2xl neuo-card">
                         I used to be obsessed with game development, but now I'm transitioning that energy into hardware projects. The joy of solving a complex bug (a software implant) is similar to wiring an Arduino for a clean, efficient function (a hardware implant).
                     </p>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <article class="p-6 rounded-2xl neuo-card">
                             <h3 class="text-xl font-bold mb-2 text-bamboo-accent">Project: Modular Frog Habitat Sensor</h3>
                             <p class="text-sm text-gray-600 mb-3">**Tech:** Arduino Uno, DHT22 sensor, Python logging.</p>
@@ -379,12 +363,11 @@
                         </article>
                     </div>
                 </div>
-            `;
+            `);
         }
 
         function renderAbout() {
-            mainTitle.textContent = "About Me: Matcha, Muji, and My Manifesto";
-            contentArea.innerHTML = `
+            renderListView("About Me: Matcha, Muji, and My Manifesto", `
                 <div class="space-y-6">
                     <p class="text-lg text-gray-700 leading-relaxed p-6 rounded-2xl neuo-card">
                         I’m a deeply **nostalgic girlie** who loves clean lines and quiet contemplation (hence the Muji obsession). My biggest conflict is being **ambitious as hell but a bit lazy**—I want to solve big problems, but I need the perfect, chill environment to start. This leads to a lot of **overthinking**, but that usually leads to a surprising connection between, say, the color of **matcha** and the soothing green of a surgical light.
@@ -400,14 +383,12 @@
                         </div>
                     </div>
                 </div>
-            `;
+            `);
         }
 
-        // --- Layout 1: The Thinker's Desk (List/Essay View) ---
-        function renderLayout1() {
-            mainTitle.textContent = "The Thinker's Desk: Deep Artifacts (List View)";
-            // Use .map() to loop through the 'posts' array and generate HTML for each one
-            contentArea.innerHTML = posts.map(post => `
+        // --- Posts will now use the old Layout 1 (The Thinker's Desk) as the ONLY view ---
+        function renderPosts() {
+            renderListView("The Thinker's Desk: Artifacts & Thoughts", posts.map(post => `
                 <article class="p-6 mb-6 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
                     <div class="flex items-center text-sm font-semibold mb-1 text-matcha-green">
                         ${post.icon || ''}
@@ -420,105 +401,7 @@
                         ${post.tags.map(tag => `<span class="text-xs font-medium px-3 py-1 rounded-full bg-wood-accent/10 text-wood-accent">${tag}</span>`).join('')}
                     </div>
                 </article>
-            `).join(''); // .join('') turns the array of HTML strings into one big string
-        }
-
-        // --- Layout 2: The Implant View (Grid/Component View) ---
-        function renderLayout2() {
-            mainTitle.textContent = "The Implant View: Spontaneous Components (Grid)";
-            // Use .map() to loop through the 'posts' array and render them in a grid layout
-            contentArea.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                ${posts.map(post => `
-                    <article class="p-5 rounded-2xl neuo-card cursor-pointer hover:border-matcha-green border-2 border-transparent transition duration-200">
-                        <div class="flex items-start mb-2">
-                            <div class="p-2 rounded-full bg-matcha-green/20 text-matcha-green">
-                                ${post.icon || ''}
-                            </div>
-                            <span class="text-xs ml-auto text-gray-500">${post.date}</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">${post.title}</h3>
-                        <p class="text-sm text-gray-600 mb-3">${post.summary.substring(0, 70)}...</p>
-                        <div class="text-xs text-wood-accent font-medium">${post.tags.join(', ')}</div>
-                    </article>
-                `).join('')}
-            </div>`;
-        }
-
-        // --- Layout Switching Logic (Toggles between List and Grid view) ---
-        function switchLayout(layout) {
-            currentLayout = layout;
-            
-            // 1. Reset button styles for both buttons
-            layout1Btn.classList.remove('neuo-active-inner');
-            layout2Btn.classList.remove('neuo-active-inner');
-            iconLayout1.classList.remove('text-matcha-green');
-            iconLayout2.classList.remove('text-matcha-green');
-            iconLayout1.classList.add('text-gray-400');
-            iconLayout2.classList.add('text-gray-400');
-
-            // 2. Apply active styles and call the correct render function
-            if (layout === 1) {
-                renderLayout1();
-                layout1Btn.classList.add('neuo-active-inner');
-                iconLayout1.classList.add('text-matcha-green');
-                iconLayout1.classList.remove('text-gray-400');
-                layoutName.textContent = "Desk View";
-            } else { // layout === 2
-                renderLayout2();
-                layout2Btn.classList.add('neuo-active-inner');
-                iconLayout2.classList.add('text-matcha-green');
-                iconLayout2.classList.remove('text-gray-400');
-                layoutName.textContent = "Component View";
-            }
-        }
-
-        // Neomorphic Active Class for Navigation (Makes the selected link look 'pressed in')
-        function setActiveNav(pageId) {
-            // Remove active class from all links first
-            document.querySelectorAll('#main-nav a').forEach(a => {
-                a.classList.remove('neuo-active-inner', 'text-matcha-green', 'font-semibold');
-                a.classList.add('neuo-button'); // Ensure it has the default button style
-            });
-            // Add active class to the selected link
-            const activeLink = document.getElementById(`nav-${pageId}`);
-            if (activeLink) {
-                activeLink.classList.remove('neuo-button');
-                activeLink.classList.add('neuo-active-inner', 'text-matcha-green', 'font-semibold');
-            }
-        }
-
-        // --- Primary Navigation Handler (The App Router) ---
-        function navigateTo(page, event) {
-            // Prevents the browser from navigating away (important for single-page apps)
-            if (event) event.preventDefault();
-            
-            currentPage = page;
-            setActiveNav(page); // Update the active navigation link style
-            
-            // Handle layout switcher visibility: only show on the 'posts' page
-            layoutSwitcherContainer.classList.add('hidden');
-            contentArea.innerHTML = ''; // Clear the main content area before loading new content
-            // Update the static title placeholder
-            mainTitle.textContent = 'Loading...'; 
-
-            switch (page) {
-                case 'home':
-                    renderHome();
-                    break;
-                case 'posts':
-                    layoutSwitcherContainer.classList.remove('hidden');
-                    // Renders the posts using the currently selected layout (1 or 2)
-                    switchLayout(currentLayout); 
-                    break;
-                case 'projects':
-                    renderProjects();
-                    break;
-                case 'about':
-                    renderAbout();
-                    break;
-                default:
-                    renderHome();
-            }
+            `).join(''));
         }
 
         // --- Theme Logic ---
@@ -543,18 +426,68 @@
 
             themeNameElement.textContent = themeData.name;
             
-            lightIcon.classList.remove('text-matcha-green');
-            darkIcon.classList.remove('text-matcha-green');
+            lightIcon.classList.remove('text-matcha-green', 'text-gray-400');
+            darkIcon.classList.remove('text-matcha-green', 'text-gray-400');
 
             if (value == 0) {
                 lightIcon.classList.add('text-matcha-green');
+                darkIcon.classList.add('text-gray-400');
             } else if (value == 2) {
                 darkIcon.classList.add('text-matcha-green');
+                lightIcon.classList.add('text-gray-400');
+            } else { // Sepia mode
+                 lightIcon.classList.add('text-gray-400');
+                 darkIcon.classList.add('text-gray-400');
             }
 
             localStorage.setItem('themeValue', value);
         }
         
+        // Neomorphic Active Class for Navigation (Makes the selected link look 'pressed in')
+        function setActiveNav(pageId) {
+            // Remove active class from all links first
+            document.querySelectorAll('#main-nav a').forEach(a => {
+                a.classList.remove('neuo-active-inner', 'text-matcha-green', 'font-semibold');
+                a.classList.add('neuo-button'); // Ensure it has the default button style
+            });
+            // Add active class to the selected link
+            const activeLink = document.getElementById(`nav-${pageId}`);
+            if (activeLink) {
+                activeLink.classList.remove('neuo-button');
+                activeLink.classList.add('neuo-active-inner', 'text-matcha-green', 'font-semibold');
+            }
+        }
+
+        // --- Primary Navigation Handler (The App Router) ---
+        function navigateTo(page, event) {
+            if (event) event.preventDefault();
+            
+            currentPage = page;
+            setActiveNav(page);
+            
+            // Layout switcher is now always hidden
+            layoutSwitcherContainer.classList.add('hidden');
+            contentArea.innerHTML = '';
+            mainTitle.textContent = 'Loading...'; 
+
+            switch (page) {
+                case 'home':
+                    renderHome();
+                    break;
+                case 'posts':
+                    renderPosts(); // Calls the single, list-based layout
+                    break;
+                case 'projects':
+                    renderProjects(); // Calls the single, list-based layout
+                    break;
+                case 'about':
+                    renderAbout(); // Calls the single, article-based layout
+                    break;
+                default:
+                    renderHome();
+            }
+        }
+
         // --- Initialization ---
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -564,10 +497,8 @@
             let initialValue = '0'; // Default to Light Mode
 
             if (savedThemeValue !== null && THEMES.hasOwnProperty(savedThemeValue)) {
-                // Use saved preference
                 initialValue = savedThemeValue;
             } else {
-                // Fallback to OS preference for Dark/Light if no saved preference
                 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (prefersDark) {
                     initialValue = '2'; // Dark Mode
@@ -575,17 +506,12 @@
             }
 
             themeSlider.value = initialValue;
-            updateTheme(initialValue); // Apply the initial theme
-
+            updateTheme(initialValue); // Apply the initial theme and runs logic
+            
             // Initialize navigation (This loads the home content)
+            // Fixes the 'stuck on home' bug by ensuring the main logic flow is run correctly once.
             navigateTo('home', { preventDefault: () => {} });
-            // Initialize layout state for the posts page
-            switchLayout(1);
         });
-
-        // The previous file had a redundant initial load command here. 
-        // We now rely on the DOMContentLoaded handler above.
-        // navigateTo('home'); 
     </script>
 </body>
 </html>
