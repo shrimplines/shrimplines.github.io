@@ -24,6 +24,8 @@
             font-family: 'Inter', sans-serif;
             background-color: #F5F5F5; /* Muji Light Background */
             transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
+            /* FIX: Remove horizontal scrollbar */
+            overflow-x: hidden;
         }
         
         /* --- 3. Neomorphic Base Styles (Light Mode Defaults) --- */
@@ -68,6 +70,7 @@
             color: var(--color-text);
         }
         .sepia-mode .text-gray-800 { color: var(--color-text); }
+        .sepia-mode .text-gray-700 { color: var(--color-text); }
         .sepia-mode .text-gray-500 { color: var(--color-text-sub); }
         .sepia-mode .border-gray-200 { border-color: var(--color-divider); }
         .sepia-mode .text-bamboo-accent { color: var(--color-text); }
@@ -103,12 +106,14 @@
         /* Apply Dark Mode Variables */
         .dark-mode body {
             background-color: var(--bg-base);
-            color: var(--color-text);
+            color: var(--color-text); /* Ensures body text is light */
         }
+        /* FIX: Ensure specific text classes also become light */
         .dark-mode .text-gray-800 { color: var(--color-text); }
+        .dark-mode .text-gray-700 { color: var(--color-text); }
         .dark-mode .text-gray-500 { color: var(--color-text-sub); }
         .dark-mode .border-gray-200 { border-color: var(--color-divider); }
-        .dark-mode .text-bamboo-accent { color: var(--color-text); }
+        .dark-mode .text-bamboo-accent { color: var(--color-text); } /* Make accents white in dark mode */
         
         .dark-mode .neuo-card {
             background: var(--bg-base);
@@ -493,6 +498,8 @@
             // Handle layout switcher visibility: only show on the 'posts' page
             layoutSwitcherContainer.classList.add('hidden');
             contentArea.innerHTML = ''; // Clear the main content area before loading new content
+            // Update the static title placeholder
+            mainTitle.textContent = 'Loading...'; 
 
             switch (page) {
                 case 'home':
@@ -514,7 +521,8 @@
             }
         }
 
-        // --- Theme Logic (Kept from previous response, just relocated inside the single script tag) ---
+        // --- Theme Logic ---
+
         const THEMES = {
             '0': { name: 'Light Mode', class: '' },
             '1': { name: 'Sepia Mode', class: 'sepia-mode' },
@@ -569,12 +577,15 @@
             themeSlider.value = initialValue;
             updateTheme(initialValue); // Apply the initial theme
 
-            // Initialize navigation (This now loads the home content)
-            navigateTo('home');
+            // Initialize navigation (This loads the home content)
+            navigateTo('home', { preventDefault: () => {} });
             // Initialize layout state for the posts page
             switchLayout(1);
         });
 
+        // The previous file had a redundant initial load command here. 
+        // We now rely on the DOMContentLoaded handler above.
+        // navigateTo('home'); 
     </script>
 </body>
 </html>
