@@ -539,20 +539,21 @@
         // --- DETAIL VIEW RENDERER ---
         function renderDetail(item, previousPage) {
             mainTitle.textContent = item.title;
-    
-            // THIS LINE MUST USE navigateTo, NOT MapsTo
+            
+            // Set the navigation back to the correct list view upon returning
             const backButtonHandler = previousPage === 'posts' ? 
                 `MapsTo('${previousPage}'); switchLayout(${currentLayout})` :
                 `MapsTo('${previousPage}')`;
 
-        contentArea.innerHTML = `
-            <div class="neuo-card p-8 rounded-2xl space-y-6">
-                <button onclick="${backButtonHandler}" class="neuo-button mt-6 p-3 rounded-xl inline-flex items-center text-sm font-medium hover:text-bamboo-accent">
-                    </button>
-            </div>
-        `;
-        }
-            
+            contentArea.innerHTML = `
+                <div class="neuo-card p-8 rounded-2xl space-y-6">
+                    <div class="flex items-center justify-between border-b pb-4 mb-4 border-gray-200">
+                        <div class="flex items-center text-lg font-semibold text-matcha-green">
+                            ${item.icon || ''}
+                            ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                        </div>
+                        <span class="text-sm text-gray-500">${item.date}</span>
+                    </div>
 
                     <article class="text-gray-700 leading-relaxed">
                         <p class="text-base leading-relaxed whitespace-pre-wrap">${item.fullContent}</p>
@@ -755,4 +756,3 @@
     </script>
 </body>
 </html>
-
