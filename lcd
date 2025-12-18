@@ -1,52 +1,34 @@
 #include <LiquidCrystal_I2C.h>
 
-// --- ITEM CONSTANTS (SAFE DEFINITIONS) ---
-const char ITEM_GIFT = 0;   
-const char ITEM_COAL = 1;   
-const char ITEM_SPACE = 32; 
+const char itemGift = 0;   
+const char itemCoal = 1;   
+const char itemSpace = 32; 
 
-// --- HARDWARE CONFIGURATION ---
 LiquidCrystal_I2C lcd(0x27, 16, 2); 
 
-const int joystickYPin = A0; 
+const int joyYPin = A0; 
 const int gLedPin = 7;
 const int rLedPin = 6;
 const int buzzerPin = 8; 
-const int gameSpeedMs = 250; 
 
-// --- CUSTOM CHARACTER DEFINITIONS ---
-byte gift[] = { 
-  0b00100, 0b01010, 0b11111, 0b01010, 0b01010, 0b11111, 0b00000, 0b00000  
-};
-byte coal[] = { 
-  0b00000, 0b00100, 0b01110, 0b11111, 0b11111, 0b01110, 0b00100, 0b00000  
-};
+// icons
+byte giftIcon[] = { 0b00100, 0b01010, 0b11111, 0b01010, 0b01010, 0b11111, 0b00000, 0b00000 };
+byte coalIcon[] = { 0b00000, 0b00100, 0b01110, 0b11111, 0b11111, 0b01110, 0b00100, 0b00000 };
 
-// --- GLOBAL GAME STATE & PATTERN ---
 long score = 0;
 int elfLane = 0; 
-char topLaneItems[16] = "               "; 
-char bottomLaneItems[16] = "               "; 
+char topLane[16] = "               "; 
+char bottomLane[16] = "               "; 
 
-// Tighter, shorter pattern for faster gameplay
-const int PATTERN_LENGTH = 15;
-const char SCROLL_PATTERN[PATTERN_LENGTH] = {
-  ITEM_GIFT, ITEM_SPACE, ITEM_COAL, ITEM_SPACE, ITEM_GIFT, // Mix
-  ITEM_GIFT, ITEM_SPACE, ITEM_COAL, ITEM_COAL, ITEM_SPACE, // Double coal challenge
-  ITEM_SPACE, ITEM_GIFT, ITEM_SPACE, ITEM_COAL, ITEM_GIFT  // Mixed
+// map pattern
+const int patternLength = 15;
+const char scrollPattern[patternLength] = {
+  itemGift, itemSpace, itemCoal, itemSpace, itemGift, 
+  itemGift, itemSpace, itemCoal, itemCoal, itemSpace, 
+  itemSpace, itemGift, itemSpace, itemCoal, itemGift  
 };
 int patternIndex = 0; 
 
-
-// --- FUNCTION PROTOTYPES ---
-void handleScore(int type);
-void playSound(int type);
-void scrollItemsAndScore();
-void updateScreen();
-void handleInput();
-
-
-// --- SETUP ---
 void setup() {
   pinMode(gLedPin, OUTPUT);
   pinMode(rLedPin, OUTPUT);
@@ -55,130 +37,93 @@ void setup() {
   lcd.init();
   lcd.backlight();
   
-  lcd.createChar(ITEM_GIFT, gift); 
-  lcd.createChar(ITEM_COAL, coal); 
+  // create custom art
+  lcd.createChar(itemGift, giftIcon); 
+  lcd.createChar(itemCoal, coalIcon); 
   
   lcd.clear();
-  lcd.print("GiftSorter Ready");
+  lcd.print("Ready!");
   delay(1000);
 }
 
-// --- MAIN LOOP ---
 void loop() {
-  handleInput();
-  scrollItemsAndScore();
-  updateScreen();
-  
-  delay(gameSpeedMs); 
+  readJoystick();
+  moveItems();
+  drawScreen();
+  delay(250); 
 }
 
-// --- CORE FUNCTIONS ---
-
-void handleInput() {
-  int joyY = analogRead(joystickYPin);
-  
-  if (joyY < 300) { 
-    elfLane = 0;
-  } else if (joyY > 700) { 
-    elfLane = 1;
-  }
+// check up or down
+void readJoystick() {
+  int val = analogRead(joyYPin);
+  if (val < 300) elfLane = 0;
+  else if (val > 700) elfLane = 1;
 }
 
-void playSound(int type) {
-  if (type == 1) { 
+// play tones
+void playSound(int hit) {
+  if (hit == 1) { 
     tone(buzzerPin, 600, 50);
     delay(50);
     tone(buzzerPin, 800, 100);
-    delay(100);
-    noTone(buzzerPin);
-  } else if (type == -1) { 
-    tone(buzzerPin, 200, 200);
-    delay(200);
-    noTone(buzzerPin);
+  } else { 
+    tone(buzzerPin, 150, 200);
   }
 }
 
-void handleScore(int type) {
-  if (type == 1) { 
-    score += 10;
+// adjust score and leds
+void updateScore(int points) {
+  if (points > 0) {
+    score += points;
     digitalWrite(gLedPin, HIGH);
-    playSound(1); 
+    playSound(1);
     digitalWrite(gLedPin, LOW);
-  } else if (type == -1) { 
+  } else {
     score -= 5;
-    if (score < 0) score = 0; 
+    if (score < 0) score = 0;
     digitalWrite(rLedPin, HIGH);
-    playSound(-1); 
-    delay(300); 
+    playSound(-1);
+    delay(100); 
     digitalWrite(rLedPin, LOW);
   }
 }
 
-void scrollItemsAndScore() {
-  // 1. SCORING CHECK
-  if (topLaneItems[0] == ITEM_GIFT && elfLane == 0) handleScore(1); 
-  if (topLaneItems[0] == ITEM_COAL && elfLane == 0) handleScore(-1); 
-  
-  if (bottomLaneItems[0] == ITEM_GIFT && elfLane == 1) handleScore(1);  
-  if (bottomLaneItems[0] == ITEM_COAL && elfLane == 1) handleScore(-1); 
+// scroll logic and collision
+void moveItems() {
+  // check if elf hits front item
+  if (topLane[0] == itemGift && elfLane == 0) updateScore(10);
+  if (topLane[0] == itemCoal && elfLane == 0) updateScore(-5);
+  if (bottomLane[0] == itemGift && elfLane == 1) updateScore(10);
+  if (bottomLane[0] == itemCoal && elfLane == 1) updateScore(-5);
 
-  // 2. SHIFTING/SCROLLING
+  // shift left
   for (int i = 0; i < 15; i++) {
-    topLaneItems[i] = topLaneItems[i+1];
-    bottomLaneItems[i] = bottomLaneItems[i+1];
+    topLane[i] = topLane[i+1];
+    bottomLane[i] = bottomLane[i+1];
   }
 
-  // 3. NEW ITEM GENERATION (FIXED PATTERN)
-  topLaneItems[15] = SCROLL_PATTERN[patternIndex % PATTERN_LENGTH];
-  
-  int bottomPatternIndex = (patternIndex + 7) % PATTERN_LENGTH; 
-  bottomLaneItems[15] = SCROLL_PATTERN[bottomPatternIndex];
-  
-  patternIndex = (patternIndex + 1) % PATTERN_LENGTH; 
+  // add new items from pattern
+  topLane[15] = scrollPattern[patternIndex % patternLength];
+  bottomLane[15] = scrollPattern[(patternIndex + 7) % patternLength];
+  patternIndex++;
 }
 
-
-void updateScreen() {
-  // 1. Draw Score
+// display all
+void drawScreen() {
   lcd.setCursor(0, 0);
-  lcd.print("SCORE:");
-  if (score < 1000) lcd.print("0");
-  if (score < 100) lcd.print("0");
-  if (score < 10) lcd.print("0");
   lcd.print(score);
-  lcd.print(" "); 
-
-  // 2. Draw Lanes
-  
-  // Draw Top Lane (Row 0)
-  lcd.setCursor(0, 0);
-  if (elfLane == 0) { 
-    lcd.print(">"); 
-  } else {
-    lcd.print(" "); 
-  }
-  
-  for (int i = 0; i < 15; i++) {
-    if (topLaneItems[i] == ITEM_SPACE) {
-      lcd.print(' ');
-    } else {
-      lcd.write(topLaneItems[i]); 
-    }
+  lcd.print(elfLane == 0 ? ">" : " ");
+  for (int i = 0; i < 14; i++) {
+    if (topLane[i] == itemSpace) lcd.print(" ");
+    else lcd.write(topLane[i]);
   }
 
-  // Draw Bottom Lane (Row 1)
   lcd.setCursor(0, 1);
-  if (elfLane == 1) { 
-    lcd.print(">"); 
-  } else {
-    lcd.print(" "); 
-  }
-  
-  for (int i = 0; i < 15; i++) {
-    if (bottomLaneItems[i] == ITEM_SPACE) {
-      lcd.print(' ');
-    } else {
-      lcd.write(bottomLaneItems[i]); 
-    }
+  lcd.print("      "); 
+  lcd.setCursor(5, 1);
+  lcd.print(elfLane == 1 ? ">" : " ");
+  for (int i = 0; i < 10; i++) {
+    if (bottomLane[i] == itemSpace) lcd.print(" ");
+    else lcd.write(bottomLane[i]);
   }
 }
