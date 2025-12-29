@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="max-w-3xl mx-auto">
+    <header class="mb-10">
+        <div class="flex items-center gap-2 text-matcha-green font-bold text-xs uppercase tracking-widest mb-4">
+            <span>{{ page.categories | first }}</span>
+            <span class="text-gray-300">•</span>
+            <span class="text-gray-500 font-medium">{{ page.date | date: "%B %d, %Y" }}</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            {{ page.title }}
+        </h1>
+        {% if page.description %}
+            <p class="text-xl text-gray-500 italic">{{ page.description }}</p>
+        {% endif %}
+    </header>
+
+    <div class="neuo-card p-8 md:p-12 rounded-[2.5rem] bg-white/60 prose prose-lg prose-matcha max-w-none">
+        {{ content }}
+    </div>
+
+    <footer class="mt-12">
+        <a href="javascript:history.back()" class="neuo-button px-8 py-3 rounded-2xl inline-flex items-center font-bold text-bamboo-accent hover:text-matcha-green transition-all">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Collection
+        </a>
+    </footer>
+</article>
