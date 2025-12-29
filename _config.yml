@@ -8,9 +8,11 @@ exclude: [README.md, Gemfile, Gemfile.lock, .github]
 
 # URL Settings
 # Replace 'shrimplines' with your actual GitHub username
-baseurl: "" 
+baseurl: ""
 url: "https://shrimplines.github.io"
 
 # Markdown Settings
 kramdown:
   input: GFM # Use GitHub Flavored Markdown
+
+#crying what is this
