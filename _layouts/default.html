@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | Circles</title>
+    <title>{{ page.title }} | shrimp chips</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -32,13 +32,13 @@
         <aside id="sidebar" class="md:w-1/4 p-6 rounded-3xl neuo-card sticky top-8 h-fit transition-all duration-300">
             <div id="sidebar-content">
                 <header class="pb-6 border-b border-gray-200">
-                    <div class="flex items-center space-x-3">
-                        <h1 class="text-2xl font-extrabold text-bamboo-accent">shrimp chips</h1>
+                    <div class="flex flex-col">
+                        <h1 class="text-3xl font-extrabold text-bamboo-accent tracking-tighter uppercase">shrimp chips</h1>
+                        <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest">Digital Sanctuary</p>
                     </div>
                 </header>
 
                 <div class="mt-6 space-y-2">
-                    <h3 class="text-sm font-semibold mb-3 text-gray-500 uppercase">Navigation</h3>
                     <nav class="space-y-2">
                         <a href="{{ '/' | relative_url }}" class="block p-3 rounded-xl {% if page.url == '/' %}neuo-active-inner text-matcha-green font-semibold{% else %}neuo-button{% endif %}">
                             Home
@@ -56,11 +56,12 @@
                 </div>
 
                 <div class="mt-8 pt-6 border-t border-gray-200">
-                    <p class="text-sm font-semibold mb-2 text-gray-700 uppercase">Theme</p>
                     <div class="flex items-center space-x-3 p-3 rounded-xl neuo-button">
                         <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)" class="flex-1 cursor-pointer">
                     </div>
-                    <p class="text-xs text-center mt-3 text-gray-400"><span id="current-theme-name">Light Mode</span></p>
+                    <p class="text-[10px] text-center mt-3 text-gray-400 uppercase tracking-widest">
+                        <span id="current-theme-name">Light Mode</span>
+                    </p>
                 </div>
             </div>
         </aside>
@@ -80,15 +81,8 @@
         function updateTheme(value) {
             const body = document.body;
             const themeData = THEMES[value];
-            
-            // Remove existing theme classes
             body.classList.remove('bg-muji-bg', 'sepia-mode', 'dark-mode');
-            
-            // Apply new theme class
-            if (themeData.class) {
-                body.classList.add(themeData.class);
-            }
-
+            if (themeData.class) body.classList.add(themeData.class);
             document.getElementById('current-theme-name').textContent = themeData.name;
             localStorage.setItem('themeValue', value);
         }
