@@ -1,6 +1,6 @@
 title: Circles
 description: My digital sanctuary.
-exclude: [README.md, Gemfile, Gemfile.lock, .github]
+exclude: [README.md, Gemfile, Gemfile.lock, .github, vendor, node_modules]
 baseurl: ""
 url: "https://shrimplines.github.io"
 kramdown:
