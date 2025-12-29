@@ -1,8 +1,14 @@
+# Site Settings
 title: shrimp chips
-description: Digital Sanctuary.
-permalink: /artifacts/:title/
+description: My digital sanctuary.
+
+# Build Settings
+exclude: [README.md, Gemfile, Gemfile.lock, .github]
+
+# URL Settings
 baseurl: ""
 url: "https://shrimplines.github.io"
-exclude: [README.md, Gemfile, Gemfile.lock, .github]
+
+# Markdown Settings
 kramdown:
   input: GFM
