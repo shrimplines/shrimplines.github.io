@@ -1,18 +1,13 @@
-# Site Settings
-title: Circles
+title: shrimp chips
 description: My digital sanctuary.
+remote_theme: jekyll/minima # Or keep your current build settings
 
-# Build Settings
-# This tells Jekyll to ignore your README and any other junk
+# Clean URLs: This fixes the 404 issues
+permalink: /artifacts/:title/
+
 exclude: [README.md, Gemfile, Gemfile.lock, .github]
-
-# URL Settings
-# Replace 'shrimplines' with your actual GitHub username
 baseurl: ""
 url: "https://shrimplines.github.io"
 
-# Markdown Settings
 kramdown:
-  input: GFM # Use GitHub Flavored Markdown
-
-#crying what is this
+  input: GFM
