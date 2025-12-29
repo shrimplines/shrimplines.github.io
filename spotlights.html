@@ -1,1 +1,33 @@
+---
+layout: default
+title: Spotlights
+---
 
+<div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-light mb-8 text-gray-800">Spotlights</h2>
+    
+    <div class="space-y-12">
+        {% for post in site.posts %}
+            {% if post.categories contains 'spotlights' %}
+            <article class="group relative">
+                <div class="absolute -inset-4 rounded-[2.5rem] bg-matcha-green/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative">
+                    <span class="text-xs font-bold tracking-widest text-matcha-green uppercase italic">Deep Dive</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-4 text-gray-900 leading-tight">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                        {{ post.excerpt | strip_html | truncate: 250 }}
+                    </p>
+                    <div class="flex items-center gap-4 text-sm font-medium text-gray-400">
+                        <span>{{ post.date | date: "%B %Y" }}</span>
+                        <span>•</span>
+                        <span>{{ post.content | number_of_words | divided_by: 200 }} min read</span>
+                    </div>
+                </div>
+            </article>
+            <hr class="border-gray-200">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
