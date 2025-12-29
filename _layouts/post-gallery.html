@@ -1,1 +1,17 @@
+---
+layout: default
+---
+<article class="max-w-4xl mx-auto py-4">
+    <header class="mb-10 text-center">
+        <h1 class="text-4xl font-extrabold text-bamboo-accent tracking-tighter uppercase">{{ page.title }}</h1>
+        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">{{ page.date | date: "%Y.%m.%d" }}</p>
+    </header>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{ content }}
+    </div>
+
+    <footer class="mt-12 text-center">
+        <a href="javascript:history.back()" class="neuo-button px-8 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest">← Return</a>
+    </footer>
+</article>
