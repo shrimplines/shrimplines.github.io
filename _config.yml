@@ -1,6 +1,6 @@
 # Site Settings
-title: shrimp chips
-description: My digital sanctuary.
+title: Circles
+description: My digital hole
 
 # Build Settings
 exclude: [README.md, Gemfile, Gemfile.lock, .github]
