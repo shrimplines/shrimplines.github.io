@@ -1,20 +1,48 @@
 ---
 layout: default
-title: Posts
+title: Artifacts
 ---
 
-<h2 class="text-3xl font-light mb-8">Artifacts</h2>
+<h2 class="text-3xl font-extrabold text-bamboo-accent tracking-tighter uppercase mb-8">Artifacts</h2>
 
-<div class="space-y-6">
+<div class="flex flex-wrap -mx-2">
   {% for post in site.posts %}
-    <article class="neuo-card p-6 rounded-2xl">
-      <span class="text-xs font-bold uppercase tracking-widest text-matcha-green">
-        {{ post.categories | first }}
-      </span>
-      <h3 class="text-xl font-bold mt-2">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h3>
-      <p class="text-gray-500 text-sm">{{ post.date | date: "%B %d, %Y" }}</p>
-    </article>
+    {% if post.layout == "post-short" %}
+      <div class="w-full md:w-1/2 px-2 mb-4">
+        <a href="{{ post.url | relative_url }}" class="block neuo-card p-6 rounded-[2rem] h-full border-l-4 border-matcha-green hover:no-underline">
+          <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">Short</span>
+          <h3 class="text-lg font-bold mt-2 text-gray-800">{{ post.title }}</h3>
+          <p class="text-gray-400 text-xs mt-1">{{ post.date | date: "%B %d, %Y" }}</p>
+        </a>
+      </div>
+
+    {% elif post.layout == "post-gallery" %}
+      <div class="w-full px-2 mb-4">
+        <a href="{{ post.url | relative_url }}" class="block neuo-card p-6 rounded-[2.5rem] hover:no-underline">
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">Gallery</span>
+              <h3 class="text-xl font-bold mt-2 text-gray-800">{{ post.title }}</h3>
+              <p class="text-gray-400 text-xs mt-1">{{ post.date | date: "%B %d, %Y" }}</p>
+            </div>
+            <div class="flex -space-x-2">
+              {% for img in post.preview_images limit:3 %}
+                <img src="{{ img | relative_url }}" class="w-12 h-12 rounded-full border-2 border-white object-cover shadow-sm">
+              {% endfor %}
+            </div>
+          </div>
+        </a>
+      </div>
+
+    {% else %}
+      <div class="w-full px-2 mb-4">
+        <a href="{{ post.url | relative_url }}" class="block neuo-card p-8 rounded-[2.5rem] hover:no-underline">
+          <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">Post</span>
+          <h3 class="text-2xl font-bold mt-2 text-gray-800">{{ post.title }}</h3>
+          <p class="text-gray-500 mt-2 line-clamp-2">{{ post.excerpt | strip_html }}</p>
+          <p class="text-gray-400 text-xs mt-4 uppercase tracking-widest">{{ post.date | date: "%B %d, %Y" }}</p>
+        </a>
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
