@@ -1,1 +1,20 @@
+---
+layout: default
+title: Posts
+---
 
+<h2 class="text-3xl font-light mb-8">Artifacts</h2>
+
+<div class="space-y-6">
+  {% for post in site.posts %}
+    <article class="neuo-card p-6 rounded-2xl">
+      <span class="text-xs font-bold uppercase tracking-widest text-matcha-green">
+        {{ post.categories | first }}
+      </span>
+      <h3 class="text-xl font-bold mt-2">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h3>
+      <p class="text-gray-500 text-sm">{{ post.date | date: "%B %d, %Y" }}</p>
+    </article>
+  {% endfor %}
+</div>
