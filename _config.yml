@@ -1,4 +1,16 @@
+# Site Settings
 title: Circles
 description: My digital sanctuary.
-remote_theme: jekyll/minima
-permalink: /:categories/:title/
+
+# Build Settings
+# This tells Jekyll to ignore your README and any other junk
+exclude: [README.md, Gemfile, Gemfile.lock, .github]
+
+# URL Settings
+# Replace 'shrimplines' with your actual GitHub username
+baseurl: "" 
+url: "https://shrimplines.github.io"
+
+# Markdown Settings
+kramdown:
+  input: GFM # Use GitHub Flavored Markdown
