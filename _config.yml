@@ -1,5 +1,6 @@
 title: Circles
 description: My digital sanctuary.
+# The line below is the shield. It stops Jekyll from digging into the 'vendor' folder.
 exclude: [README.md, Gemfile, Gemfile.lock, .github, vendor, node_modules]
 baseurl: ""
 url: "https://shrimplines.github.io"
