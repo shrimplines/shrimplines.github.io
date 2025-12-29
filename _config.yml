@@ -1,13 +1,8 @@
 title: shrimp chips
-description: My digital sanctuary.
-remote_theme: jekyll/minima # Or keep your current build settings
-
-# Clean URLs: This fixes the 404 issues
+description: Digital Sanctuary.
 permalink: /artifacts/:title/
-
-exclude: [README.md, Gemfile, Gemfile.lock, .github]
 baseurl: ""
 url: "https://shrimplines.github.io"
-
+exclude: [README.md, Gemfile, Gemfile.lock, .github]
 kramdown:
   input: GFM
