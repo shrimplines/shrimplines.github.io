@@ -2,18 +2,19 @@
 layout: default
 ---
 <article class="max-w-3xl mx-auto py-4">
-  <header class="mb-8 border-b border-gray-200 pb-6">
-    <h1 class="text-4xl font-extrabold text-bamboo-accent uppercase tracking-tighter">{{ page.title }}</h1>
-    <p class="text-sm text-gray-500 mt-2">{{ page.date | date: "%B %d, %Y" }} • {{ page.categories | first }}</p>
+  <header class="mb-8">
+    <span class="text-[10px] font-bold text-matcha-green uppercase tracking-[0.2em]">Post</span>
+    <h1 class="text-4xl font-extrabold text-bamboo-accent tracking-tighter uppercase mt-1">{{ page.title }}</h1>
+    <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">{{ page.date | date: "%B %d, %Y" }}</p>
   </header>
 
-  <div class="neuo-card p-8 rounded-[2.5rem] leading-relaxed text-gray-700 text-lg">
+  <div class="neuo-card p-10 rounded-[3rem] leading-relaxed text-gray-700 text-lg">
     {{ content }}
   </div>
 
-  <div class="mt-8">
-    <a href="/" class="neuo-button px-6 py-2 rounded-xl text-sm font-bold text-matcha-green">
-      ← Return to Sanctuary
+  <footer class="mt-8">
+    <a href="{{ '/artifacts' | relative_url }}" class="neuo-button px-6 py-2 rounded-xl text-sm font-bold text-matcha-green">
+      ← Return to Artifacts
     </a>
-  </div>
+  </footer>
 </article>
