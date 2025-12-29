@@ -1,0 +1,4 @@
+title: Circles
+description: My digital sanctuary.
+remote_theme: jekyll/minima
+permalink: /:categories/:title/
