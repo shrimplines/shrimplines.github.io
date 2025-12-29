@@ -5,16 +5,37 @@ layout: default
 
 <div class="space-y-8">
     <div class="grid grid-cols-3 gap-4">
-        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-matcha-green/30">
-            <p class="text-sm font-semibold text-matcha-green">green shape</p>
-        </div>
-        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-wood-accent/30">
-            <p class="text-sm font-semibold text-wood-accent">brown shape</p>
-        </div>
-        <div class="neuo-card rounded-2xl aspect-square flex items-center justify-center text-center p-4 bg-gray-300/30">
-            <p class="text-sm font-semibold text-gray-700">grey (or gray?) shape</p>
-        </div>
+        <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
+        <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" 
+          class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
+          alt="Green Artifact">
+        <div class="absolute inset-0 bg-matcha-green/10 group-hover:bg-transparent transition-colors duration-500"></div>
     </div>
+
+    <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
+        <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" 
+          class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
+          alt="Brown Artifact">
+        <div class="absolute inset-0 bg-wood-accent/10 group-hover:bg-transparent transition-colors duration-500"></div>
+    </div>
+
+    <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
+        <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" 
+            class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
+            alt="Grey Artifact">
+        <div class="absolute inset-0 bg-gray-400/10 group-hover:bg-transparent transition-colors duration-500"></div>
+    </div>
+</div>
+
+<article class="p-8 rounded-2xl neuo-card mt-8">
+  <h3 class="text-2xl font-bold mb-4 text-bamboo-accent">The Thesis Statement</h3>
+  <p class="text-lg text-gray-700 leading-relaxed">
+    Welcome to my digital sanctuary, a space for documenting all of my thoughts, plans, and projects. Right now, this blog is in the single-celled organism (the protoplasm) phase.
+  </p>
+  <p class="text-lg text-gray-700 leading-relaxed mt-4">
+    Consider this the very beginning.
+  </p>
+</article>
 
     <article class="p-8 rounded-2xl neuo-card">
         <h3 class="text-2xl font-bold mb-4 text-bamboo-accent">The Thesis Statement</h3>
