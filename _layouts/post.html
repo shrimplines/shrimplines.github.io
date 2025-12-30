@@ -1,28 +1,35 @@
 ---
 layout: default
 ---
+{% assign words = content | number_of_words %}
+{% if words > 500 %}
+    {% assign accent_color = "matcha-green" %}
+    {% assign hover_color = "hover:text-matcha-green" %}
+{% else %}
+    {% assign accent_color = "sunset-orange" %}
+    {% assign hover_color = "hover:text-sunset-orange" %}
+{% endif %}
+
 <article class="max-w-3xl mx-auto py-4">
   <header class="mb-10">
-    <span class="text-[10px] font-bold text-matcha-green uppercase tracking-[0.2em] border-b-2 border-matcha-green pb-1">
+    <span class="text-[10px] font-bold text-{{ accent_color }} uppercase tracking-[0.2em] border-b-2 border-{{ accent_color }} pb-1">
       {{ page.categories | first | capitalize }}
     </span>
     <h1 class="text-4xl font-extrabold text-bamboo-accent tracking-tighter uppercase mt-6 leading-none">{{ page.title }}</h1>
     <div class="flex items-center gap-4 mt-4">
         <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">
-            {{ content | number_of_words | divided_by: 180 | plus: 1 }} min read
+            {{ words | divided_by: 180 | plus: 1 }} min read
         </p>
     </div>
   </header>
 
-  <div class="neuo-card p-12 rounded-[3.5rem] leading-relaxed text-gray-700 text-lg border-l-8 
-    {% assign words = content | number_of_words %}
-    {% if words > 500 %}border-bamboo-accent{% else %}border-matcha-green{% endif %}">
+  <div class="neuo-card p-12 rounded-[3.5rem] leading-relaxed text-gray-700 text-lg border-l-8 border-{{ accent_color }}">
     {{ content }}
   </div>
 
   <div class="mt-16 mb-12 flex justify-center">
     <a href="{{ site.baseurl }}/{{ page.categories | first }}" 
-       class="neuo-card px-12 py-5 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-matcha-green hover:scale-105 transition-all">
+       class="neuo-card px-12 py-5 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 {{ hover_color }} hover:scale-105 transition-all">
       ← Return to {{ page.categories | first | capitalize }}
     </a>
   </div>
