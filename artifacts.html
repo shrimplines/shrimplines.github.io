@@ -40,9 +40,9 @@ title: Artifacts
     {% else %}
       <div class="w-full px-2 mb-4">
         <a href="{{ post.url | relative_url }}" class="block neuo-card p-8 rounded-[2.5rem] border-l-8 
-           {% if words > 500 %}border-matcha-green{% else %}border-canary-yellow{% endif %} 
+           {% if words > 500 %}border-matcha-green{% else %}border-sunset-orange{% endif %} 
            hover:scale-[1.01] transition-transform">
-          <span class="text-[10px] font-bold {% if words > 500 %}text-matcha-green{% else %}text-canary-yellow{% endif %} uppercase tracking-widest border-b opacity-70 pb-1">Post</span>
+          <span class="text-[10px] font-bold {% if words > 500 %}text-matcha-green{% else %}text-sunset-orange{% endif %} uppercase tracking-widest border-b opacity-70 pb-1">Post</span>
           <h3 class="text-2xl font-bold mt-4 text-gray-800">{{ post.title }}</h3>
         </a>
       </div>
