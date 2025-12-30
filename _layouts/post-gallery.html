@@ -7,47 +7,60 @@ layout: default
         Visual Gallery
     </span>
     <h1 class="text-4xl font-extrabold text-bamboo-accent tracking-tighter uppercase mt-4 leading-none">{{ page.title }}</h1>
+    
+    {% if page.description %}
+    <div class="mt-6 p-6 rounded-3xl bg-white/50 border border-gray-100 text-gray-500 italic leading-relaxed max-w-2xl">
+        {{ page.description }}
+    </div>
+    {% endif %}
   </header>
 
-  <div class="group relative neuo-card rounded-[3rem] border-l-8 border-sky-blue bg-white overflow-hidden transition-all duration-500">
+  <div class="group relative neuo-card rounded-[3rem] border-l-8 border-sky-blue bg-white overflow-hidden transition-all duration-500 shadow-sm hover:shadow-xl">
     
-    <div class="p-6 flex overflow-x-auto space-x-6 pb-12 custom-scrollbar snap-x snap-mandatory">
+    <div class="p-8 flex overflow-x-auto space-x-6 pb-16 custom-scrollbar snap-x snap-mandatory">
       {{ content }}
     </div>
 
-    <div class="absolute bottom-0 left-0 right-0 bg-sky-blue/95 backdrop-blur-md p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
-        <div class="flex justify-between items-end">
+    <div class="absolute bottom-0 left-0 right-0 bg-sky-blue/95 backdrop-blur-md p-10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10 border-t border-white/20">
+        <div class="flex justify-between items-center">
             <div class="max-w-xl">
-                <h2 class="text-2xl font-black text-white uppercase tracking-tighter mb-2">{{ page.title }}</h2>
-                <p class="text-white/80 text-sm leading-relaxed italic">
-                    {{ page.description | default: "Exploring the visual elements of this artifact." }}
+                <h2 class="text-2xl font-black text-white uppercase tracking-tighter mb-2">Technical Details</h2>
+                <p class="text-white/90 text-sm leading-relaxed font-medium">
+                    {{ page.dropdown_text | default: "Additional details about this gallery set." }}
                 </p>
             </div>
-            <div class="text-white font-mono text-[10px] tracking-widest opacity-50">
-                INFO.ARTIFACT_v1.0
+            <div class="hidden md:block">
+                <div class="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
   </div>
 
-  <div class="mt-12 mb-8 flex justify-center">
+  <div class="mt-16 mb-8 flex justify-center">
     <a href="{{ site.baseurl }}/{{ page.categories | first }}" 
-       class="neuo-card px-10 py-4 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-sky-blue hover:scale-105 transition-all">
+       class="neuo-card px-12 py-5 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-sky-blue hover:scale-105 transition-all">
       ← Return to {{ page.categories | first | capitalize }}
     </a>
   </div>
 </article>
 
 <style>
-  .custom-scrollbar::-webkit-scrollbar { height: 8px; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { background: #BAE6FD; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar { height: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; margin: 0 40px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #BAE6FD; border-radius: 10px; border: 3px solid white; }
   .custom-scrollbar img { 
     flex: 0 0 auto; 
-    height: 480px; 
+    height: 520px; 
     width: auto; 
     border-radius: 2.5rem;
     snap-align: center;
-    box-shadow: 15px 15px 30px rgba(0,0,0,0.03);
-    border: 6px solid white;
+    box-shadow: 20px 20px 40px rgba(0,0,0,0.06);
+    border: 10px solid white;
+    transition: transform 0.3s ease;
   }
+  .custom-scrollbar img:hover { transform: scale(1.02); }
 </style>
