@@ -4,7 +4,7 @@ description: "My digital hole."
 
 sass:
   style: compressed
-  sass_dir: _sass # or assets/css if that's where your partials are
+  sass_dir: _sass 
 
 exclude:
   - README.md
