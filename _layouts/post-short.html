@@ -2,21 +2,25 @@
 layout: default
 ---
 <div class="flex py-4 justify-center">
-  <article class="neuo-card p-10 rounded-[3rem] w-full md:w-2/3 border-l-8 border-shrimp-pink">
-    <header class="mb-4">
-      <span class="text-[10px] font-bold text-shrimp-pink uppercase tracking-[0.2em] border-b-2 border-shrimp-pink pb-1">Short</span>
-      <h1 class="text-2xl font-bold text-gray-800 mt-6">{{ page.title }}</h1>
-    </header>
+  <article class="w-full md:w-2/3">
+    <div class="neuo-card p-10 rounded-[3rem] border-l-8 border-shrimp-pink">
+        <header class="mb-6">
+          <span class="text-[10px] font-bold text-shrimp-pink uppercase tracking-[0.2em] border-b-2 border-shrimp-pink pb-1">
+            Short Thought
+          </span>
+          <h1 class="text-2xl font-bold text-gray-800 mt-8 tracking-tight">{{ page.title }}</h1>
+        </header>
 
-    <div class="text-gray-600 italic text-lg leading-relaxed mb-8">
-      {{ content }}
+        <div class="text-gray-600 italic text-lg leading-relaxed mb-4">
+          {{ content }}
+        </div>
     </div>
 
-    <div class="mt-8 pt-6 border-t border-gray-100 flex justify-center">
-      <a href="{{ site.baseurl }}/{{ page.categories | first }}" 
-         class="text-[10px] font-bold text-gray-300 hover:text-matcha-green uppercase tracking-[0.3em] transition-all">
-        ← Return to {{ page.categories | first | capitalize }}
-      </a>
+    <div class="mt-12 flex justify-center">
+        <a href="{{ site.baseurl }}/{{ page.categories | first }}" 
+           class="neuo-card px-10 py-4 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-matcha-green hover:scale-105 transition-all">
+          ← Return to {{ page.categories | first | capitalize }}
+        </a>
     </div>
   </article>
 </div>
