@@ -1,25 +1,33 @@
 ---
 layout: default
 ---
-<div class="flex py-4 justify-center">
-  <article class="w-full md:w-2/3">
-    <div class="neuo-card p-10 rounded-[3rem] border-l-8 border-shrimp-pink">
+<div class="flex py-12 justify-center">
+  <article class="w-full max-w-xl mx-auto">
+    <div class="neuo-card p-10 rounded-[2.5rem] border-l-8 border-shrimp-pink relative overflow-hidden">
+        
         <header class="mb-6">
-          <span class="text-[10px] font-bold text-shrimp-pink uppercase tracking-[0.2em] border-b-2 border-shrimp-pink pb-1">
-            Short Thought
-          </span>
-          <h1 class="text-2xl font-bold text-gray-800 mt-8 tracking-tight">{{ page.title }}</h1>
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] font-bold text-shrimp-pink uppercase tracking-[0.2em] border-b-2 border-shrimp-pink/30 pb-1">
+              Short Thought
+            </span>
+            <span class="text-[10px] opacity-30 font-mono">{{ page.date | date: "%m.%d.%y" }}</span>
+          </div>
+          <h1 class="text-2xl font-black text-shrimp-pink mt-6 tracking-tight leading-tight italic">
+            {{ page.title }}
+          </h1>
         </header>
 
-        <div class="text-gray-600 italic text-lg leading-relaxed mb-4">
+        <div class="text-lg leading-relaxed italic opacity-90">
           {{ content }}
         </div>
+        
+        <div class="absolute top-0 right-0 w-16 h-16 bg-shrimp-pink/5 rounded-bl-full"></div>
     </div>
 
     <div class="mt-12 flex justify-center">
         <a href="{{ site.baseurl }}/{{ page.categories | first }}" 
-           class="neuo-card px-10 py-4 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-matcha-green hover:scale-105 transition-all">
-          ← Return to {{ page.categories | first | capitalize }}
+           class="neuo-card px-10 py-4 rounded-2xl text-[10px] font-extrabold uppercase tracking-[0.3em] text-gray-400 hover:text-shrimp-pink border-b-2 border-transparent hover:border-shrimp-pink hover:scale-105 transition-all">
+          ← Back to {{ page.categories | first | capitalize }}
         </a>
     </div>
   </article>
