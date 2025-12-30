@@ -8,7 +8,6 @@ title: Spotlights
             Archive / 03
         </span>
         <h2 class="text-5xl font-black text-matcha-green tracking-tighter uppercase mt-6 leading-none">Spotlights</h2>
-        <p class="text-sm opacity-50 italic mt-4">Extended research, deep dives, and long-form technical narratives.</p>
     </header>
     
     <div class="space-y-12">
@@ -17,36 +16,39 @@ title: Spotlights
             <article class="group relative">
                 <a href="{{ post.url | relative_url }}" class="block neuo-card p-10 md:p-14 rounded-[4rem] border-l-[12px] border-matcha-green hover:scale-[1.01] transition-all duration-500 bg-white/40 backdrop-blur-sm">
                     
-                    <div class="flex justify-between items-start mb-8">
-                        <div class="bg-matcha-green/10 px-4 py-2 rounded-full">
-                            <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">Deep Dive</span>
-                        </div>
-                        <span class="text-[10px] font-mono opacity-30 uppercase tracking-tighter text-right">
-                            Ref: SC-{{ post.date | date: "%Y%m" }}<br>
-                            {{ post.date | date: "%B %d, %Y" }}
-                        </span>
-                    </div>
-                    
-                    <h3 class="text-4xl font-black text-gray-800 group-hover:text-matcha-green transition-colors leading-[0.9] tracking-tight mb-6">
-                        {{ post.title }}
-                    </h3>
-                    
-                    <div class="text-gray-500 leading-relaxed text-lg mb-8 line-clamp-3 italic opacity-80">
-                        {{ post.excerpt | strip_html | truncate: 250 }}
-                    </div>
-                    
-                    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
-                        <div class="flex items-center gap-6">
-                            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="flex-1">
+                            <div class="inline-block bg-matcha-green/10 px-4 py-2 rounded-xl mb-6">
+                                <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">
+                                    {{ post.label | default: "Deep Dive" }}
+                                </span>
+                            </div>
+
+                            <h3 class="text-4xl font-black text-gray-800 group-hover:text-matcha-green transition-colors leading-[0.9] tracking-tight mb-6">
+                                {{ post.title }}
+                            </h3>
+                            
+                            {% if post.description %}
+                                <p class="text-gray-500 leading-relaxed text-lg mb-8">
+                                    {{ post.description }}
+                                </p>
+                            {% endif %}
+                            
+                            <div class="flex items-center gap-6 pt-6 border-t border-gray-100">
+                                <span class="text-[10px] font-mono opacity-30 uppercase tracking-tighter">
+                                    {{ post.date | date: "%B %d, %Y" }}
+                                </span>
+                                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                                    {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+                                </div>
                             </div>
                         </div>
-                        <span class="text-matcha-green font-black text-xs uppercase tracking-tighter opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
-                            Open Entry ⟶
-                        </span>
+
+                        {% if post.cover_image %}
+                        <div class="w-full md:w-56 h-56 rounded-[3rem] overflow-hidden border-8 border-white shadow-xl bg-gray-50 flex-shrink-0">
+                            <img src="{{ post.cover_image | relative_url }}" class="w-full h-full object-cover">
+                        </div>
+                        {% endif %}
                     </div>
                 </a>
                 
