@@ -2,34 +2,55 @@
 layout: default
 title: Spotlights
 ---
-<div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-extrabold text-matcha-green tracking-tighter uppercase mb-10">Spotlights</h2>
+<div class="max-w-4xl mx-auto py-4">
+    <header class="mb-12">
+        <span class="text-[10px] font-black text-matcha-green uppercase tracking-[0.4em] border-b-2 border-matcha-green pb-2">
+            Archive / 03
+        </span>
+        <h2 class="text-5xl font-black text-matcha-green tracking-tighter uppercase mt-6 leading-none">Spotlights</h2>
+        <p class="text-sm opacity-50 italic mt-4">Extended research, deep dives, and long-form technical narratives.</p>
+    </header>
     
-    <div class="space-y-8">
+    <div class="space-y-12">
         {% assign spotlights = site.posts | where_exp: "item", "item.categories contains 'spotlights'" %}
         {% for post in spotlights %}
-            <article class="group">
-                <a href="{{ post.url | relative_url }}" class="block neuo-card p-10 rounded-[3rem] border-l-8 border-matcha-green hover:scale-[1.01] transition-all">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-[10px] font-bold tracking-[0.2em] text-matcha-green uppercase italic border-b border-matcha-green/30 pb-1">Deep Dive</span>
-                        <span class="text-[10px] font-mono opacity-30">{{ post.date | date: "%B %Y" }}</span>
+            <article class="group relative">
+                <a href="{{ post.url | relative_url }}" class="block neuo-card p-10 md:p-14 rounded-[4rem] border-l-[12px] border-matcha-green hover:scale-[1.01] transition-all duration-500 bg-white/40 backdrop-blur-sm">
+                    
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="bg-matcha-green/10 px-4 py-2 rounded-full">
+                            <span class="text-[10px] font-bold text-matcha-green uppercase tracking-widest">Deep Dive</span>
+                        </div>
+                        <span class="text-[10px] font-mono opacity-30 uppercase tracking-tighter text-right">
+                            Ref: SC-{{ post.date | date: "%Y%m" }}<br>
+                            {{ post.date | date: "%B %d, %Y" }}
+                        </span>
                     </div>
                     
-                    <h3 class="text-3xl font-black text-gray-800 group-hover:text-matcha-green transition-colors leading-tight tracking-tight">
+                    <h3 class="text-4xl font-black text-gray-800 group-hover:text-matcha-green transition-colors leading-[0.9] tracking-tight mb-6">
                         {{ post.title }}
                     </h3>
                     
-                    <p class="text-gray-500 leading-relaxed my-6 line-clamp-2 italic">
-                        {{ post.excerpt | strip_html | truncate: 200 }}
-                    </p>
+                    <div class="text-gray-500 leading-relaxed text-lg mb-8 line-clamp-3 italic opacity-80">
+                        {{ post.excerpt | strip_html | truncate: 250 }}
+                    </div>
                     
-                    <div class="flex items-center gap-6">
-                        <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                            {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+                            </div>
                         </div>
-                        <span class="text-matcha-green text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase">Read Full Article →</span>
+                        <span class="text-matcha-green font-black text-xs uppercase tracking-tighter opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
+                            Open Entry ⟶
+                        </span>
                     </div>
                 </a>
+                
+                <div class="absolute -z-10 inset-0 bg-matcha-green/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </article>
         {% endfor %}
     </div>
