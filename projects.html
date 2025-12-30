@@ -17,12 +17,9 @@ title: Projects
             </svg>
           </div>
           <div class="flex-1">
-            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-200 pb-1">Technical Build</span>
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1">Project File</span>
             <h3 class="text-2xl font-bold mt-3 text-gray-800">{{ post.title }}</h3>
-            <p class="text-sm text-gray-500 mt-1 line-clamp-1 opacity-70">{{ post.excerpt | strip_html }}</p>
-          </div>
-          <div class="hidden md:block text-right">
-             <span class="text-[10px] font-mono opacity-30 uppercase">{{ post.date | date: "%Y" }}</span>
+            <p class="text-sm text-gray-500 mt-1 opacity-70 italic">{{ post.excerpt | strip_html | truncate: 100 }}</p>
           </div>
         </div>
       </a>
