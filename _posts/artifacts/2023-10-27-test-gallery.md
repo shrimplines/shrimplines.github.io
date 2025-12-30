@@ -5,7 +5,7 @@ categories: artifacts
 description: "scroll."
 dropdown_text: "stok pics lol"
 preview_images:
-  - "https://images.unsplash.com/photo-1502691876148-a84978f5d81b"
+  - "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf8"
   - "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85"
 ---
 
