@@ -2,7 +2,6 @@
 layout: default
 title: Projects
 ---
-
 <h2 class="text-3xl font-extrabold text-bamboo-accent tracking-tighter uppercase mb-8">Projects</h2>
 
 <div class="flex flex-wrap -mx-2">
@@ -10,16 +9,20 @@ title: Projects
   
   {% for post in projects %}
     <div class="w-full px-2 mb-4">
-      <a href="{{ post.url | relative_url }}" class="block neuo-card p-8 rounded-[3rem] border-l-8 border-bamboo-accent hover:scale-[1.01] transition-transform">
+      <a href="{{ post.url | relative_url }}" class="block neuo-card p-8 rounded-[2.5rem] border-l-8 border-bamboo-accent hover:scale-[1.01] transition-transform">
         <div class="flex items-center space-x-6">
-          <div class="text-bamboo-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="text-bamboo-accent bg-bamboo-accent/10 p-4 rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
           </div>
-          <div>
-            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Project File</span>
-            <h3 class="text-2xl font-bold text-gray-800 mt-1">{{ post.title }}</h3>
+          <div class="flex-1">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-200 pb-1">Technical Build</span>
+            <h3 class="text-2xl font-bold mt-3 text-gray-800">{{ post.title }}</h3>
+            <p class="text-sm text-gray-500 mt-1 line-clamp-1 opacity-70">{{ post.excerpt | strip_html }}</p>
+          </div>
+          <div class="hidden md:block text-right">
+             <span class="text-[10px] font-mono opacity-30 uppercase">{{ post.date | date: "%Y" }}</span>
           </div>
         </div>
       </a>
