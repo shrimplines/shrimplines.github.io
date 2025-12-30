@@ -3,18 +3,24 @@ layout: default
 ---
 <article class="max-w-3xl mx-auto py-4">
   <header class="mb-8">
-    <span class="text-[10px] font-bold text-matcha-green uppercase tracking-[0.2em] border-b-2 border-matcha-green pb-1">Post</span>
+    <span class="text-[10px] font-bold text-matcha-green uppercase tracking-[0.2em] border-b-2 border-matcha-green pb-1">
+      {{ page.categories | first | capitalize }}
+    </span>
     <h1 class="text-4xl font-extrabold text-bamboo-accent tracking-tighter uppercase mt-4">{{ page.title }}</h1>
-    <p class="text-xs text-gray-400 mt-2 uppercase tracking-widest">{{ page.date | date: "%B %d, %Y" }}</p>
+    <p class="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">
+      {{ page.content | number_of_words | divided_by: 180 | plus: 1 }} min read
+    </p>
   </header>
 
-  <div class="neuo-card p-10 rounded-[3rem] leading-relaxed text-gray-700 text-lg">
+  <div class="neuo-card p-10 rounded-[3rem] leading-relaxed text-gray-700 text-lg border-l-8 
+    {% assign words = content | number_of_words %}
+    {% if words < 100 %}border-pink-300{% elsif words > 500 %}border-bamboo-accent{% else %}border-matcha-green{% endif %}">
     {{ content }}
   </div>
 
-  <footer class="mt-8">
-    <a href="{{ '/artifacts' | relative_url }}" class="neuo-button px-6 py-2 rounded-xl text-sm font-bold text-matcha-green">
-      ← Return to Artifacts
+  <div class="mt-12 flex justify-center">
+    <a href="{{ site.baseurl }}/{{ page.categories | first }}" class="neuo-button px-8 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-matcha-green transition-all">
+      ← Return to {{ page.categories | first | capitalize }}
     </a>
-  </footer>
+  </div>
 </article>
