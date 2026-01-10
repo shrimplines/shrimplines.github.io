@@ -20,7 +20,7 @@ I am playing with bubble wrap. This feels inconsequential. It isn’t.
 Bubble wrap is composed of bubbles. That statement sounds trivial until you realize the wrap is not defined by any single bubble, but by the idea that bubbles can be replaced. 
 
 
-You’ve probably heard the saying:* one is weak, and together we are strong. *
+You’ve probably heard the saying: *one is weak, and together we are strong.*
 
 
 
@@ -41,11 +41,11 @@ Assume, for a moment, that each bubble represents a soldier.** You do not win by
 
 If you disable the bubble wrap machine, you win immediately. No more bubbles. No replenishment. This is not about strength; it is about capacity.
 
-
+<br>
 Now generalize the idea.
 
 
-**In theory, war is decided by three inputs: resources, people, and morale. **These variables are interdependent. People extract and manage resources. People operate infrastructure. People sustain morale simply by continuing to exist. Remove people and the other two degrade automatically. This is how systems work.
+**In theory, war is decided by three inputs: resources, people, and morale.** These variables are interdependent. People extract and manage resources. People operate infrastructure. People sustain morale simply by continuing to exist. Remove people and the other two degrade automatically. This is how systems work.
 
 
 This is where biological warfare appears—not as cruelty, but as a conceptual endpoint of strategic thinking. It is the shift from brute-force fighting forces to interfering with the conditions that allow forces to regenerate. The idea is not immediate destruction, but long-term interruption. 
