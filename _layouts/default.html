@@ -4,114 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>shrimp chips</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['"DM Serif Display"', 'serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'base-white': '#FFFFFF',
-                        'ui-black': '#0A0A0A',
-                        'matcha': '#ABE27A',
-                    },
+                    fontFamily: { serif: ['"DM Serif Display"', 'serif'], mono: ['"JetBrains Mono"', 'monospace'], sans: ['Inter', 'sans-serif'] },
+                    colors: { 'base-white': '#FFFFFF', 'ui-black': '#0A0A0A', 'matcha': '#ABE27A', 'shrimp': '#FFB7B7' }
                 }
             }
         }
     </script>
     <style>
-        /* Modern Pixel Grid */
-        .bg-grid {
-            background-image: radial-gradient(rgba(10, 10, 10, 0.08) 1px, transparent 1px);
-            background-size: 36px 36px;
-        }
-
-        /* Fragile Theme Logic Preserved */
-        body.sepia-mode { background-color: #F4ECD8 !important; color: #5B4636 !important; }
+        * { border-radius: 0 !important; cursor: crosshair; }
+        .bg-grid { background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 40px 40px; }
         body.dark-mode { background-color: #0A0A0A !important; color: #EDEDED !important; }
-        .dark-mode .bg-grid { background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px); }
-        .dark-mode aside, .dark-mode nav, .dark-mode .border-ui-black { border-color: rgba(255,255,255,0.15) !important; }
+        .dark-mode .bg-grid { background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); }
+        .sidebar-fixed { width: 260px; flex-shrink: 0; }
+        main { flex-grow: 1; min-width: 0; }
+        
+        /* Seedling Animation Logic */
+        .seedling-box { width: 32px; height: 32px; position: relative; background: #0A0A0A; }
+        .seedling-part { position: absolute; background: #ABE27A; bottom: 4px; left: 50%; transform: translateX(-50%); width: 4px; height: 0; transition: all 0.4s ease; }
+        .header-group:hover .seedling-part-stem { height: 16px; }
+        .header-group:hover .seedling-part-leaf { width: 12px; height: 4px; bottom: 12px; opacity: 1; }
+        .seedling-part-leaf { opacity: 0; width: 0; }
 
-        /* Intentional Spacing */
-        .sidebar-fixed { width: 260px; }
-        .section-padding { padding: 5rem 3.5rem; } /* Adjusted to feel "human" */
-
-        /* Pixel-art border accent */
-        .pixel-card {
-            border: 1px solid currentColor;
-            box-shadow: 4px 4px 0px 0px currentColor;
-        }
-
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: currentColor; }
-
-        @media (max-width: 768px) { 
-            .sidebar-fixed { width: 100%; height: auto; position: relative; border-right: 0; border-bottom: 1px solid currentColor; }
-            .section-padding { padding: 3rem 1.5rem; }
-        }
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 8px; background: #0A0A0A; border: 1px solid white; }
     </style>
 </head>
-    
 <body class="bg-base-white text-ui-black min-h-screen transition-colors duration-500 overflow-x-hidden">
     <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
-
     <div class="relative z-10 flex flex-col md:flex-row min-h-screen">
-        
-        <aside class="sidebar-fixed h-screen sticky top-0 border-r border-ui-black flex flex-col p-8 bg-inherit z-30">
-            <div class="mb-auto">
-                <div class="w-7 h-7 bg-matcha border border-ui-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mb-6"></div>
+        <aside class="sidebar-fixed h-screen sticky top-0 border-r-2 border-ui-black flex flex-col p-8 bg-inherit z-30">
+            <div class="mb-12">
+                <div class="w-10 h-10 bg-matcha border-2 border-ui-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-6"></div>
                 <h1 class="font-serif text-3xl leading-none lowercase tracking-tighter">shrimp<br>chips</h1>
             </div>
-
-            <nav class="flex flex-col space-y-1 border-t border-ui-black pt-8">
-                <a href="#index" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] p-2 hover:bg-ui-black hover:text-white transition-all">
-                    <span>01. Index</span>
-                    <span class="opacity-0 group-hover:opacity-100">→</span>
+            <nav class="flex flex-col space-y-1 border-t-2 border-ui-black pt-8">
+                <a href="{{ '/' | relative_url }}" class="group flex items-center justify-between p-2 border border-transparent hover:border-ui-black transition-all">
+                    <span class="font-mono text-[10px] uppercase tracking-widest">01. Index</span>
                 </a>
-                <a href="#sprouts" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] p-2 hover:bg-ui-black hover:text-white transition-all">
-                    <span>02. Sprouts</span>
-                    <span class="opacity-0 group-hover:opacity-100">→</span>
+                <a href="{{ '/#sprouts' | relative_url }}" class="group flex items-center justify-between p-2 border border-transparent hover:border-ui-black transition-all">
+                    <span class="font-mono text-[10px] uppercase tracking-widest">02. Sprouts</span>
                 </a>
-                <a href="#evergreens" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] p-2 hover:bg-ui-black hover:text-white transition-all">
-                    <span>03. Evergreens</span>
-                    <span class="opacity-0 group-hover:opacity-100">→</span>
+                <a href="{{ '/evergreens' | relative_url }}" class="group flex items-center justify-between p-2 border-2 border-ui-black bg-ui-black text-white transition-all">
+                    <span class="font-mono text-[10px] uppercase tracking-widest">03. Evergreens</span>
                 </a>
-                <a href="#scaffolds" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] p-2 hover:bg-ui-black hover:text-white transition-all">
-                    <span>04. Scaffolds</span>
-                    <span class="opacity-0 group-hover:opacity-100">→</span>
+                <a href="{{ '/#scaffolds' | relative_url }}" class="group flex items-center justify-between p-2 border border-transparent hover:border-ui-black transition-all">
+                    <span class="font-mono text-[10px] uppercase tracking-widest">04. Scaffolds</span>
                 </a>
-                
-                <div class="mt-8 pt-6 border-t border-ui-black/5">
-                    <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)" 
-                           class="w-full h-1 bg-ui-black/10 appearance-none cursor-pointer accent-ui-black">
-                </div>
             </nav>
+            <div class="mt-auto pt-6 border-t-2 border-ui-black">
+                <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)" class="w-full h-2 border-2 border-ui-black">
+            </div>
         </aside>
-
-        <main class="flex-1 min-w-0">
-            {{ content }}
-        </main>
+        <main>{{ content }}</main>
     </div>
-
     <script>
         const THEMES = { '0': { class: '' }, '1': { class: 'sepia-mode' }, '2': { class: 'dark-mode' } };
-        function updateTheme(value) {
+        function updateTheme(v) {
             document.body.classList.remove('sepia-mode', 'dark-mode');
-            if (THEMES[value].class) document.body.classList.add(THEMES[value].class);
-            localStorage.setItem('themeValue', value);
+            if (THEMES[v].class) document.body.classList.add(THEMES[v].class);
+            localStorage.setItem('tv', v);
         }
         document.addEventListener('DOMContentLoaded', () => {
-            const savedValue = localStorage.getItem('themeValue') || '0';
-            const slider = document.getElementById('theme-slider');
-            if(slider) slider.value = savedValue;
-            updateTheme(savedValue);
+            const v = localStorage.getItem('tv') || '0';
+            document.getElementById('theme-slider').value = v;
+            updateTheme(v);
         });
     </script>
 </body>
