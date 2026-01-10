@@ -3,74 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>shrimp chips</title>
+    <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 'muji-bg': '#F5F5F5', 'matcha': '#ABE27A', 'shrimp': '#FFB7B7', 'ui-black': '#1A1A1A' }
+                    colors: {
+                        'muji-bg': '#F5F5F5',
+                        'matcha': '#ABE27A',
+                        'shrimp': '#FFB7B7',
+                        'ui-black': '#1A1A1A'
+                    }
                 }
             }
         }
     </script>
     <style>
         * { border-radius: 0 !important; }
-        body { background-color: #F5F5F5; color: #1A1A1A; transition: background 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        body { background-color: #F5F5F5; color: #1A1A1A; transition: background 0.3s; }
         .sepia-mode { background-color: #F4ECD8 !important; color: #5B4636 !important; }
         .dark-mode { background-color: #1A1A1A !important; color: #EDEDED !important; }
         
-        .bg-grid { background-image: radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px); background-size: 30px 30px; }
-        
-        /* Custom Snap Slider */
-        .slider-track { height: 2px; background: currentColor; opacity: 0.2; position: relative; }
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; cursor: pointer; }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 12px; width: 12px;
-            background: currentColor;
-            border-radius: 50% !important; /* The only exception for circles */
-            border: 2px solid #F5F5F5;
-        }
-    </style>
-</head>
-<body class="min-h-screen">
-    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
-    
-    <div class="relative z-10 flex min-h-screen">
-        <aside class="w-64 flex-shrink-0 border-right border-ui-black p-10 flex flex-col sticky top-0 h-screen">
-            <div class="mb-20">
-                <h1 class="font-serif text-3xl lowercase">shrimp chips</h1>
-            </div>
-
-            <nav class="flex flex-col space-y-4">
-                <a href="/" class="text-sm font-bold uppercase tracking-widest hover:pl-2 transition-all">Index</a>
-                <a href="/artifacts" class="text-sm font-bold uppercase tracking-widest hover:pl-2 transition-all">Evergreens</a>
-            </nav>
-
-            <div class="mt-auto">
-                <p class="text-[10px] uppercase tracking-tighter mb-4 opacity-50">Theme Control</p>
-                <div class="slider-track">
-                    <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)">
-                </div>
-            </div>
-        </aside>
-
-        <main class="flex-1 p-20">
-            <div class="max-w-5xl mx-auto">
-                {{ content }}
-            </div>
-        </main>
-    </div>
-
-    <script>
-        function updateTheme(v) {
-            const b = document.body;
-            b.classList.remove('sepia-mode', 'dark-mode');
-            if(v === '1') b.classList.add('sepia-mode');
-            if(v === '2') b.classList.add('dark-mode');
-        }
-    </script>
-</body>
-</html>
+        /* Notebook Grid */
+        .bg-grid { background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 25px 25px; }
