@@ -23,9 +23,9 @@ Bubble wrap is composed of bubbles. That statement sounds trivial until you real
 
 <br>
 You’ve probably heard the saying: *one is weak, and together we are strong.*
+
+
 <br>
-
-
 Bubble wrap follows the same idea. One bubble is weak. Many bubbles are not strong either - but they are simply plentiful.
 
 
@@ -34,9 +34,9 @@ I pop bubbles one by one. Pop, pop, pop.  It works, but slowly. I pop one, and t
 
 <br>
 **What matters is that neither method changes the outcome. The sheet remains functional.**
+
+
 <br>
-
-
 This leads to a more interesting framing: you versus the bubble wrap–making machine. If you pop bubbles individually, you are reacting. If you destroy many at once, you are still reacting, just louder. As long as the machine continues to produce bubbles, your effort is negligible.
 
 
@@ -47,8 +47,9 @@ If you disable the bubble wrap machine, you win immediately. No more bubbles. No
 
 <br>
 Now generalize the idea.
-<br>
 
+
+<br>
 **In theory, war is decided by three inputs: resources, people, and morale.** These variables are interdependent. People extract and manage resources. People operate infrastructure. People sustain morale simply by continuing to exist. Remove people and the other two degrade automatically. This is how systems work.
 
 
@@ -57,9 +58,9 @@ This is where biological warfare appears—not as cruelty, but as a conceptual e
 
 <br>
 **Collapse not through direct confrontation, but through depletion.**
+
+
 <br>
-
-
 The uncomfortable question then emerges: what is the machine in this system? The answer, is reproduction—along with health, and the other conditions required for replacement. If replacement ceases, the system cannot sustain itself. The conflict ends without a decisive battle.
 
 
@@ -74,9 +75,9 @@ I stop playing with the bubble wrap. The sheet is largely unchanged. Somewhere e
 
 <br>
 That is the point. Not a proposal. Just an observation about where leverage actually resides—and why **focusing on individual units feels productive while accomplishing nothing.**
+
+
 <br>
-
-
 The bubbles were never the problem.
 
 
