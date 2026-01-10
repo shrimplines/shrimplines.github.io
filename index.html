@@ -1,34 +1,28 @@
 ---
 layout: default
 ---
-<div class="space-y-12">
-    <header>
-        <h2 class="text-6xl font-black tracking-tighter lowercase">Circles.</h2>
-        <p class="font-mono text-xs opacity-40 mt-2 uppercase tracking-widest">System_v.01 / Prototype_Phase</p>
-    </header>
-
-    <div class="grid grid-cols-3 gap-2 border-2 border-black bg-black p-1">
-        <div class="aspect-square bg-white overflow-hidden group relative">
-            <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute bottom-0 p-2 bg-matcha-green text-[9px] font-bold uppercase w-full">Artifact_01</div>
+<section class="mb-20">
+    <h2 class="font-serif text-6xl lowercase tracking-tighter mb-10">Circles.</h2>
+    
+    <div class="grid grid-cols-3 gap-1 bg-ui-black border border-ui-black">
+        <div class="aspect-square bg-white p-2 group overflow-hidden relative">
+            <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 bg-matcha text-[8px] font-mono p-1">ATTACHMENT_01</div>
         </div>
-        <div class="aspect-square bg-white overflow-hidden group relative">
-            <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute bottom-0 p-2 bg-shrimp-pink text-[9px] font-bold uppercase w-full">Artifact_02</div>
+        <div class="aspect-square bg-white p-2 group overflow-hidden relative">
+            <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 bg-shrimp text-[8px] font-mono p-1">ATTACHMENT_02</div>
         </div>
-        <div class="aspect-square bg-white overflow-hidden group relative">
-            <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-            <div class="absolute bottom-0 p-2 bg-sky-blue text-[9px] font-bold uppercase w-full">Artifact_03</div>
+        <div class="aspect-square bg-white p-2 group overflow-hidden relative">
+            <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 bg-ui-black text-white text-[8px] font-mono p-1">ATTACHMENT_03</div>
         </div>
     </div>
+</section>
 
-    <article class="p-8 border-2 border-black bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter italic">The Thesis Statement</h3>
-        <p class="text-lg leading-relaxed">
-            Welcome to my digital sanctuary, a space for documenting all of my thoughts, plans, and projects. Right now, this blog is in the single-celled organism (the protoplasm) phase.
-        </p>
-        <p class="text-lg leading-relaxed mt-4">
-            Consider this the very beginning.
-        </p>
-    </article>
-</div>
+<article class="p-8 border-2 border-ui-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <h3 class="font-mono text-xs uppercase opacity-40 mb-4 tracking-widest">// Thesis_Statement</h3>
+    <p class="text-xl leading-relaxed font-serif italic">
+        Welcome to my digital sanctuary, a space for documenting all of my thoughts, plans, and projects. Right now, this blog is in the single-celled organism (the protoplasm) phase.
+    </p>
+</article>
