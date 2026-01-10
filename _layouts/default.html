@@ -5,64 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         'muji-bg': '#F5F5F5',
-                        'matcha-green': '#ABE27A',
-                        'shrimp-pink': '#FFB7B7',
-                        'sky-blue': '#A9DFFC',
-                        'sunset-orange': '#FFBF47',
-                    },
+                        'matcha': '#ABE27A',
+                        'shrimp': '#FFB7B7',
+                        'ui-black': '#1A1A1A'
+                    }
                 }
             }
         }
     </script>
     <style>
-        * { border-radius: 0 !important; } /* Sharp edges back */
+        * { border-radius: 0 !important; }
+        body { background-color: #F5F5F5; color: #1A1A1A; transition: background 0.5s, color 0.5s; }
         .sepia-mode { background-color: #F4ECD8 !important; color: #5B4636 !important; }
-        .dark-mode { background-color: #1A1A1A !important; color: #D1D1D1 !important; }
-        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        .dark-mode { background-color: #1A1A1A !important; color: #EDEDED !important; }
+        
+        .bg-grid { background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 25px 25px; }
+        .sidebar-fixed { width: 260px; flex-shrink: 0; border-right: 2px solid #1A1A1A; }
+        
+        /* Seedling Grow Animation */
+        .seedling-wrap:hover .stem { height: 12px; }
+        .seedling-wrap:hover .leaf { opacity: 1; }
+        .stem { width: 2px; height: 0; background: #ABE27A; transition: height 0.3s; }
+        .leaf { width: 4px; height: 2px; background: #ABE27A; opacity: 0; transition: opacity 0.3s; }
 
-        /* THE SEEDLING (CSS Pixel Art) */
-        .seedling-icon { width: 20px; height: 20px; position: relative; background: #000; display: inline-block; vertical-align: middle; margin-left: 8px; }
-        .stem { position: absolute; bottom: 2px; left: 50%; width: 2px; height: 0; background: #ABE27A; transform: translateX(-50%); transition: height 0.3s ease; }
-        .leaf { position: absolute; bottom: 8px; width: 4px; height: 2px; background: #ABE27A; opacity: 0; transition: opacity 0.3s }
-        .leaf-l { left: 2px; transform: rotate(-45deg); }
-        .leaf-r { right: 2px; transform: rotate(45deg); }
-        .nav-link:hover .stem { height: 12px; }
-        .nav-link:hover .leaf { opacity: 1; }
-
-        /* Color Slider */
-        input[type=range] { -webkit-appearance: none; width: 100%; background: #ddd; height: 4px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 8px; background: #000; border: 1px solid white; cursor: pointer; }
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; border: 1px solid #1A1A1A; height: 12px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 10px; width: 6px; background: #1A1A1A; cursor: pointer; }
     </style>
 </head>
-<body class="bg-muji-bg min-h-screen">
-    <div class="flex flex-col md:flex-row max-w-7xl mx-auto p-8 gap-8">
-        <aside class="md:w-64 flex flex-col h-fit sticky top-8 border-2 border-black p-6 bg-white shadow-[4px_4px_00px_0px_rgba(0,0,0,1)]">
-            <h1 class="text-2xl font-black uppercase tracking-tighter border-b-2 border-black pb-4">shrimp chips</h1>
-            
-            <nav class="mt-6 flex flex-col space-y-1">
-                <a href="{{ '/' | relative_url }}" class="nav-link group p-2 hover:bg-black hover:text-white font-mono text-xs uppercase tracking-widest">
-                    Index <div class="seedling-icon"><div class="stem"></div><div class="leaf leaf-l"></div><div class="leaf leaf-r"></div></div>
+<body class="min-h-screen">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+    <div class="relative z-10 flex min-h-screen">
+        
+        <aside class="sidebar-fixed h-screen sticky top-0 flex flex-col p-6 bg-inherit">
+            <div class="mb-10 p-4 border border-ui-black bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                <p class="font-mono text-[8px] uppercase opacity-40 mb-1">Subject_ID:</p>
+                <h1 class="font-serif text-2xl leading-tight lowercase">shrimp chips</h1>
+            </div>
+
+            <nav class="flex flex-col space-y-1">
+                <p class="font-mono text-[9px] opacity-30 mb-2 ml-2 tracking-widest uppercase">Index_Tabs</p>
+                <a href="{{ '/' | relative_url }}" class="seedling-wrap group flex items-center p-2 border border-transparent hover:border-ui-black transition-all font-mono text-[10px] uppercase">
+                    <span class="mr-3 opacity-30">01</span> index.log
+                    <div class="ml-auto flex flex-col items-center">
+                        <div class="flex gap-1"><div class="leaf"></div><div class="leaf"></div></div>
+                        <div class="stem"></div>
+                    </div>
                 </a>
-                <a href="{{ '/artifacts' | relative_url }}" class="nav-link group p-2 hover:bg-black hover:text-white font-mono text-xs uppercase tracking-widest">
-                    Evergreens <div class="seedling-icon"><div class="stem"></div><div class="leaf leaf-l"></div><div class="leaf leaf-r"></div></div>
+                <a href="{{ '/artifacts' | relative_url }}" class="seedling-wrap group flex items-center p-2 border border-ui-black bg-ui-black text-white font-mono text-[10px] uppercase">
+                    <span class="mr-3 opacity-50">02</span> evergreens.lib
+                    <div class="ml-auto flex flex-col items-center">
+                        <div class="flex gap-1"><div class="leaf"></div><div class="leaf"></div></div>
+                        <div class="stem"></div>
+                    </div>
                 </a>
             </nav>
 
-            <div class="mt-12 pt-6 border-t-2 border-black">
+            <div class="mt-auto pt-6 border-t border-ui-black">
+                <p class="font-mono text-[8px] opacity-40 uppercase mb-2">Calibration</p>
                 <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)">
-                <p id="theme-name" class="text-[9px] font-mono uppercase mt-2 opacity-50">Standard_Mode</p>
             </div>
         </aside>
 
-        <main class="flex-1">
-            {{ content }}
+        <main class="flex-1 p-12 overflow-y-auto">
+            <div class="max-w-4xl">
+                {{ content }}
+            </div>
         </main>
     </div>
 
@@ -70,14 +84,12 @@
         function updateTheme(v) {
             const b = document.body;
             b.classList.remove('sepia-mode', 'dark-mode');
-            const label = document.getElementById('theme-name');
-            if(v === '1') { b.classList.add('sepia-mode'); label.innerText = "Sepia_Archive"; }
-            else if(v === '2') { b.classList.add('dark-mode'); label.innerText = "Dark_Void"; }
-            else { label.innerText = "Standard_Mode"; }
-            localStorage.setItem('theme', v);
+            if(v === '1') b.classList.add('sepia-mode');
+            if(v === '2') b.classList.add('dark-mode');
+            localStorage.setItem('theme-choice', v);
         }
         window.onload = () => {
-            const saved = localStorage.getItem('theme') || '0';
+            const saved = localStorage.getItem('theme-choice') || '0';
             document.getElementById('theme-slider').value = saved;
             updateTheme(saved);
         }
