@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | shrimp chips</title>
+    <title>shrimp chips | digital garden</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -31,59 +31,51 @@
         }
     </script>
     <style>
-        /* Technical Background Grid */
         .bg-grid {
             background-image: radial-gradient(rgba(10, 10, 10, 0.1) 1px, transparent 1px);
             background-size: 30px 30px;
         }
-
-        /* Theme Overrides (Fragile Logic Preserved) */
         body.sepia-mode { background-color: #F4ECD8 !important; color: #5B4636 !important; }
         body.dark-mode { background-color: #0A0A0A !important; color: #EDEDED !important; }
-        
         .dark-mode .bg-grid { background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px); }
-        .dark-mode aside, .dark-mode nav, .dark-mode .border-ui-black { border-color: rgba(255,255,255,0.1) !important; }
-
-        /* Pixel Text Rendering */
-        .pixel-rendering { image-rendering: pixelated; }
-
-        /* Pinned Navigation Logic */
-        .sidebar-fixed { width: 300px; }
-        @media (max-width: 768px) { .sidebar-fixed { width: 100%; height: auto; position: relative; } }
+        
+        /* Adjusted Spacing for Hand-Crafted Feel */
+        .content-section { padding: 4rem 3rem; border-bottom: 1px solid #0A0A0A; }
+        .sidebar-fixed { width: 260px; }
+        
+        @media (max-width: 768px) { 
+            .sidebar-fixed { width: 100%; height: auto; position: relative; border-r: 0; border-b: 1px solid #0A0A0A; }
+        }
     </style>
 </head>
     
-<body class="bg-base-white text-ui-black min-h-screen selection:bg-matcha transition-colors duration-300">
-
+<body class="bg-base-white text-ui-black min-h-screen selection:bg-matcha transition-colors duration-300 overflow-x-hidden">
     <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
 
     <div class="relative z-10 flex flex-col md:flex-row min-h-screen">
-
-        <aside class="sidebar-fixed h-screen sticky top-0 border-r border-ui-black flex flex-col p-8 bg-inherit">
-            
+        <aside class="sidebar-fixed h-screen sticky top-0 border-r border-ui-black flex flex-col p-6 bg-inherit">
             <div class="mb-auto">
-                <div class="mb-8">
-                    <div class="w-10 h-10 bg-matcha border border-ui-black shadow-[3px_3px_0px_0px_rgba(10,10,10,1)] mb-4"></div>
-                    <h1 class="font-serif text-4xl leading-none lowercase tracking-tighter">shrimp<br>chips</h1>
-                    <p class="font-mono text-[9px] mt-4 opacity-40 uppercase tracking-[0.3em]">Engineering_Lab.v2</p>
+                <div class="mb-6">
+                    <div class="w-8 h-8 bg-matcha border border-ui-black shadow-[2px_2px_0px_0px_rgba(10,10,10,1)] mb-4"></div>
+                    <h1 class="font-serif text-3xl leading-none lowercase tracking-tighter">shrimp<br>chips</h1>
                 </div>
             </div>
 
-            <nav class="border-t border-ui-black pt-8 flex flex-col space-y-2">
-                <a href="{{ '/' | relative_url }}" class="group flex items-center justify-between font-mono text-[11px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
+            <nav class="border-t border-ui-black pt-6 flex flex-col space-y-1">
+                <a href="#index" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
                     <span>01. Index</span>
                     <span class="opacity-0 group-hover:opacity-100">→</span>
                 </a>
-                <a href="{{ '/artifacts' | relative_url }}" class="group flex items-center justify-between font-mono text-[11px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
+                <a href="#field-notes" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
                     <span>02. Field Notes</span>
                     <span class="opacity-0 group-hover:opacity-100">→</span>
                 </a>
-                <a href="{{ '/projects' | relative_url }}" class="group flex items-center justify-between font-mono text-[11px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
+                <a href="#projects" class="group flex items-center justify-between font-mono text-[10px] uppercase tracking-widest p-2 hover:bg-ui-black hover:text-white transition-all">
                     <span>03. Projects</span>
                     <span class="opacity-0 group-hover:opacity-100">→</span>
                 </a>
                 
-                <div class="mt-6 pt-6 border-t border-ui-black/10">
+                <div class="mt-4 pt-4 border-t border-ui-black/10">
                     <input type="range" min="0" max="2" value="0" step="1" id="theme-slider" oninput="updateTheme(this.value)" 
                            class="w-full h-1 bg-ui-black/20 appearance-none cursor-pointer accent-ui-black mb-2">
                     <div id="current-theme-name" class="font-mono text-[8px] uppercase opacity-40 text-center">System: Light</div>
