@@ -2,29 +2,32 @@
 layout: default
 title: Evergreens
 ---
-<section class="p-12 md:p-24 min-h-screen">
-    <div class="header-group flex items-center gap-8 mb-20 border-b-4 border-ui-black pb-8">
-        <h2 class="font-serif text-8xl lowercase tracking-tighter">Evergreens</h2>
+<section class="grow-trigger">
+    <div class="flex items-end justify-between mb-16 border-b-2 border-ui-black pb-8">
+        <div>
+            <h2 class="font-serif text-7xl lowercase tracking-tighter">Evergreens</h2>
+            <p class="font-mono text-[10px] mt-2 opacity-40 uppercase tracking-widest">Permanent_Library</p>
+        </div>
         
-        <div class="seedling-box border-2 border-ui-black">
-            <div class="seedling-part seedling-part-stem"></div>
-            <div class="seedling-part seedling-part-leaf left-[30%] -rotate-45"></div>
-            <div class="seedling-part seedling-part-leaf left-[70%] rotate-45"></div>
+        <div class="seedling-icon border-2 border-ui-black">
+            <div class="stem"></div>
+            <div class="leaf leaf-l"></div>
+            <div class="leaf leaf-r"></div>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4">
-      {% assign evergreens = site.posts | where_exp: "item", "item.categories contains 'evergreens'" %}
-      {% for post in evergreens %}
-        <a href="{{ post.url | relative_url }}" class="group block border-2 border-ui-black p-10 hover:bg-ui-black hover:text-white transition-all">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end">
-                <div>
-                    <span class="font-mono text-[10px] opacity-40 uppercase tracking-widest">{{ post.date | date: "%B %Y" }}</span>
-                    <h3 class="font-serif text-5xl mt-2 group-hover:translate-x-4 transition-transform">{{ post.title }}</h3>
-                </div>
-                <div class="font-mono text-[10px] mt-4 md:mt-0 uppercase group-hover:text-matcha">Open_Theses →</div>
+    <div class="space-y-4">
+        {% assign evergreens = site.posts | where_exp: "item", "item.categories contains 'evergreens'" %}
+        {% for post in evergreens %}
+        <a href="{{ post.url | relative_url }}" class="group flex items-center justify-between p-8 border-2 border-ui-black bg-white hover:bg-ui-black hover:text-white transition-all">
+            <div class="flex-1">
+                <span class="font-mono text-[10px] opacity-40 uppercase">{{ post.date | date: "%B %Y" }}</span>
+                <h3 class="font-serif text-4xl mt-1">{{ post.title }}</h3>
+            </div>
+            <div class="font-mono text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                READ_LOG →
             </div>
         </a>
-      {% endfor %}
+        {% endfor %}
     </div>
 </section>
