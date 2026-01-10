@@ -40,7 +40,7 @@ I pop bubbles one by one. Pop, pop, pop.  It works, but slowly. I pop one, and t
 This leads to a more interesting framing: you versus the bubble wrap–making machine. If you pop bubbles individually, you are reacting. If you destroy many at once, you are still reacting, just louder. As long as the machine continues to produce bubbles, your effort is negligible.
 
 
-Assume, for a moment, that each bubble represents a soldier.** You do not win by eliminating soldiers. You win by stopping the flow.** You have to stop the flow. That is the first point where the problem stops being tactile and takes on another form. 
+Assume, for a moment, that each bubble represents a soldier. **You do not win by eliminating soldiers. You win by stopping the flow.** You have to stop the flow. That is the first point where the problem stops being tactile and takes on another form. 
 
 
 If you disable the bubble wrap machine, you win immediately. No more bubbles. No replenishment. This is not about strength; it is about capacity.
