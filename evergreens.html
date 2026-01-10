@@ -1,0 +1,30 @@
+---
+layout: default
+title: Evergreens
+---
+<section class="p-12 md:p-24 min-h-screen">
+    <div class="header-group flex items-center gap-8 mb-20 border-b-4 border-ui-black pb-8">
+        <h2 class="font-serif text-8xl lowercase tracking-tighter">Evergreens</h2>
+        
+        <div class="seedling-box border-2 border-ui-black">
+            <div class="seedling-part seedling-part-stem"></div>
+            <div class="seedling-part seedling-part-leaf left-[30%] -rotate-45"></div>
+            <div class="seedling-part seedling-part-leaf left-[70%] rotate-45"></div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
+      {% assign evergreens = site.posts | where_exp: "item", "item.categories contains 'evergreens'" %}
+      {% for post in evergreens %}
+        <a href="{{ post.url | relative_url }}" class="group block border-2 border-ui-black p-10 hover:bg-ui-black hover:text-white transition-all">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end">
+                <div>
+                    <span class="font-mono text-[10px] opacity-40 uppercase tracking-widest">{{ post.date | date: "%B %Y" }}</span>
+                    <h3 class="font-serif text-5xl mt-2 group-hover:translate-x-4 transition-transform">{{ post.title }}</h3>
+                </div>
+                <div class="font-mono text-[10px] mt-4 md:mt-0 uppercase group-hover:text-matcha">Open_Theses →</div>
+            </div>
+        </a>
+      {% endfor %}
+    </div>
+</section>
