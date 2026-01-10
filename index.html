@@ -2,91 +2,95 @@
 layout: default
 ---
 
-<section id="index" class="content-section min-h-screen">
-    <header class="mb-12">
-        <h2 class="font-serif text-5xl lowercase">index.circles</h2>
-        <p class="font-mono text-[10px] mt-2 opacity-30 uppercase tracking-[0.2em]">Primary_Entry_Point</p>
-    </header>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 border border-ui-black">
-        <div class="border-r border-ui-black p-6 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
-            <div class="font-mono text-[9px] uppercase opacity-40">001_green</div>
-            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" class="w-full h-full object-cover grayscale">
-            </div>
-            <h3 class="font-serif text-2xl relative z-10">Initial<br>Growth</h3>
-            <div class="relative z-10 w-3 h-3 bg-matcha border border-ui-black"></div>
-        </div>
-
-        <div class="border-r border-ui-black p-6 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
-            <div class="font-mono text-[9px] uppercase opacity-40">002_earth</div>
-            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" class="w-full h-full object-cover grayscale">
-            </div>
-            <h3 class="font-serif text-2xl relative z-10">Structural<br>Foundation</h3>
-            <div class="relative z-10 w-3 h-3 bg-sunset border border-ui-black"></div>
-        </div>
-
-        <div class="p-6 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
-            <div class="font-mono text-[9px] uppercase opacity-40">003_void</div>
-            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" class="w-full h-full object-cover grayscale">
-            </div>
-            <h3 class="font-serif text-2xl relative z-10">Obsidian<br>Theory</h3>
-            <div class="relative z-10 w-3 h-3 bg-sky border border-ui-black"></div>
-        </div>
+<section id="index" class="section-padding min-h-screen border-b border-ui-black">
+    <div class="mb-16">
+        <h2 class="font-serif text-6xl md:text-8xl lowercase tracking-tighter">Circles.</h2>
+        <p class="font-mono text-[10px] mt-4 opacity-30 uppercase tracking-[0.4em]">Establishing_Base_Protocols</p>
     </div>
 
-    <div class="mt-16 max-w-xl">
-        <h4 class="font-mono text-[9px] uppercase tracking-[0.4em] mb-6 opacity-30">Thesis_Module</h4>
-        <p class="font-sans text-xl leading-tight lowercase opacity-80">
-            This digital garden is a living organism. It documents thoughts, plans, and technical artifacts as they evolve from protoplasm to structure.
-        </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 border border-ui-black bg-white/50">
+        <div class="border-r border-ui-black p-8 group aspect-square flex flex-col justify-between relative overflow-hidden">
+            <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 transition-opacity grayscale">
+            <span class="font-mono text-[9px] uppercase opacity-40">Artifact_01</span>
+            <h3 class="font-serif text-3xl z-10 leading-none">Initial<br>Growth</h3>
+            <div class="w-3 h-3 bg-matcha border border-ui-black z-10"></div>
+        </div>
+        <div class="border-r border-ui-black p-8 group aspect-square flex flex-col justify-between relative overflow-hidden">
+            <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 transition-opacity grayscale">
+            <span class="font-mono text-[9px] uppercase opacity-40">Artifact_02</span>
+            <h3 class="font-serif text-3xl z-10 leading-none">Structural<br>Foundation</h3>
+            <div class="w-3 h-3 bg-amber-200 border border-ui-black z-10"></div>
+        </div>
+        <div class="p-8 group aspect-square flex flex-col justify-between relative overflow-hidden">
+            <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 transition-opacity grayscale">
+            <span class="font-mono text-[9px] uppercase opacity-40">Artifact_03</span>
+            <h3 class="font-serif text-3xl z-10 leading-none">The Obsidian<br>Void</h3>
+            <div class="w-3 h-3 bg-sky-200 border border-ui-black z-10"></div>
+        </div>
     </div>
 </section>
 
-<section id="field-notes" class="content-section">
-    <header class="mb-12 flex justify-between items-end">
-        <div>
-            <h2 class="font-serif text-4xl lowercase">field_notes</h2>
-            <p class="font-mono text-[10px] mt-1 opacity-30 uppercase tracking-[0.2em]">Observation_Logs</p>
-        </div>
-        <span class="font-mono text-[9px] opacity-40">count: {{ site.posts | size }}</span>
-    </header>
-
-    <div class="space-y-4">
-      {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
-      {% for post in artifacts %}
-        <a href="{{ post.url | relative_url }}" class="group block border border-ui-black p-6 hover:bg-ui-black hover:text-white transition-all">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div class="flex-1">
-                    <span class="font-mono text-[9px] opacity-40 uppercase">{{ post.date | date: "%Y.%m.%d" }}</span>
-                    <h3 class="font-serif text-3xl group-hover:translate-x-2 transition-transform">{{ post.title }}</h3>
-                </div>
-                {% if post.preview_images %}
-                <div class="flex gap-1 shrink-0">
-                    {% for img in post.preview_images limit:2 %}
-                    <div class="w-10 h-10 border border-ui-black overflow-hidden bg-white grayscale">
-                        <img src="{{ img | relative_url }}" class="w-full h-full object-cover">
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
-        </a>
-      {% endfor %}
+<section id="sprouts" class="section-padding border-b border-ui-black">
+    <div class="flex justify-between items-end mb-16">
+        <h2 class="font-serif text-5xl lowercase">sprouts</h2>
+        <span class="font-mono text-[9px] opacity-30 lowercase tracking-widest">Rapid_Development_Phase</span>
     </div>
-</section>
-
-<section id="projects" class="content-section min-h-screen">
-    <header class="mb-12">
-        <h2 class="font-serif text-4xl lowercase">projects</h2>
-        <p class="font-mono text-[10px] mt-1 opacity-30 uppercase tracking-[0.2em]">Constructed_Output</p>
-    </header>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="border border-ui-black p-8 opacity-40 font-mono text-xs uppercase italic">
-            Building_in_progress...
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+        {% assign sprouts = site.posts | where_exp: "item", "item.layout == 'post-short'" %}
+        {% for post in sprouts limit:4 %}
+        <a href="{{ post.url | relative_url }}" class="group block border-l-2 border-ui-black pl-8 py-2 hover:border-matcha transition-colors">
+            <span class="font-mono text-[9px] opacity-30">{{ post.date | date: "%H:%M // %Y.%m.%d" }}</span>
+            <h4 class="font-serif text-2xl mt-2 group-hover:italic">{{ post.title }}</h4>
+            <p class="font-sans text-sm opacity-50 mt-4 leading-relaxed line-clamp-2 lowercase">{{ post.excerpt | strip_html }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="evergreens" class="section-padding border-b border-ui-black bg-ui-black text-white">
+    <div class="max-w-4xl">
+        <h2 class="font-serif text-5xl mb-20 lowercase">evergreens</h2>
+        
+        <div class="space-y-24">
+            {% assign evergreens = site.posts | where_exp: "item", "item.content.size > 1000" %}
+            {% for post in evergreens limit:2 %}
+            <div class="relative group">
+                <span class="font-mono text-[9px] uppercase tracking-[0.3em] text-matcha">Deep_Logic</span>
+                <a href="{{ post.url | relative_url }}">
+                    <h3 class="font-serif text-5xl md:text-7xl mt-6 leading-none hover:text-matcha transition-colors">{{ post.title }}</h3>
+                </a>
+                <p class="font-sans text-lg mt-8 opacity-60 leading-relaxed lowercase max-w-2xl">{{ post.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="scaffolds" class="section-padding min-h-screen">
+    <h2 class="font-serif text-5xl mb-16 lowercase">scaffolds</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="pixel-card p-10 flex flex-col justify-between aspect-[16/10] bg-white group hover:bg-matcha transition-all cursor-crosshair">
+            <div class="flex justify-between items-start">
+                <span class="font-mono text-[9px] uppercase tracking-widest">Model_001</span>
+                <div class="w-6 h-6 border border-ui-black flex items-center justify-center text-[10px] group-hover:bg-ui-black group-hover:text-white transition-colors">↗</div>
+            </div>
+            <div>
+                <h3 class="font-serif text-4xl mb-4 leading-none">conceptual<br>physics engine</h3>
+                <p class="font-mono text-[10px] opacity-50 uppercase tracking-tighter">Status: Active Development</p>
+            </div>
+        </div>
+
+        <div class="pixel-card p-10 flex flex-col justify-between aspect-[16/10] bg-white group hover:bg-sky-200 transition-all cursor-crosshair">
+            <div class="flex justify-between items-start">
+                <span class="font-mono text-[9px] uppercase tracking-widest">Model_002</span>
+                <div class="w-6 h-6 border border-ui-black flex items-center justify-center text-[10px] group-hover:bg-ui-black group-hover:text-white transition-colors">↗</div>
+            </div>
+            <div>
+                <h3 class="font-serif text-4xl mb-4 leading-none">urban garden<br>logic system</h3>
+                <p class="font-mono text-[10px] opacity-50 uppercase tracking-tighter">Status: Deployed / Verified</p>
+            </div>
         </div>
     </div>
 </section>
