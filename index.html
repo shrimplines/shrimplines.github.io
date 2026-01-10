@@ -1,51 +1,52 @@
 ---
 layout: default
 ---
-<h2 id="main-title" class="text-3xl md:text-4xl font-light mb-6">Circles</h2>
+<header class="h-20 border-b border-ui-black flex items-center px-12 sticky top-0 bg-inherit z-20">
+    <h2 id="main-title" class="font-serif text-2xl lowercase">index.circles</h2>
+</header>
 
-<div class="space-y-8">
-  <div class="grid grid-cols-3 gap-4">
-    <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
-      <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" 
-        class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
-        alt="Green Artifact">
-      <div class="absolute inset-0 bg-matcha-green/10 group-hover:bg-transparent transition-colors duration-500"></div>
-      
-      <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/40 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-        <p class="text-xs font-bold tracking-widest text-gray-800 uppercase">Artifact 001</p>
-      </div>
+<div class="p-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 border-t border-l border-ui-black">
+        <div class="border-r border-b border-ui-black p-8 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
+            <div class="font-mono text-[10px] uppercase opacity-40">001_green_protoplasm</div>
+            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <img src="{{ '/assets/images/home/gnsqr.png' | relative_url }}" class="w-full h-full object-cover grayscale pixel-rendering">
+            </div>
+            <div class="relative z-10">
+                <h3 class="font-serif text-3xl opacity-80 group-hover:opacity-100">Initial<br>Growth</h3>
+            </div>
+            <div class="relative z-10 w-4 h-4 bg-matcha border border-ui-black"></div>
+        </div>
+
+        <div class="border-r border-b border-ui-black p-8 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
+            <div class="font-mono text-[10px] uppercase opacity-40">002_earth_matter</div>
+            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" class="w-full h-full object-cover grayscale pixel-rendering">
+            </div>
+            <div class="relative z-10">
+                <h3 class="font-serif text-3xl opacity-80 group-hover:opacity-100">Structural<br>Foundation</h3>
+            </div>
+            <div class="relative z-10 w-4 h-4 bg-sunset border border-ui-black"></div>
+        </div>
+
+        <div class="border-r border-b border-ui-black p-8 group cursor-pointer aspect-square flex flex-col justify-between overflow-hidden relative">
+            <div class="font-mono text-[10px] uppercase opacity-40">003_void_state</div>
+            <div class="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" class="w-full h-full object-cover grayscale pixel-rendering">
+            </div>
+            <div class="relative z-10">
+                <h3 class="font-serif text-3xl opacity-80 group-hover:opacity-100">Obsidian<br>Theory</h3>
+            </div>
+            <div class="relative z-10 w-4 h-4 bg-sky border border-ui-black"></div>
+        </div>
     </div>
 
-    <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
-      <img src="{{ '/assets/images/home/bnsqr.png' | relative_url }}" 
-        class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
-        alt="Brown Artifact">
-      <div class="absolute inset-0 bg-wood-accent/10 group-hover:bg-transparent transition-colors duration-500"></div>
-      
-      <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/40 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-        <p class="text-xs font-bold tracking-widest text-gray-800 uppercase">Artifact 002</p>
-      </div>
-    </div>
-
-    <div class="neuo-card rounded-2xl aspect-square overflow-hidden relative group cursor-pointer">
-      <img src="{{ '/assets/images/home/gysqr.png' | relative_url }}" 
-        class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
-        alt="Grey Artifact">
-      <div class="absolute inset-0 bg-gray-400/10 group-hover:bg-transparent transition-colors duration-500"></div>
-      
-      <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/40 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-        <p class="text-xs font-bold tracking-widest text-gray-800 uppercase">Artifact 003</p>
-      </div>
-    </div>
-  </div>
-
-  <article class="p-8 rounded-2xl neuo-card mt-8">
-    <h3 class="text-2xl font-bold mb-4 text-bamboo-accent">The Thesis Statement</h3>
-    <p class="text-lg text-gray-700 leading-relaxed">
-      Welcome to my digital sanctuary, a space for documenting all of my thoughts, plans, and projects. Right now, this blog is in the single-celled organism (the protoplasm) phase.
-    </p>
-    <p class="text-lg text-gray-700 leading-relaxed mt-4">
-      Consider this the very beginning.
-    </p>
-  </article>
+    <section class="mt-24 max-w-2xl">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.4em] mb-12 opacity-30">The_Thesis_Statement</h4>
+        <div class="space-y-8 font-sans text-2xl leading-tight lowercase">
+            <p>Welcome to my digital sanctuary—a space for documenting thoughts, plans, and technical artifacts.</p>
+            <p class="font-serif italic text-4xl">Consider this the very beginning.</p>
+            <p class="opacity-60 text-lg">Right now, this blog is in the single-celled organism phase. It is evolving toward a high-fidelity garden of engineering and philosophy.</p>
+        </div>
+    </section>
 </div>
