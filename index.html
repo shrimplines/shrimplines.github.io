@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<section class="flex flex-col justify-center">
+<section id="index" class="min-h-screen flex flex-col justify-center px-[10vw]">
     <header class="mb-20">
         <h1 class="text-8xl lowercase mb-8 tracking-tighter leading-[0.85]" style="font-family: 'Cormorant Garamond', serif;">
             to be or not to be?
@@ -21,7 +21,6 @@ layout: default
                 <span class="text-[10px] text-gray-300 italic">01</span>
             </div>
         </div>
-
         <div class="group cursor-pointer">
             <div class="relative aspect-[3/4] bg-[#FAFAFA] overflow-hidden mb-4 border border-gray-50">
                 <img src="/assets/images/home/flower.jpg" class="pixel-image">
@@ -31,7 +30,6 @@ layout: default
                 <span class="text-[10px] text-gray-300 italic">02</span>
             </div>
         </div>
-
         <div class="group cursor-pointer">
             <div class="relative aspect-[3/4] bg-[#FAFAFA] overflow-hidden mb-4 border border-gray-50">
                 <img src="/assets/images/home/sea.jpg" class="pixel-image">
@@ -41,5 +39,77 @@ layout: default
                 <span class="text-[10px] text-gray-300 italic">03</span>
             </div>
         </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="about" class="min-h-screen py-32 px-[10vw]">
+    <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">about</h2>
+    <div class="max-w-xl text-lg text-gray-500 font-light leading-relaxed lowercase">
+        <p>this is a digital sanctuary for thoughts, builds, and salmon-related observations. materializing slice by slice.</p>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="evergreens" class="min-h-screen py-32 px-[10vw]">
+    <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">evergreens</h2>
+    <div class="space-y-4">
+      {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
+      {% for post in artifacts %}
+        <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.date | date: "%Y.%m.%d" }}</span>
+                    <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
+                </div>
+                <div class="text-[10px] border border-current px-3 py-1 uppercase">Open Log</div>
+            </div>
+        </a>
+      {% endfor %}
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="projects" class="min-h-screen py-32 px-[10vw]">
+    <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">projects</h2>
+    <div class="grid grid-cols-1 gap-4">
+      {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
+      {% for post in projects %}
+        <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.status | default: "Internal Build" }}</span>
+              <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
+              <p class="text-gray-400 font-light mt-4 max-w-xl lowercase leading-relaxed">{{ post.description }}</p>
+            </div>
+            <div class="text-[10px] border border-current px-3 py-1 uppercase opacity-20 group-hover:opacity-100">View Build</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="spotlights" class="min-h-screen py-32 px-[10vw]">
+    <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">spotlights</h2>
+    <div class="space-y-8">
+        {% assign spotlights = site.posts | where_exp: "item", "item.categories contains 'spotlights'" %}
+        {% for post in spotlights %}
+            <article class="group">
+                <a href="{{ post.url | relative_url }}" class="flex flex-col md:flex-row gap-12 border-b border-gray-50 pb-12 hover:border-black transition-colors duration-700">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-[10px] border border-gray-200 px-2 py-0.5 uppercase tracking-widest text-gray-400">{{ post.label | default: "Deep Dive" }}</span>
+                            <span class="text-[10px] font-mono opacity-30">{{ post.date | date: "%Y.%m.%d" }}</span>
+                        </div>
+                        <h3 class="text-5xl font-light tracking-tighter lowercase mb-4 group-hover:italic transition-all">{{ post.title }}</h3>
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
     </div>
 </section>
