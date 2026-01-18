@@ -5,79 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 'muji-bg': '#F5F5F5', 'ui-black': '#1A1A1A' },
+                    colors: { 'ui-black': '#1A1A1A', 'bg-white': '#FFFFFF' },
                     fontFamily: {
-                        'serif': ['DM Serif Display', 'serif'],
-                        'sans': ['Inter', 'sans-serif'],
-                        'mono': ['JetBrains+Mono', 'monospace']
+                        'pixel': ['Silkscreen', 'cursive'],
+                        'pixel-mono': ['VT323', 'monospace'],
+                        'sans': ['Inter', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     <style>
-        * { border-radius: 0 !important; }
-        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; font-family: 'Inter', sans-serif; }
+        * { border-radius: 0 !important; cursor: crosshair; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; }
         
-        /* The Cofounder Sidebar Frame */
+        /* The Cofounder Sidebar Frame: Fixed with Thin Line */
         .sidebar { 
-            width: 240px; 
-            border-right: 1px solid #EAEAEA; 
+            width: 260px; 
+            border-right: 1px solid #EDEDED; 
             height: 100vh; 
             position: fixed; 
             top: 0; 
             left: 0;
             padding: 3rem 2rem; 
-            display: flex;
-            flex-direction: column;
             background: #FFFFFF;
+            z-index: 50;
         }
 
-        /* Clean Main Content Area */
+        /* Main Content Container */
         main { 
-            margin-left: 240px; 
-            padding: 4rem 6rem;
-            max-width: 1200px;
+            margin-left: 260px; 
+            padding: 5rem;
+            min-height: 100vh;
         }
 
-        /* High-end Nav Links */
+        /* Nav Links */
         .nav-link {
-            font-size: 13px;
-            color: #888;
-            transition: color 0.2s;
-            text-transform: capitalize;
+            font-family: 'VT323', monospace;
+            font-size: 1.25rem;
+            color: #A0A0A0;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
         }
         .nav-link:hover, .nav-link.active {
             color: #1A1A1A;
+            padding-left: 4px;
         }
     </style>
 </head>
 <body class="flex">
-    <aside class="sidebar">
-        <div class="mb-16">
-            <a href="/" class="font-serif text-xl">shrimp chips</a>
+    <aside class="sidebar flex flex-col justify-between">
+        <div>
+            <div class="mb-16">
+                <a href="/" class="font-pixel text-lg leading-tight block">shrimp<br>chips</a>
+            </div>
+
+            <nav class="flex flex-col space-y-2">
+                <a href="/" class="nav-link active">01. index</a>
+                <a href="/work" class="nav-link">02. work</a>
+                <a href="/about" class="nav-link">03. about</a>
+            </nav>
         </div>
 
-        <nav class="flex flex-col space-y-4">
-            <a href="{{ '/' | relative_url }}" 
-               class="nav-link {% if page.url == '/' %} active font-medium {% endif %}">
-                Index
-            </a>
-            <a href="{{ '/artifacts' | relative_url }}" 
-               class="nav-link {% if page.url contains 'artifacts' %} active font-medium {% endif %}">
-                Evergreens
-            </a>
-            <a href="#" class="nav-link">About</a>
-            <a href="#" class="nav-link">Work</a>
-        </nav>
+        <div class="flex gap-4 opacity-30 hover:opacity-100 transition-opacity">
+            <div class="w-4 h-4 bg-ui-black"></div>
+            <div class="w-4 h-4 bg-ui-black"></div>
+            <div class="w-4 h-4 bg-ui-black"></div>
+        </div>
     </aside>
 
-    <main>
+    <main class="w-full">
         {{ content }}
     </main>
 </body>
