@@ -1,43 +1,6 @@
 ---
 layout: default
-title: Spotlights
-permalink: /spotlights
 ---
-<div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
-    <h2 class="text-5xl lowercase italic" style="font-family: 'Cormorant Garamond', serif;">spotlights</h2>
-    <span class="text-[9px] text-gray-300 uppercase tracking-widest">Final_Log: MATERIALIZED</span>
-</div>
-
-<div class="space-y-8">
-    {% assign spotlights = site.posts | where_exp: "item", "item.categories contains 'spotlights'" %}
-    {% for post in spotlights %}
-        <article class="group">
-            <a href="{{ post.url | relative_url }}" class="flex flex-col md:flex-row gap-12 border-b border-gray-50 pb-12 hover:border-black transition-colors duration-700">
-                <div class="flex-1">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="text-[10px] border border-gray-200 px-2 py-0.5 uppercase tracking-widest text-gray-400">{{ post.label | default: "Deep Dive" }}</span>
-                        <span class="text-[10px] font-mono opacity-30">{{ post.date | date: "%Y.%m.%d" }}</span>
-                    </div>
-
-                    <h3 class="text-5xl font-light tracking-tighter lowercase mb-4 group-hover:italic transition-all">{{ post.title }}</h3>
-                    
-                    {% if post.description %}
-                        <p class="text-gray-400 font-light leading-relaxed lowercase max-w-2xl line-clamp-2">
-                            {{ post.description }}
-                        </p>
-                    {% endif %}
-                </div>
-
-                {% if post.cover_image %}
-                <div class="w-full md:w-48 aspect-square overflow-hidden bg-gray-50">
-                    <img src="{{ post.cover_image | relative_url }}" class="pixel-image">
-                </div>
-                {% endif %}
-            </a>
-        </article>
-    {% endfor %}
-</div>
-
-<div class="mt-20 opacity-20 text-[10px] uppercase tracking-[0.5em] text-center">
-    the salmon has left the building
-</div>
+<script>
+  window.location.href = "/#" + window.location.pathname.replace(/\//g, "").replace(".html", "");
+</script>
