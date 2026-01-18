@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
         * { border-radius: 0 !important; cursor: crosshair; }
-        html { scroll-behavior: smooth; } /* Enables the smooth slide effect */
+        html { scroll-behavior: smooth; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
         .sidebar { 
@@ -27,7 +27,11 @@
 
         main { margin-left: 240px; min-height: 100vh; }
 
-        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
+        /* The thin divider line between sections */
+        .section-divider {
+            border-top: 1px solid #F0F0F0;
+            width: 100%;
+        }
 
         .nav-link {
             font-size: 12px;
@@ -114,7 +118,7 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section');
 
-        // 1. SCROLL MAGIC: Updates URL and Salmon as you scroll
+        // Scroll Magic: Updates URL and Salmon
         window.addEventListener('scroll', () => {
             let current = "";
 
@@ -130,13 +134,11 @@
                 if (link.getAttribute("href").includes(current)) {
                     link.classList.add("active");
                     
-                    // Update URL without refresh
                     const newUrl = link.getAttribute('data-url');
                     if (window.location.pathname !== newUrl) {
                         window.history.pushState(null, '', newUrl);
                     }
 
-                    // Update Salmon Materialization based on current section
                     updateSalmon(current);
                 }
             });
@@ -163,7 +165,7 @@
             }
         }
 
-        // 2. TELEPORTER: If someone lands on /artifacts, send them to the section
+        // Teleporter for direct URL landing
         window.addEventListener('load', () => {
             const path = window.location.pathname;
             if (path.includes('artifacts')) window.location.hash = '#evergreens';
