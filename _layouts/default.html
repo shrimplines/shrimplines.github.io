@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=DotGothic16&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 'ui-black': '#1A1A1A' },
                     fontFamily: {
-                        'pixel': ['Silkscreen', 'cursive'],
-                        'pixel-mono': ['VT323', 'monospace'],
+                        'elegant': ['"EB Garamond"', 'serif'],
+                        'pixel-dot': ['"DotGothic16"', 'sans-serif'],
                         'sans': ['Inter', 'sans-serif']
                     }
                 }
@@ -24,15 +23,15 @@
         * { border-radius: 0 !important; cursor: crosshair; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; font-family: 'Inter', sans-serif; }
         
-        /* The literal thin-line sidebar */
+        /* The Ultra-Thin Frame */
         .sidebar { 
-            width: 240px; 
-            border-right: 1px solid #F0F0F0; 
+            width: 280px; 
+            border-right: 1px solid #F2F2F2; 
             height: 100vh; 
             position: fixed; 
             top: 0; 
             left: 0;
-            padding: 4rem 2.5rem; 
+            padding: 5rem 3rem; 
             background: #FFFFFF;
             display: flex;
             flex-direction: column;
@@ -40,44 +39,55 @@
         }
 
         main { 
-            margin-left: 240px; 
-            padding: 6rem 8rem;
-            max-width: 1400px;
+            margin-left: 280px; 
+            padding: 6rem 10rem;
+            max-width: 1600px;
         }
 
-        /* Clean sidebar links - no boxes */
         .nav-link {
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: #999;
-            transition: color 0.2s ease;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            color: #A3A3A3;
+            transition: color 0.3s ease;
+            text-transform: lowercase;
         }
         .nav-link:hover, .nav-link.active {
             color: #1A1A1A;
         }
 
-        /* Pixelate effect for later */
-        .pixel-art {
-            image-rendering: pixelated;
+        /* Sophisticated Pixel Mesh (High Density) */
+        .pixel-mesh {
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAACpJREFUGFdjZEADTAwMDIxQAAn9Z2BgYIDSTAyMUMp/BggNAn8ZIMZABQA7pQgJAos77AAAAABJRU5ErkJggg==');
+            background-size: 2px 2px; /* Very tiny pixels for elegance */
+            opacity: 0.4;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        .group:hover .pixel-mesh {
+            opacity: 0;
         }
     </style>
 </head>
 <body class="flex">
     <aside class="sidebar">
-        <div class="mb-16">
-            <a href="/" class="font-pixel text-xs tracking-widest lowercase">shrimp chips</a>
+        <div class="mb-24">
+            <a href="/" class="font-elegant text-2xl tracking-tight leading-none">shrimp chips</a>
         </div>
 
-        <nav class="flex flex-col space-y-6">
+        <nav class="flex flex-col space-y-5">
             <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Index</a>
             <a href="{{ '/artifacts' | relative_url }}" class="nav-link {% if page.url contains 'artifacts' %}active{% endif %}">Evergreens</a>
             <a href="{{ '/projects' | relative_url }}" class="nav-link {% if page.url contains 'projects' %}active{% endif %}">Projects</a>
             <a href="{{ '/spotlights' | relative_url }}" class="nav-link {% if page.url contains 'spotlights' %}active{% endif %}">Spotlights</a>
         </nav>
 
-        <div class="mt-auto flex gap-3">
-            <div class="w-2 h-2 rounded-full bg-gray-100"></div>
-            <div class="w-2 h-2 rounded-full bg-gray-100"></div>
+        <div class="mt-auto flex gap-4">
+            <div class="w-1 h-1 bg-gray-200"></div>
+            <div class="w-1 h-1 bg-gray-200"></div>
         </div>
     </aside>
 
