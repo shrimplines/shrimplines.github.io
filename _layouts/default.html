@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=DotGothic16&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        'elegant': ['"EB Garamond"', 'serif'],
-                        'pixel-dot': ['"DotGothic16"', 'sans-serif'],
-                        'sans': ['Inter', 'sans-serif']
+                        'astragal': ['"Cormorant Garamond"', 'serif'],
+                        'sans-ui': ['Inter', 'sans-serif']
                     }
                 }
             }
@@ -21,34 +20,37 @@
     </script>
     <style>
         * { border-radius: 0 !important; cursor: crosshair; }
-        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; }
         
-        /* The Ultra-Thin Frame */
+        /* Fixed Sidebar with Literal Thin Line */
         .sidebar { 
-            width: 280px; 
-            border-right: 1px solid #F2F2F2; 
+            width: 240px; 
+            border-right: 1px solid #F0F0F0; 
             height: 100vh; 
             position: fixed; 
             top: 0; 
             left: 0;
-            padding: 5rem 3rem; 
+            padding: 3rem 2rem; 
             background: #FFFFFF;
             display: flex;
             flex-direction: column;
             z-index: 50;
         }
 
+        /* Responsive Main: Less "Vast" White Space */
         main { 
-            margin-left: 280px; 
-            padding: 6rem 10rem;
-            max-width: 1600px;
+            margin-left: 240px; 
+            padding: 5vh 8vw; /* Dynamic padding based on screen size */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Keeps content centered vertically */
         }
 
         .nav-link {
             font-family: 'Inter', sans-serif;
             font-size: 13px;
-            letter-spacing: 0.05em;
-            color: #A3A3A3;
+            color: #AAAAAA;
             transition: color 0.3s ease;
             text-transform: lowercase;
         }
@@ -56,16 +58,16 @@
             color: #1A1A1A;
         }
 
-        /* Sophisticated Pixel Mesh (High Density) */
+        /* High-Res Pixel Mesh Overlay */
         .pixel-mesh {
             position: absolute;
             inset: 0;
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAACpJREFUGFdjZEADTAwMDIxQAAn9Z2BgYIDSTAyMUMp/BggNAn8ZIMZABQA7pQgJAos77AAAAABJRU5ErkJggg==');
-            background-size: 2px 2px; /* Very tiny pixels for elegance */
-            opacity: 0.4;
+            background-size: 2px 2px;
+            opacity: 0.35;
             transition: opacity 0.5s ease;
             pointer-events: none;
-            mix-blend-mode: overlay;
+            mix-blend-mode: multiply;
         }
         .group:hover .pixel-mesh {
             opacity: 0;
@@ -74,18 +76,18 @@
 </head>
 <body class="flex">
     <aside class="sidebar">
-        <div class="mb-24">
-            <a href="/" class="font-elegant text-2xl tracking-tight leading-none">shrimp chips</a>
+        <div class="mb-16">
+            <a href="/" class="font-astragal text-2xl tracking-tighter leading-none italic">shrimp chips</a>
         </div>
 
-        <nav class="flex flex-col space-y-5">
-            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Index</a>
-            <a href="{{ '/artifacts' | relative_url }}" class="nav-link {% if page.url contains 'artifacts' %}active{% endif %}">Evergreens</a>
-            <a href="{{ '/projects' | relative_url }}" class="nav-link {% if page.url contains 'projects' %}active{% endif %}">Projects</a>
-            <a href="{{ '/spotlights' | relative_url }}" class="nav-link {% if page.url contains 'spotlights' %}active{% endif %}">Spotlights</a>
+        <nav class="flex flex-col space-y-4">
+            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">index</a>
+            <a href="{{ '/artifacts' | relative_url }}" class="nav-link">evergreens</a>
+            <a href="{{ '/projects' | relative_url }}" class="nav-link">projects</a>
+            <a href="{{ '/spotlights' | relative_url }}" class="nav-link">spotlights</a>
         </nav>
 
-        <div class="mt-auto flex gap-4">
+        <div class="mt-auto flex gap-3">
             <div class="w-1 h-1 bg-gray-200"></div>
             <div class="w-1 h-1 bg-gray-200"></div>
         </div>
