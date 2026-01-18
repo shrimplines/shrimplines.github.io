@@ -1,34 +1,32 @@
 ---
 layout: default
 title: Projects
+permalink: /projects
 ---
-<h2 class="text-3xl font-extrabold text-bamboo-accent tracking-tighter uppercase mb-8">System Builds</h2>
+<div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
+    <h2 class="text-5xl lowercase italic" style="font-family: 'Cormorant Garamond', serif;">projects</h2>
+    <span class="text-[9px] text-gray-300 uppercase tracking-widest">Build_Phase: Active</span>
+</div>
 
-<div class="grid grid-cols-1 gap-6">
+<div class="grid grid-cols-1 gap-4">
   {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
   {% for post in projects %}
-    <a href="{{ post.url | relative_url }}" class="block neuo-card p-8 rounded-[3rem] border-l-[12px] border-bamboo-accent hover:scale-[1.01] transition-all">
+    <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
       <div class="flex justify-between items-start">
         <div>
-          <span class="text-[10px] font-bold text-bamboo-accent uppercase tracking-widest bg-bamboo-accent/10 px-3 py-1 rounded-lg">
+          <span class="text-[10px] opacity-50 uppercase tracking-widest">
             {{ post.status | default: "Internal Build" }}
           </span>
-          <h3 class="text-3xl font-black text-gray-800 mt-4">{{ post.title }}</h3>
-          <p class="text-gray-500 mt-2 max-w-xl">{{ post.description }}</p>
+          <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
+          <p class="text-gray-400 font-light mt-4 max-w-xl lowercase leading-relaxed">{{ post.description }}</p>
           
-          <div class="flex gap-2 mt-4">
+          <div class="flex gap-2 mt-6">
             {% for tool in post.tools %}
-              <span class="text-[9px] font-mono bg-gray-100 px-2 py-1 rounded border border-gray-200 opacity-60">{{ tool }}</span>
+              <span class="text-[9px] font-mono border border-current px-2 py-0.5 opacity-40 group-hover:opacity-100">{{ tool }}</span>
             {% endfor %}
           </div>
         </div>
-        <div class="text-right">
-            <div class="w-12 h-12 bg-bamboo-accent/5 rounded-2xl flex items-center justify-center text-bamboo-accent">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-        </div>
+        <div class="text-[10px] border border-current px-3 py-1 uppercase opacity-20 group-hover:opacity-100">View Build</div>
       </div>
     </a>
   {% endfor %}
