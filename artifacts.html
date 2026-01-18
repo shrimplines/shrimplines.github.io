@@ -1,24 +1,6 @@
 ---
 layout: default
-title: Evergreens
-permalink: /artifacts
 ---
-<div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
-    <h2 class="text-5xl lowercase italic" style="font-family: 'Cormorant Garamond', serif;">evergreens</h2>
-    <span class="text-[9px] text-gray-300 uppercase tracking-widest">Vault_Status: Active</span>
-</div>
-
-<div class="space-y-4">
-  {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
-  {% for post in artifacts %}
-    <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
-        <div class="flex justify-between items-center">
-            <div>
-                <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.date | date: "%Y.%m.%d" }}</span>
-                <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
-            </div>
-            <div class="text-[10px] border border-current px-3 py-1 uppercase">Open Log</div>
-        </div>
-    </a>
-  {% endfor %}
-</div>
+<script>
+  window.location.href = "/#" + window.location.pathname.replace(/\//g, "").replace(".html", "");
+</script>
