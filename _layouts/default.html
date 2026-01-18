@@ -7,9 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
-        /* global styles */
         * { border-radius: 0 !important; cursor: crosshair; }
-        html { scroll-behavior: smooth; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
         .sidebar { 
@@ -26,12 +24,8 @@
             z-index: 50;
         }
 
-        main { margin-left: 240px; }
+        main { margin-left: 240px; min-height: 100vh; padding: 4rem; }
 
-        /* thin section divider */
-        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
-
-        /* nav links */
         .nav-link {
             font-size: 12px;
             color: #AAAAAA;
@@ -41,7 +35,7 @@
         }
         .nav-link.active { color: #1A1A1A; }
 
-        /* chunky pixelation filter */
+        /* Chunky Artistic Pixelation */
         .pixel-image {
             filter: url(#chunky-pixel);
             transition: filter 0.5s ease-out;
@@ -58,13 +52,13 @@
             flex-direction: column; 
             gap: 2px; 
             width: 40px;
-            transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1);
+            transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1);
         }
         .salmon-slice { 
             height: 6px; 
             width: 100%; 
             opacity: 0; 
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.5s ease;
         }
 
         .spotify-container { margin-top: auto; border-top: 1px solid #F0F0F0; padding-top: 1rem; }
@@ -87,10 +81,11 @@
         </div>
 
         <nav class="flex flex-col space-y-4 mb-8">
-            <a href="#index" data-url="/" class="nav-link active">index</a>
-            <a href="#evergreens" data-url="/artifacts" class="nav-link">evergreens</a>
-            <a href="#projects" data-url="/projects" class="nav-link">projects</a>
-            <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
+            <a href="/" class="nav-link {% if page.url == '/' %}active{% endif %}">index</a>
+            <a href="/about" class="nav-link {% if page.url contains 'about' %}active{% endif %}">about</a>
+            <a href="/artifacts" class="nav-link {% if page.url contains 'artifacts' %}active{% endif %}">evergreens</a>
+            <a href="/projects" class="nav-link {% if page.url contains 'projects' %}active{% endif %}">projects</a>
+            <a href="/spotlights" class="nav-link {% if page.url contains 'spotlights' %}active{% endif %}">spotlights</a>
         </nav>
 
         <div id="salmon-stage">
@@ -102,51 +97,37 @@
         </div>
 
         <div class="spotify-container">
-            <iframe style="border-radius:0px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM3M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGvPBcmU?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     </aside>
 
-    <main>{{ content }}</main>
+    <main>
+        {{ content }}
+    </main>
 
     <script>
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const slices = document.querySelectorAll('.salmon-slice');
-            const stage = document.getElementById('salmon-stage');
-            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        const slices = document.querySelectorAll('.salmon-slice');
+        const stage = document.getElementById('salmon-stage');
+        const path = window.location.pathname;
 
-            // Salmon Materialization
-            slices.forEach((slice, index) => {
-                const threshold = (index / slices.length) * 0.7;
-                slice.style.opacity = scrollPercent > threshold ? "1" : "0";
-                slice.style.transform = scrollPercent > threshold ? "translateX(0)" : "translateX(-10px)";
-            });
-
-            // Swim away at the end
-            if (scrollPercent > 0.98) {
+        // Fish materializes based on which page you are on
+        if (path === "/" || path === "/index.html") {
+            slices[0].style.opacity = "1";
+        } else if (path.includes("about")) {
+            slices[0].style.opacity = "1";
+            slices[1].style.opacity = "1";
+        } else if (path.includes("artifacts")) {
+            slices[0].style.opacity = "1";
+            slices[1].style.opacity = "1";
+            slices[2].style.opacity = "1";
+        } else if (path.includes("projects")) {
+            slices.forEach(s => s.style.opacity = "1");
+        } else if (path.includes("spotlights")) {
+            slices.forEach(s => s.style.opacity = "1");
+            setTimeout(() => {
                 stage.style.transform = "translateX(300px) rotate(-10deg)";
-            } else {
-                stage.style.transform = "translateX(0) rotate(0deg)";
-            }
-
-            // URL Update logic
-            let current = "";
-            sections.forEach((section) => {
-                if (pageYOffset >= section.offsetTop - 200) { current = section.getAttribute("id"); }
-            });
-
-            navLinks.forEach((link) => {
-                link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("active");
-                    const newUrl = link.getAttribute('data-url');
-                    if (window.location.pathname !== newUrl) {
-                        window.history.pushState(null, '', newUrl);
-                    }
-                }
-            });
-        });
+            }, 500);
+        }
     </script>
 </body>
 </html>
