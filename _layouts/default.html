@@ -5,65 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 'muji-bg': '#F5F5F5', 'matcha': '#ABE27A', 'shrimp': '#FFB7B7', 'ui-black': '#1A1A1A' }
+                    colors: { 'muji-bg': '#F5F5F5', 'ui-black': '#1A1A1A' },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains+Mono', 'monospace']
+                    }
                 }
             }
         }
     </script>
     <style>
         * { border-radius: 0 !important; }
-        body { background-color: #F5F5F5; color: #1A1A1A; transition: background 0.3s; margin: 0; }
-        .sepia-mode { background-color: #F4ECD8 !important; color: #5B4636 !important; }
-        .dark-mode { background-color: #1A1A1A !important; color: #EDEDED !important; }
-        .bg-grid { background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 25px 25px; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; font-family: 'Inter', sans-serif; }
         
-        /* The sidebar needs a fixed width so it doesn't shrink */
-        .sidebar { width: 260px; border-right: 2px solid #1A1A1A; height: 100vh; position: sticky; top: 0; padding: 2.5rem; flex-shrink: 0; }
-        
-        /* Seedling Animation Logic */
-        .seedling-wrap:hover .stem { height: 10px; }
-        .seedling-wrap:hover .leaf { opacity: 1; }
-        .stem { width: 2px; height: 0; background: #ABE27A; transition: height 0.3s; margin: 0 auto; }
-        .leaf { width: 4px; height: 2px; background: #ABE27A; opacity: 0; transition: opacity 0.3s; }
+        /* The Cofounder Sidebar Frame */
+        .sidebar { 
+            width: 240px; 
+            border-right: 1px solid #EAEAEA; 
+            height: 100vh; 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            padding: 3rem 2rem; 
+            display: flex;
+            flex-direction: column;
+            background: #FFFFFF;
+        }
+
+        /* Clean Main Content Area */
+        main { 
+            margin-left: 240px; 
+            padding: 4rem 6rem;
+            max-width: 1200px;
+        }
+
+        /* High-end Nav Links */
+        .nav-link {
+            font-size: 13px;
+            color: #888;
+            transition: color 0.2s;
+            text-transform: capitalize;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #1A1A1A;
+        }
     </style>
 </head>
 <body class="flex">
-    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
-    
-    <aside class="sidebar z-10 bg-inherit flex flex-col">
-        <div class="mb-12 border-2 border-ui-black p-4 bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-            <h1 class="font-serif text-2xl lowercase leading-none">shrimp chips</h1>
+    <aside class="sidebar">
+        <div class="mb-16">
+            <a href="/" class="font-serif text-xl">shrimp chips</a>
         </div>
 
-        <nav class="flex flex-col space-y-2">
+        <nav class="flex flex-col space-y-4">
             <a href="{{ '/' | relative_url }}" 
-               class="seedling-wrap group flex items-center p-2 border-2 border-ui-black font-mono text-[10px] uppercase transition-all
-               {% if page.url == '/' %} bg-ui-black text-white {% else %} bg-white text-ui-black hover:bg-ui-black/5 {% endif %}">
-                <span class="mr-3 opacity-30">01</span> index
-                <div class="ml-auto flex flex-col items-center">
-                    <div class="flex gap-1"><div class="leaf"></div><div class="leaf"></div></div>
-                    <div class="stem"></div>
-                </div>
+               class="nav-link {% if page.url == '/' %} active font-medium {% endif %}">
+                Index
             </a>
-
             <a href="{{ '/artifacts' | relative_url }}" 
-               class="seedling-wrap group flex items-center p-2 border-2 border-ui-black font-mono text-[10px] uppercase transition-all
-               {% if page.url contains 'artifacts' %} bg-ui-black text-white {% else %} bg-white text-ui-black hover:bg-ui-black/5 {% endif %}">
-                <span class="mr-3 opacity-30">02</span> evergreens
-                <div class="ml-auto flex flex-col items-center">
-                    <div class="flex gap-1"><div class="leaf"></div><div class="leaf"></div></div>
-                    <div class="stem"></div>
-                </div>
+               class="nav-link {% if page.url contains 'artifacts' %} active font-medium {% endif %}">
+                Evergreens
             </a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Work</a>
         </nav>
     </aside>
 
-    <main class="flex-1 p-16 z-10 overflow-y-auto">
+    <main>
         {{ content }}
     </main>
 </body>
