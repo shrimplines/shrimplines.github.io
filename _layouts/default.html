@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
+        /* Base Styles */
         * { border-radius: 0 !important; cursor: crosshair; }
         html { scroll-behavior: smooth; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
@@ -27,11 +28,7 @@
 
         main { margin-left: 240px; min-height: 100vh; }
 
-        /* The thin divider line between sections */
-        .section-divider {
-            border-top: 1px solid #F0F0F0;
-            width: 100%;
-        }
+        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
 
         .nav-link {
             font-size: 12px;
@@ -41,6 +38,24 @@
             letter-spacing: 0.05em;
         }
         .nav-link.active { color: #1A1A1A; }
+
+        /* Postcard Stamp Effect */
+        .postcard-container {
+            padding: 1.5rem;
+            background: white;
+            position: relative;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.03));
+        }
+
+        .postcard-stamp-edge {
+            background-image: 
+                radial-gradient(circle at 0px 15px, transparent 10px, white 11px),
+                radial-gradient(circle at 100% 15px, transparent 10px, white 11px),
+                radial-gradient(circle at 15px 0px, transparent 10px, white 11px),
+                radial-gradient(circle at 15px 100%, transparent 10px, white 11px);
+            background-size: 100% 30px, 100% 30px, 30px 100%, 30px 100%;
+            background-repeat: repeat-y, repeat-y, repeat-x, repeat-x;
+        }
 
         /* Chunky Artistic Pixelation */
         .pixel-image {
@@ -118,10 +133,9 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section');
 
-        // Scroll Magic: Updates URL and Salmon
+        // SCROLL MAGIC: Updates Salmon and URL
         window.addEventListener('scroll', () => {
             let current = "";
-
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
                 if (window.pageYOffset >= sectionTop - 300) {
@@ -133,12 +147,10 @@
                 link.classList.remove("active");
                 if (link.getAttribute("href").includes(current)) {
                     link.classList.add("active");
-                    
                     const newUrl = link.getAttribute('data-url');
                     if (window.location.pathname !== newUrl) {
                         window.history.pushState(null, '', newUrl);
                     }
-
                     updateSalmon(current);
                 }
             });
@@ -165,7 +177,7 @@
             }
         }
 
-        // Teleporter for direct URL landing
+        // TELEPORTER: Direct URL landings
         window.addEventListener('load', () => {
             const path = window.location.pathname;
             if (path.includes('artifacts')) window.location.hash = '#evergreens';
