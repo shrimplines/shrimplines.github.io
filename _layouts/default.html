@@ -9,10 +9,10 @@
     <style>
         * { border-radius: 0 !important; cursor: crosshair; }
         html { scroll-behavior: smooth; }
-        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
         .sidebar { 
-            width: 220px; 
+            width: 240px; 
             border-right: 1px solid #F0F0F0; 
             height: 100vh; 
             position: fixed; 
@@ -25,7 +25,13 @@
             z-index: 50;
         }
 
-        main { margin-left: 220px; }
+        main { margin-left: 240px; }
+
+        /* The thin divider line between sections */
+        .section-divider {
+            border-top: 1px solid #F0F0F0;
+            width: 100%;
+        }
 
         .nav-link {
             font-size: 12px;
@@ -36,45 +42,37 @@
         }
         .nav-link.active { color: #1A1A1A; }
 
-        /* ARTISTIC PIXELATION LOGIC */
+        /* Chunky Artistic Pixelation */
         .pixel-container {
             position: relative;
             overflow: hidden;
-            /* Force the browser to render pixels sharply */
-            image-rendering: -moz-crisp-edges;
-            image-rendering: -o-crisp-edges;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
+            background: #FAFAFA;
         }
-
-        .pixel-effect {
-            filter: url(#artistic-pixelate);
-            transition: filter 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        .pixel-image {
+            filter: url(#chunky-pixel);
+            transition: filter 0.5s ease-out;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .group:hover .pixel-image { filter: none; }
 
-        /* When we hover, we clear the filter for that crisp "reveal" */
-        .group:hover .pixel-effect {
-            filter: none;
+        /* Spotify Sidebar Player */
+        .spotify-container {
+            margin-top: auto;
+            border-top: 1px solid #F0F0F0;
+            padding-top: 1.5rem;
         }
-
-        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
-
-        /* Sprout Logic */
-        .sprout-pixel { background: #E0E0E0; position: absolute; transition: all 0.4s ease; }
     </style>
 </head>
 <body class="flex">
     <svg style="display: none;">
-        <filter id="artistic-pixelate" x="0" y="0">
+        <filter id="chunky-pixel" x="0" y="0">
             <feFlood x="4" y="4" height="2" width="2" />
-            <feComposite width="8" height="8" />
+            <feComposite width="10" height="10" />
             <feTile result="a" />
             <feComposite in="SourceGraphic" in2="a" operator="in" />
-            <feMorphology operator="dilate" radius="3" />
+            <feMorphology operator="dilate" radius="4" />
         </filter>
     </svg>
 
@@ -83,17 +81,18 @@
             <a href="/" class="font-light text-xl tracking-tighter lowercase" style="font-family: 'Cormorant Garamond', serif;">shrimp chips</a>
         </div>
 
-        <nav class="flex flex-col space-y-4">
+        <nav class="flex flex-col space-y-4 mb-10">
             <a href="#index" data-url="/" class="nav-link active">index</a>
             <a href="#evergreens" data-url="/artifacts" class="nav-link">evergreens</a>
             <a href="#projects" data-url="/projects" class="nav-link">projects</a>
             <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
         </nav>
 
-        <div id="sprout" class="mt-8 relative w-4 h-10">
-            <div id="stem" class="sprout-pixel" style="width: 2px; height: 0; bottom: 0; left: 7px;"></div>
-            <div id="leaf-l" class="sprout-pixel opacity-0" style="width: 4px; height: 2px; bottom: 10px; left: 3px;"></div>
-            <div id="leaf-r" class="sprout-pixel opacity-0" style="width: 4px; height: 2px; bottom: 10px; left: 9px;"></div>
+        <div id="salmon-stage" class="relative w-full h-24 opacity-50 pointer-events-none">
+            </div>
+
+        <div class="spotify-container">
+            <iframe style="border-radius:0px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     </aside>
 
@@ -102,23 +101,11 @@
     </main>
 
     <script>
-        // URL Swapping + Sprout Growth Script
+        // URL Magic + Salmon Materialization
         window.addEventListener('scroll', () => {
-            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            
-            // Growing the sprout
-            document.getElementById('stem').style.height = (scrollPercent * 30) + 'px';
-            if(scrollPercent > 0.2) {
-                document.getElementById('leaf-l').classList.remove('opacity-0');
-                document.getElementById('leaf-r').classList.remove('opacity-0');
-            } else {
-                document.getElementById('leaf-l').classList.add('opacity-0');
-                document.getElementById('leaf-r').classList.add('opacity-0');
-            }
-
-            // Update URL and Nav
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
+            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
             let current = "";
 
             sections.forEach((section) => {
@@ -133,6 +120,7 @@
                 if (link.getAttribute("href").includes(current)) {
                     link.classList.add("active");
                     const newUrl = link.getAttribute('data-url');
+                    // Updates URL without refreshing the page
                     if (window.location.pathname !== newUrl) {
                         window.history.pushState(null, '', newUrl);
                     }
