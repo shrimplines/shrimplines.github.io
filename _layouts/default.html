@@ -9,7 +9,7 @@
     <style>
         * { border-radius: 0 !important; cursor: crosshair; }
         html { scroll-behavior: smooth; }
-        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
         
         .sidebar { 
             width: 220px; 
@@ -25,7 +25,7 @@
             z-index: 50;
         }
 
-        main { margin-left: 220px; padding-bottom: 80px; }
+        main { margin-left: 220px; }
 
         .nav-link {
             font-size: 12px;
@@ -36,50 +36,45 @@
         }
         .nav-link.active { color: #1A1A1A; }
 
-        /* Pixel sprout logic */
-        .sprout-box {
-            margin-top: 2rem;
-            width: 20px;
-            height: 40px;
+        /* ARTISTIC PIXELATION LOGIC */
+        .pixel-container {
             position: relative;
-        }
-        .sprout-pixel {
-            background: #D1D1D1;
-            position: absolute;
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        /* Music Player */
-        .player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #F9F9F9;
-            border: 1px solid #EEEEEE;
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 100;
+            overflow: hidden;
+            /* Force the browser to render pixels sharply */
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -o-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
         }
 
-        /* SVG Pixelate Filter */
         .pixel-effect {
-            filter: url(#pixelate);
-            transition: filter 0.4s ease;
+            filter: url(#artistic-pixelate);
+            transition: filter 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .group:hover .pixel-effect { filter: none; }
+
+        /* When we hover, we clear the filter for that crisp "reveal" */
+        .group:hover .pixel-effect {
+            filter: none;
+        }
+
+        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
+
+        /* Sprout Logic */
+        .sprout-pixel { background: #E0E0E0; position: absolute; transition: all 0.4s ease; }
     </style>
 </head>
 <body class="flex">
     <svg style="display: none;">
-        <filter id="pixelate" x="0" y="0">
-            <feFlood x="2" y="2" height="1" width="1" />
-            <feComposite width="4" height="4" />
+        <filter id="artistic-pixelate" x="0" y="0">
+            <feFlood x="4" y="4" height="2" width="2" />
+            <feComposite width="8" height="8" />
             <feTile result="a" />
             <feComposite in="SourceGraphic" in2="a" operator="in" />
-            <feMorphology operator="dilate" radius="2" />
+            <feMorphology operator="dilate" radius="3" />
         </filter>
     </svg>
 
@@ -95,10 +90,10 @@
             <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
         </nav>
 
-        <div class="sprout-box" id="sprout">
-            <div id="stem" class="sprout-pixel" style="width: 4px; height: 0; bottom: 0; left: 8px; opacity: 1;"></div>
-            <div id="leaf-l" class="sprout-pixel" style="width: 6px; height: 4px; bottom: 12px; left: 2px;"></div>
-            <div id="leaf-r" class="sprout-pixel" style="width: 6px; height: 4px; bottom: 12px; left: 12px;"></div>
+        <div id="sprout" class="mt-8 relative w-4 h-10">
+            <div id="stem" class="sprout-pixel" style="width: 2px; height: 0; bottom: 0; left: 7px;"></div>
+            <div id="leaf-l" class="sprout-pixel opacity-0" style="width: 4px; height: 2px; bottom: 10px; left: 3px;"></div>
+            <div id="leaf-r" class="sprout-pixel opacity-0" style="width: 4px; height: 2px; bottom: 10px; left: 9px;"></div>
         </div>
     </aside>
 
@@ -106,39 +101,41 @@
         {{ content }}
     </main>
 
-    <div class="player">
-        <button onclick="document.getElementById('bgm').paused ? document.getElementById('bgm').play() : document.getElementById('bgm').pause()" class="text-[10px] uppercase tracking-widest text-gray-400">play/pause</button>
-        <span class="text-[10px] text-gray-300 italic">lo-fi_sanctuary.mp3</span>
-        <audio id="bgm" loop src="YOUR_MUSIC_FILE_URL"></audio>
-    </div>
-
     <script>
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const stem = document.getElementById('stem');
-        const leafL = document.getElementById('leaf-l');
-        const leafR = document.getElementById('leaf-r');
-
+        // URL Swapping + Sprout Growth Script
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                if (pageYOffset >= section.offsetTop - 150) {
-                    current = section.getAttribute('id');
+            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            
+            // Growing the sprout
+            document.getElementById('stem').style.height = (scrollPercent * 30) + 'px';
+            if(scrollPercent > 0.2) {
+                document.getElementById('leaf-l').classList.remove('opacity-0');
+                document.getElementById('leaf-r').classList.remove('opacity-0');
+            } else {
+                document.getElementById('leaf-l').classList.add('opacity-0');
+                document.getElementById('leaf-r').classList.add('opacity-0');
+            }
+
+            // Update URL and Nav
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = "";
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute("id");
                 }
             });
 
-            // Sprout growth logic
-            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight));
-            stem.style.height = (scrollPercent * 30) + 'px';
-            if (scrollPercent > 0.3) { leafL.style.opacity = 1; leafR.style.opacity = 1; }
-            else { leafL.style.opacity = 0; leafR.style.opacity = 0; }
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
                     const newUrl = link.getAttribute('data-url');
-                    window.history.pushState({path: newUrl}, '', newUrl);
+                    if (window.location.pathname !== newUrl) {
+                        window.history.pushState(null, '', newUrl);
+                    }
                 }
             });
         });
