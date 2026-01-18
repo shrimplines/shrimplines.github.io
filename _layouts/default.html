@@ -24,10 +24,10 @@
         * { border-radius: 0 !important; cursor: crosshair; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; font-family: 'Inter', sans-serif; }
         
-        /* The Clean Sidebar Frame */
+        /* The literal thin-line sidebar */
         .sidebar { 
             width: 240px; 
-            border-right: 1px solid #F0F0F0; /* Super light line */
+            border-right: 1px solid #F0F0F0; 
             height: 100vh; 
             position: fixed; 
             top: 0; 
@@ -36,6 +36,7 @@
             background: #FFFFFF;
             display: flex;
             flex-direction: column;
+            z-index: 50;
         }
 
         main { 
@@ -44,6 +45,7 @@
             max-width: 1400px;
         }
 
+        /* Clean sidebar links - no boxes */
         .nav-link {
             font-family: 'Inter', sans-serif;
             font-size: 14px;
@@ -53,23 +55,29 @@
         .nav-link:hover, .nav-link.active {
             color: #1A1A1A;
         }
+
+        /* Pixelate effect for later */
+        .pixel-art {
+            image-rendering: pixelated;
+        }
     </style>
 </head>
 <body class="flex">
     <aside class="sidebar">
         <div class="mb-16">
-            <a href="/" class="font-pixel text-sm tracking-widest lowercase">shrimp chips</a>
+            <a href="/" class="font-pixel text-xs tracking-widest lowercase">shrimp chips</a>
         </div>
 
         <nav class="flex flex-col space-y-6">
-            <a href="/" class="nav-link active">Index</a>
-            <a href="/work" class="nav-link">Work</a>
-            <a href="/about" class="nav-link">About</a>
+            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Index</a>
+            <a href="{{ '/artifacts' | relative_url }}" class="nav-link {% if page.url contains 'artifacts' %}active{% endif %}">Evergreens</a>
+            <a href="{{ '/projects' | relative_url }}" class="nav-link {% if page.url contains 'projects' %}active{% endif %}">Projects</a>
+            <a href="{{ '/spotlights' | relative_url }}" class="nav-link {% if page.url contains 'spotlights' %}active{% endif %}">Spotlights</a>
         </nav>
 
         <div class="mt-auto flex gap-3">
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
-            <div class="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-100"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-100"></div>
         </div>
     </aside>
 
