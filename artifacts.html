@@ -1,27 +1,23 @@
 ---
 layout: default
 title: Evergreens
+permalink: /artifacts
 ---
-<div class="flex justify-between items-end mb-12 border-b-2 border-ui-black pb-4">
-    <h2 class="font-serif text-5xl lowercase">Evergreens</h2>
-    <span class="font-mono text-[9px] opacity-40 uppercase">Vault_Status: Active</span>
+<div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
+    <h2 class="text-5xl lowercase italic" style="font-family: 'Cormorant Garamond', serif;">evergreens</h2>
+    <span class="text-[9px] text-gray-300 uppercase tracking-widest">Vault_Status: Active</span>
 </div>
 
-<div class="space-y-2">
+<div class="space-y-4">
   {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
   {% for post in artifacts %}
-    
-    {% if post.layout == "post-short" %}{% assign bg = "bg-shrimp" %}
-    {% elsif post.layout == "post-gallery" %}{% assign bg = "bg-white" %}
-    {% else %}{% assign bg = "bg-matcha" %}{% endif %}
-
-    <a href="{{ post.url | relative_url }}" class="group block border border-ui-black p-6 {{ bg }} hover:bg-ui-black hover:text-white transition-all">
+    <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
         <div class="flex justify-between items-center">
             <div>
-                <span class="font-mono text-[10px] opacity-50 uppercase">{{ post.date | date: "%Y.%m.%d" }}</span>
-                <h3 class="font-serif text-3xl">{{ post.title }}</h3>
+                <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.date | date: "%Y.%m.%d" }}</span>
+                <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
             </div>
-            <div class="font-mono text-[10px] border border-current px-2 py-1">OPEN_LOG</div>
+            <div class="text-[10px] border border-current px-3 py-1 uppercase">Open Log</div>
         </div>
     </a>
   {% endfor %}
