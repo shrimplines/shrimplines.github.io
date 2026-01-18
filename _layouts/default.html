@@ -5,96 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | shrimp chips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'astragal': ['"Cormorant Garamond"', 'serif'],
-                        'sans-ui': ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
         * { border-radius: 0 !important; cursor: crosshair; }
-        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
         
-        /* Fixed Sidebar with Literal Thin Line */
         .sidebar { 
-            width: 240px; 
+            width: 220px; 
             border-right: 1px solid #F0F0F0; 
             height: 100vh; 
             position: fixed; 
             top: 0; 
             left: 0;
-            padding: 3rem 2rem; 
+            padding: 1.5rem 2rem; 
             background: #FFFFFF;
             display: flex;
             flex-direction: column;
             z-index: 50;
         }
 
-        /* Responsive Main: Less "Vast" White Space */
-        main { 
-            margin-left: 240px; 
-            padding: 5vh 8vw; /* Dynamic padding based on screen size */
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Keeps content centered vertically */
-        }
+        main { margin-left: 220px; }
 
         .nav-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             color: #AAAAAA;
             transition: color 0.3s ease;
             text-transform: lowercase;
+            letter-spacing: 0.05em;
         }
-        .nav-link:hover, .nav-link.active {
-            color: #1A1A1A;
-        }
+        .nav-link.active { color: #1A1A1A; font-weight: 400; }
 
-        /* High-Res Pixel Mesh Overlay */
-        .pixel-mesh {
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAACpJREFUGFdjZEADTAwMDIxQAAn9Z2BgYIDSTAyMUMp/BggNAn8ZIMZABQA7pQgJAos77AAAAABJRU5ErkJggg==');
-            background-size: 2px 2px;
-            opacity: 0.35;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            mix-blend-mode: multiply;
+        /* CSS Pixelization */
+        .pixel-effect {
+            filter: url(#pixelate);
+            transition: filter 0.4s ease;
         }
-        .group:hover .pixel-mesh {
-            opacity: 0;
-        }
+        .group:hover .pixel-effect { filter: none; }
+
+        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
     </style>
 </head>
 <body class="flex">
+    <svg style="display: none;">
+        <filter id="pixelate" x="0" y="0">
+            <feFlood x="2" y="2" height="1" width="1" />
+            <feComposite width="4" height="4" />
+            <feTile result="a" />
+            <feComposite in="SourceGraphic" in2="a" operator="in" />
+            <feMorphology operator="dilate" radius="2" />
+        </filter>
+    </svg>
+
     <aside class="sidebar">
-        <div class="mb-16">
-            <a href="/" class="font-astragal text-2xl tracking-tighter leading-none italic">shrimp chips</a>
+        <div class="mb-10">
+            <a href="/" class="font-light text-xl tracking-tighter lowercase" style="font-family: 'Cormorant Garamond', serif;">shrimp chips</a>
         </div>
 
         <nav class="flex flex-col space-y-4">
-            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">index</a>
-            <a href="{{ '/artifacts' | relative_url }}" class="nav-link">evergreens</a>
-            <a href="{{ '/projects' | relative_url }}" class="nav-link">projects</a>
-            <a href="{{ '/spotlights' | relative_url }}" class="nav-link">spotlights</a>
+            <a href="#index" data-url="/" class="nav-link active">index</a>
+            <a href="#evergreens" data-url="/artifacts" class="nav-link">evergreens</a>
+            <a href="#projects" data-url="/projects" class="nav-link">projects</a>
+            <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
         </nav>
-
-        <div class="mt-auto flex gap-3">
-            <div class="w-1 h-1 bg-gray-200"></div>
-            <div class="w-1 h-1 bg-gray-200"></div>
-        </div>
     </aside>
 
     <main>
         {{ content }}
     </main>
+
+    <script>
+        // The magic "Cofounder" URL switcher
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                    // Update URL without refresh
+                    const newUrl = link.getAttribute('data-url');
+                    window.history.pushState({path: newUrl}, '', newUrl);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
