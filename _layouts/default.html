@@ -68,23 +68,23 @@
 
         .postcard-container {
             display: inline-block;
-            background: #D1D1D1;
-            padding: 16px;
+            background: #999999;
+            padding: 14px;
             position: relative;
             
             --r: 6px;
             --s: 18px;
             
             -webkit-mask:
-                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
-                    calc(var(--r) * -1) 50% / 100% var(--s),
-                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
-                    50% calc(var(--r) * -1) / var(--s) 100%;
+                radial-gradient(var(--r) at 50% 0, #0000 98%, #000) 50% 0 / var(--s) 100%,
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000) 50% 100% / var(--s) 100%,
+                radial-gradient(var(--r) at 0 50%, #0000 98%, #000) 0 50% / 100% var(--s),
+                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000) 100% 50% / 100% var(--s);
             mask:
-                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
-                    calc(var(--r) * -1) 50% / 100% var(--s),
-                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
-                    50% calc(var(--r) * -1) / var(--s) 100%;
+                radial-gradient(var(--r) at 50% 0, #0000 98%, #000) 50% 0 / var(--s) 100%,
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000) 50% 100% / var(--s) 100%,
+                radial-gradient(var(--r) at 0 50%, #0000 98%, #000) 0 50% / 100% var(--s),
+                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000) 100% 50% / 100% var(--s);
             -webkit-mask-composite: destination-in;
             mask-composite: intersect;
         }
