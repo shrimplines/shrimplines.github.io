@@ -37,11 +37,10 @@
         }
         .nav-link.active { color: #1A1A1A; }
 
-        /* Slide-out Spotify Drawer logic */
         .spotify-drawer {
             position: fixed;
             bottom: 2rem;
-            left: -360px; /* Hidden off-screen */
+            left: -360px;
             width: 400px;
             height: 152px;
             background: white;
@@ -50,8 +49,7 @@
             display: flex;
             box-shadow: 10px 0 30px rgba(0,0,0,0.05);
         }
-
-        .spotify-drawer:hover { left: 240px; } /* Slides past sidebar */
+        .spotify-drawer:hover { left: 240px; }
 
         .drawer-handle {
             width: 40px;
@@ -68,23 +66,30 @@
             cursor: pointer;
         }
 
-        /* Postcard Stamp Edge */
+        /* PERFECT CSS POSTSTAMP GENERATION */
         .postcard-container {
-            padding: 1.5rem;
             background: white;
+            padding: 2.5rem;
             position: relative;
             filter: drop-shadow(0 10px 30px rgba(0,0,0,0.03));
             width: fit-content;
-        }
-
-        .postcard-stamp-edge {
-            background-image: 
-                radial-gradient(circle at 0px 15px, transparent 10px, white 11px),
-                radial-gradient(circle at 100% 15px, transparent 10px, white 11px),
-                radial-gradient(circle at 15px 0px, transparent 10px, white 11px),
-                radial-gradient(circle at 15px 100%, transparent 10px, white 11px);
-            background-size: 100% 30px, 100% 30px, 30px 100%, 30px 100%;
-            background-repeat: repeat-y, repeat-y, repeat-x, repeat-x;
+            
+            /* The Mathematical Mask */
+            --r: 8px; /* hole size */
+            --s: 24px; /* spacing */
+            
+            -webkit-mask:
+                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
+                    calc(var(--r) * -1) 50% / 100% var(--s),
+                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
+                    50% calc(var(--r) * -1) / var(--s) 100%;
+            mask:
+                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
+                    calc(var(--r) * -1) 50% / 100% var(--s),
+                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
+                    50% calc(var(--r) * -1) / var(--s) 100%;
+            -webkit-mask-composite: destination-in;
+            mask-composite: intersect;
         }
 
         .pixel-image {
@@ -122,7 +127,6 @@
         <div class="mb-10">
             <a href="/" class="font-light text-xl tracking-tighter lowercase" style="font-family: 'Cormorant Garamond', serif;">shrimp chips</a>
         </div>
-
         <nav class="flex flex-col space-y-4 mb-8">
             <a href="#index" data-url="/" class="nav-link active">index</a>
             <a href="#about" data-url="/about" class="nav-link">about</a>
@@ -130,7 +134,6 @@
             <a href="#projects" data-url="/projects" class="nav-link">projects</a>
             <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
         </nav>
-
         <div id="salmon-stage">
             <div class="salmon-slice" style="background: #FFADAD; width: 20px; margin-left: 10px;"></div>
             <div class="salmon-slice" style="background: #FFD6A5; width: 35px; margin-left: 2px;"></div>
