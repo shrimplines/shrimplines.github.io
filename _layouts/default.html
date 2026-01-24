@@ -66,16 +66,16 @@
             cursor: pointer;
         }
 
-        /* POSTAGE STAMP EFFECT */
+        /* STAMP EFFECT FIX */
         .postcard-container {
-            background: #F9F9F9; /* Stamp Paper Color */
-            padding: 12px; /* Border thickness */
+            background: #F2F2F2; /* Visible stamp paper */
+            padding: 16px; /* Space for the "teeth" */
             position: relative;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.08));
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
             width: fit-content;
             
-            --r: 6px; /* size of the punches */
-            --s: 18px; /* spacing between punches */
+            --r: 6px; /* hole radius */
+            --s: 18px; /* spacing */
             
             -webkit-mask:
                 radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
