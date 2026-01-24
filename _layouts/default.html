@@ -68,24 +68,32 @@
 
         .postcard-container {
             display: inline-block;
-            background: #C0C0C0;
-            padding: 16px;
+            background: #D1D1D1;
+            padding: 14px;
             position: relative;
+            filter: none !important;
+            box-shadow: none !important;
             
             --r: 6px;
-            --s: 20px;
+            --s: 18px;
             
-            -webkit-mask:
-                radial-gradient(var(--r) at 50% 0, #0000 98%, #000) 50% 0 / var(--s) 100%,
-                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000) 50% 100% / var(--s) 100%,
-                radial-gradient(var(--r) at 0 50%, #0000 98%, #000) 0 50% / 100% var(--s),
-                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000) 100% 50% / 100% var(--s);
-            mask:
-                radial-gradient(var(--r) at 50% 0, #0000 98%, #000) 50% 0 / var(--s) 100%,
-                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000) 50% 100% / var(--s) 100%,
-                radial-gradient(var(--r) at 0 50%, #0000 98%, #000) 0 50% / 100% var(--s),
-                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000) 100% 50% / 100% var(--s);
-            -webkit-mask-composite: destination-in;
+            -webkit-mask-image:
+                radial-gradient(var(--r) at 50% 0, #0000 98%, #000),
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000),
+                radial-gradient(var(--r) at 0 50%, #0000 98%, #000),
+                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000);
+            mask-image:
+                radial-gradient(var(--r) at 50% 0, #0000 98%, #000),
+                radial-gradient(var(--r) at 50% 100%, #0000 98%, #000),
+                radial-gradient(var(--r) at 0 50%, #0000 98%, #000),
+                radial-gradient(var(--r) at 100% 50%, #0000 98%, #000);
+            -webkit-mask-size: var(--s) 100%, var(--s) 100%, 100% var(--s), 100% var(--s);
+            mask-size: var(--s) 100%, var(--s) 100%, 100% var(--s), 100% var(--s);
+            -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            -webkit-mask-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
+            mask-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
+            -webkit-mask-composite: source-in, source-in, source-in, source-in;
             mask-composite: intersect;
         }
 
