@@ -66,17 +66,16 @@
             cursor: pointer;
         }
 
-        /* PERFECT CSS POSTSTAMP GENERATION */
+        /* POSTAGE STAMP EFFECT */
         .postcard-container {
-            background: white;
-            padding: 2.5rem;
+            background: #F9F9F9; /* Stamp Paper Color */
+            padding: 12px; /* Border thickness */
             position: relative;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.03));
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.08));
             width: fit-content;
             
-            /* The Mathematical Mask */
-            --r: 8px; /* hole size */
-            --s: 24px; /* spacing */
+            --r: 6px; /* size of the punches */
+            --s: 18px; /* spacing between punches */
             
             -webkit-mask:
                 radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
