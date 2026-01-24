@@ -67,16 +67,26 @@
         }
 
         .postcard-container {
-            background-color: #FFFDF5;
+            display: inline-block;
+            background: #D1D1D1;
             padding: 16px;
             position: relative;
-            display: inline-block;
-            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.06));
-            background-image: 
-                radial-gradient(#FFFFFF 5px, transparent 5px), 
-                radial-gradient(#FFFFFF 5px, transparent 5px);
-            background-size: 20px 20px;
-            background-position: -10px -10px;
+            
+            --r: 6px;
+            --s: 18px;
+            
+            -webkit-mask:
+                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
+                    calc(var(--r) * -1) 50% / 100% var(--s),
+                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
+                    50% calc(var(--r) * -1) / var(--s) 100%;
+            mask:
+                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
+                    calc(var(--r) * -1) 50% / 100% var(--s),
+                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
+                    50% calc(var(--r) * -1) / var(--s) 100%;
+            -webkit-mask-composite: destination-in;
+            mask-composite: intersect;
         }
 
         .pixel-image {
