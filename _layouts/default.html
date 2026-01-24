@@ -66,29 +66,17 @@
             cursor: pointer;
         }
 
-        /* STAMP EFFECT FIX */
         .postcard-container {
-            background: #F2F2F2; /* Visible stamp paper */
-            padding: 16px; /* Space for the "teeth" */
+            background: #f4f4f4;
+            padding: 20px;
             position: relative;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
-            width: fit-content;
-            
-            --r: 6px; /* hole radius */
-            --s: 18px; /* spacing */
-            
-            -webkit-mask:
-                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
-                    calc(var(--r) * -1) 50% / 100% var(--s),
-                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
-                    50% calc(var(--r) * -1) / var(--s) 100%;
-            mask:
-                radial-gradient(var(--r) at var(--r) 50%, #0000 98%, #000) 
-                    calc(var(--r) * -1) 50% / 100% var(--s),
-                radial-gradient(var(--r) at 50% var(--r), #0000 98%, #000) 
-                    50% calc(var(--r) * -1) / var(--s) 100%;
-            -webkit-mask-composite: destination-in;
-            mask-composite: intersect;
+            display: inline-block;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.05));
+            background-image: 
+                radial-gradient(#ffffff 6px, transparent 6px), 
+                radial-gradient(#ffffff 6px, transparent 6px);
+            background-size: 24px 24px;
+            background-position: -12px -12px;
         }
 
         .pixel-image {
