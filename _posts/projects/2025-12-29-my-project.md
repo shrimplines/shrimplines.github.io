@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Big Project"
+title: "Projekt Numero Uno"
 categories: projects
 ---
-This should only show up on the Projects tab!
+pruhjekts tab
