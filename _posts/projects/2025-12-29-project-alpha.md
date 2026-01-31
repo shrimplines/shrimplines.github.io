@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Project Alpha"
+title: "project numero uno"
 date: 2025-12-29
 categories: projects
 ---
 
-### Project Overview
-This is a test post for the **Projects** section. It uses the standard long-form layout with the green "Post" header at the top.
+### overview
+uses normal layout, this should appear in posts or im going to explode
 
 * **Status:** In Progress
 * **Tools:** Jekyll, Tailwind CSS
