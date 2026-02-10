@@ -4,8 +4,8 @@ title: "I hate linear narratives."
 date: 2026-2-9
 categories: artifacts
 ---
-<div class="postcard-container">
-    <img src="/assets/images/posts/artifacts/linear/linear.dimension.png" alt="linear dimension" class="pixel-image">
+<div>
+    <img src="/assets/images/posts/artifacts/linear/linear.dimension.png" class="pixel-image no-pixel">
 </div>
 
 There's a way you're supposed to experience life that nobody ever really explains. You're just expected to pick it up. You're supposed to feel in order.
@@ -35,8 +35,8 @@ I think this is why happiness feels hard to access. Not impossible. Just incompa
 
 After social interactions, my mind replays everything. What I said. How I said it. Whether it was too much. Whether it landed wrong. Every pause. Every look. I tell myself to stop. I tell myself I didn't ruin anything.I don't think this makes me broken. **I think it makes me out of sync with a culture that rewards clean emotional arcs.** We like people who are easy to read. We like joy that arrives on time and leaves when it's supposed to.A hyperdimensional network doesn't move forward neatly. It spreads. It overlaps. It contradicts itself. You can't flatten that into a story without losing something important.
 
-<div class="postcard-container">
-    <img src="/assets/images/posts/artifacts/linear/quote.png" alt="quote" class="pixel-image">
+<div>
+    <img src="/assets/images/posts/artifacts/linear/quote.png" class="pixel-image no-pixel">
 </div>
 
 So when something good happens, I don't react fast like I'm expected to. I wait. I contemplate. I think. Sometimes the feeling never fully arrives. Sometimes it arrives later when no one's watching.
