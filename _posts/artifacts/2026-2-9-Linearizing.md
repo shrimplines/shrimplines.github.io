@@ -40,6 +40,7 @@ So when something good happens, I don't react fast like I'm expected to. I wait.
 
 I don't want a beginning, middle, and end that pretends nothing spills over. I don't want happiness that requires me to stop thinking in order to count.I want to live honestly inside the network, even if it means joy comes slower or quieter or not at all sometimes.
 
-I'm not "sad".I'm just not shrimple.
+I'm not "sad".
+I'm just not shrimple.
 
 Maybe it's just inconvenient in a world obsessed with straight lines.
