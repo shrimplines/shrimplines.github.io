@@ -14,11 +14,11 @@ Growth after struggle.
 
 **It's clean. It's legible. It makes sense to other people.I cannot work like that.**
 
-I don't experience life as a straight line. My mind is a hyperdimensional network. Everything connects to everything else. Every moment shows up already carrying what caused it and what it's going to break later. _By the time something happens, I'm already thinking about what it implies._**The world wants linear narratives. I can't do it.**
+I don't experience life as a straight line. My mind is a hyperdimensional network. Everything connects to everything else. Every moment shows up already carrying what caused it and what it's going to break later. _By the time something happens, I'm already thinking about what it implies._ **The world wants linear narratives. I can't do it.**
 
 When the Seahawks won recently, everyone was happy in the correct way. Instagram flooded with posts. _I literally redownloaded the app just to like them._ Why? _For a reputation, for a digital status I convinced myself I had._ I commented. I said "yayyy" and "congrats team" like I was supposed to. **I knew how to socially perform that moment.**
 
-But my first real thought was that every win means someone else lost. _Not in a dramatic way._ Cause and effect. That's how systems work._I didn't say it. Obviously I didn't say it._Nobody wants that thought in a moment that's supposed to be pure joy. So I kept it to myself and watched the happiness drain out of the experience before it ever fully landed. _That happens a lot._ **I don't kill joy. I overthink it until it dissolves.**Happiness feels less like a feeling and more like a performance, or _something I miss by thinking too far ahead._
+But my first real thought was that every win means someone else lost. _Not in a dramatic way._ Cause and effect. That's how systems work._I didn't say it. Obviously I didn't say it._Nobody wants that thought in a moment that's supposed to be pure joy. So I kept it to myself and watched the happiness drain out of the experience before it ever fully landed. _That happens a lot._ I don't kill joy. I overthink it until it dissolves. **Happiness feels less like a feeling and more like a performance, or _something I miss by thinking too far ahead._**
 
 Parties are much the same.I get there and almost immediately I need a break. Not because I hate people. Not because I'm anxious in the way people expect. I just need time. I need acclimation. Like when you buy fish from Petco and you're not supposed to dump them straight into the tank. You float the bag. You wait. You let the temperatures match or you shock them.
 
