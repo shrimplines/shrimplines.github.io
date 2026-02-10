@@ -7,10 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         * { border-radius: 0 !important; cursor: crosshair; }
         html { scroll-behavior: smooth; }
         body { background-color: #FFFFFF; color: #1A1A1A; margin: 0; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
+        /* Sidebar Navigation */
         .sidebar { 
             width: 240px; 
             border-right: 1px solid #F0F0F0; 
@@ -26,7 +28,6 @@
         }
 
         main { margin-left: 240px; min-height: 100vh; }
-        .section-divider { border-top: 1px solid #F0F0F0; width: 100%; }
 
         .nav-link {
             font-size: 12px;
@@ -37,6 +38,7 @@
         }
         .nav-link.active { color: #1A1A1A; }
 
+        /* Spotify Drawer */
         .spotify-drawer {
             position: fixed;
             bottom: 2rem;
@@ -66,15 +68,16 @@
             cursor: pointer;
         }
 
+        /* The Postcard/Stamp Container */
         .postcard-container {
             display: inline-block;
-            background: #9D8582;
+            background: #9D8582; /* Your chosen dark grey */
             padding: 20px;
             position: relative;
             filter: none !important;
             
-            --r: 8px;
-            --s: 24px;
+            --r: 8px; /* Hole radius */
+            --s: 24px; /* Hole spacing */
             
             -webkit-mask:
                 radial-gradient(var(--r) at 50% 0   ,#0000 98%,#000) 50% 0   / var(--s) 100% repeat-x,
@@ -90,15 +93,26 @@
             mask-composite: intersect;
         }
 
+        /* Pixel Filter Style */
         .pixel-image {
             filter: url(#chunky-pixel);
             transition: filter 0.5s ease-out;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
-        .group:hover .pixel-image { filter: none; }
 
+        /* Class to turn off blurring: class="pixel-image no-pixel" */
+        .pixel-image.no-pixel {
+            filter: none !important;
+        }
+
+        .postcard-container:hover .pixel-image:not(.no-pixel) { 
+            filter: none; 
+        }
+
+        /* Salmon Animation */
         #salmon-stage { 
             margin-top: 2rem; 
             display: flex; 
@@ -156,6 +170,7 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section');
 
+        // Scroll Tracking for Navigation
         window.addEventListener('scroll', () => {
             let current = "";
             sections.forEach((section) => {
@@ -178,6 +193,7 @@
             });
         });
 
+        // Salmon Animation Update
         function updateSalmon(sectionId) {
             slices.forEach(s => s.style.opacity = "0");
             stage.style.transform = "none";
@@ -188,6 +204,7 @@
             else if (sectionId === "spotlights") { slices.forEach(s => s.style.opacity = "1"); stage.style.transform = "translateX(300px) rotate(-10deg)"; }
         }
 
+        // Handle path-based hash scrolling on load
         window.addEventListener('load', () => {
             const path = window.location.pathname;
             if (path.includes('artifacts')) window.location.hash = '#evergreens';
