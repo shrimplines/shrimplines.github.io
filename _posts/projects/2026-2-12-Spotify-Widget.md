@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Projekt Numero Uno"
+title: "Desktop Spotify Widget"
 categories: projects
 ---
-pruhjekts tab
+yayyy
