@@ -6,7 +6,7 @@ layout: default
 
 <div class="min-h-screen bg-white text-[#1A1A1A] font-sans lowercase selection:bg-black selection:text-white overflow-hidden relative">
     
-    <nav class="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-50">
+    <nav class="absolute top-0 left-0 w-[calc(100vw-240px)] p-8 flex justify-between items-start z-50">
         <a href="/recaps" class="flex items-center gap-2 text-[10px] tracking-[0.3em] text-gray-400 hover:text-black transition-colors uppercase font-bold no-underline">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> archives
         </a>
@@ -17,24 +17,25 @@ layout: default
     </nav>
 
     <main class="relative h-screen w-[calc(100vw-240px)] flex flex-col items-center justify-center">
-        <div id="tetris-container" class="relative transition-transform duration-500 ease-in-out" style="transform: rotate(0deg)">
+        <div id="tetris-container" class="relative transition-transform duration-700 ease-in-out" style="transform: rotate(0deg)">
             <div class="grid grid-cols-3 gap-3 w-[350px] md:w-[500px]">
                 <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="0">
-                    <img src="" class="block-img w-full h-full object-cover grayscale transition-opacity duration-300">
+                    <img src="" class="block-img w-full h-full object-cover grayscale transition-all duration-700">
                     <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
                 </div>
                 <div class="aspect-square opacity-0 pointer-events-none"></div>
                 <div class="aspect-square opacity-0 pointer-events-none"></div>
+                
                 <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="1">
-                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <img src="" class="block-img w-full h-full object-cover grayscale transition-all duration-700">
                     <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
                 </div>
                 <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="2">
-                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <img src="" class="block-img w-full h-full object-cover grayscale transition-all duration-700">
                     <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
                 </div>
                 <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="3">
-                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <img src="" class="block-img w-full h-full object-cover grayscale transition-all duration-700">
                     <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
                 </div>
             </div>
@@ -50,7 +51,6 @@ layout: default
 </div>
 
 <script>
-    // Pulls data from the markdown file's Front Matter
     const data = {
         projects: {{ page.projects | jsonify }},
         reading: {{ page.reading | jsonify }},
@@ -69,7 +69,8 @@ layout: default
 
         const blocks = document.querySelectorAll('.tetris-block');
         blocks.forEach((block, i) => {
-            const imgData = data.gallery[(offset + i) % data.gallery.length];
+            const imgIndex = (offset + i) % data.gallery.length;
+            const imgData = data.gallery[imgIndex];
             const img = block.querySelector('.block-img');
             const overlay = block.querySelector('.overlay');
             
@@ -79,6 +80,7 @@ layout: default
             
             let content = `<span class="text-[7px] tracking-[0.3em] uppercase opacity-40 mb-2 font-bold">${imgData.label}</span>`;
             const list = data[imgData.type];
+            
             if (Array.isArray(list)) {
                 list.forEach(item => content += `<div class="text-[10px] italic font-serif leading-none mb-1">${item}</div>`);
             } else {
@@ -90,7 +92,7 @@ layout: default
 
     document.getElementById('shuffle-btn').addEventListener('click', () => {
         rotation += 90;
-        offset = (offset + 1) % data.gallery.length;
+        offset = (offset + 4) % data.gallery.length;
         updateBlocks();
     });
 
