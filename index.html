@@ -44,7 +44,7 @@ layout: default
     </div>
 </section>
 
-<div class="section-divider"></div>
+<div class="section-divider" style="border-top: 1px solid #F0F0F0; width: 100%; margin: 4rem 0;"></div>
 
 <section id="about" class="min-h-screen py-32 px-[10vw] flex flex-col justify-between">
     <div class="max-w-xl">
@@ -52,7 +52,6 @@ layout: default
         <div class="text-lg text-gray-500 font-light leading-relaxed lowercase">
             <p>after months of planning, overthinking, and a considerable amount of late night music dives, it's finally time for the little blog to be live :]</p>
             <p class="mt-4">think of this as a refined version of the notes app. a space for documenting stuff, projects, shiny things, or whatever else has my attention.</p>
-            <p class="mt-4">read what you like, skim what you don't... this space is for me first, second for anyone else.</p>
             <p class="mt-4">welcome<3</p>
         </div>
     </div>
@@ -67,14 +66,14 @@ layout: default
     </div>
 </section>
 
-<div class="section-divider"></div>
+<div class="section-divider" style="border-top: 1px solid #F0F0F0; width: 100%; margin: 4rem 0;"></div>
 
 <section id="evergreens" class="min-h-screen py-32 px-[10vw]">
     <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">evergreens</h2>
     <div class="space-y-0">
       {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
       {% for post in artifacts %}
-        <div class="essay-preview" style="padding: 1.5rem 0;">
+        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0;">
           <div class="essay-info">
             <div class="essay-date">{{ post.date | date: "%Y.%m.%d" }}</div>
             <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
@@ -92,14 +91,14 @@ layout: default
     </div>
 </section>
 
-<div class="section-divider"></div>
+<div class="section-divider" style="border-top: 1px solid #F0F0F0; width: 100%; margin: 4rem 0;"></div>
 
 <section id="projects" class="min-h-screen py-32 px-[10vw]">
     <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">projects</h2>
     <div class="space-y-0">
       {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
       {% for post in projects %}
-        <div class="essay-preview" style="padding: 1.5rem 0;">
+        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0;">
           <div class="essay-info">
             <div class="essay-date">{{ post.status | default: "Internal Build" }}</div>
             <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
@@ -117,7 +116,7 @@ layout: default
     </div>
 </section>
 
-<div class="section-divider"></div>
+<div class="section-divider" style="border-top: 1px solid #F0F0F0; width: 100%; margin: 4rem 0;"></div>
 
 <section id="spotlights" class="min-h-screen py-32 px-[10vw]">
     <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">spotlights</h2>
