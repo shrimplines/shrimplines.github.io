@@ -1,0 +1,99 @@
+---
+layout: default
+---
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<div class="min-h-screen bg-white text-[#1A1A1A] font-sans lowercase selection:bg-black selection:text-white overflow-hidden relative">
+    
+    <nav class="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-50">
+        <a href="/recaps" class="flex items-center gap-2 text-[10px] tracking-[0.3em] text-gray-400 hover:text-black transition-colors uppercase font-bold no-underline">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> archives
+        </a>
+        <div class="text-right">
+            <h1 class="text-5xl font-serif italic tracking-tighter leading-none mb-1">{{ page.title }}</h1>
+            <div class="text-[10px] tracking-[0.4em] text-gray-200 uppercase font-mono">type_04.tetrimino</div>
+        </div>
+    </nav>
+
+    <main class="relative h-screen w-full flex flex-col items-center justify-center">
+        <div id="tetris-container" class="relative transition-transform duration-500 ease-in-out" style="transform: rotate(0deg)">
+            <div class="grid grid-cols-3 gap-3 w-[350px] md:w-[500px]">
+                <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="0">
+                    <img src="" class="block-img w-full h-full object-cover grayscale transition-opacity duration-300">
+                    <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
+                </div>
+                <div class="aspect-square opacity-0 pointer-events-none"></div>
+                <div class="aspect-square opacity-0 pointer-events-none"></div>
+                <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="1">
+                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
+                </div>
+                <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="2">
+                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
+                </div>
+                <div class="tetris-block aspect-square bg-gray-50 relative group cursor-crosshair overflow-hidden border border-gray-100 shadow-sm" data-index="3">
+                    <img src="" class="block-img w-full h-full object-cover grayscale">
+                    <div class="overlay absolute inset-0 bg-white/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all p-4 flex flex-col justify-center"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <button id="shuffle-btn" class="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-95 bg-white shadow-sm group">
+                <i data-lucide="rotate-cw" class="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"></i>
+            </button>
+            <span class="text-[8px] tracking-[0.4em] text-gray-300 uppercase font-bold">shuffle</span>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Pulls data from the markdown file's Front Matter
+    const data = {
+        projects: {{ page.projects | jsonify }},
+        reading: {{ page.reading | jsonify }},
+        summary: {{ page.summary | jsonify }},
+        random: {{ page.random | jsonify }},
+        vitals: {{ page.vitals | jsonify }},
+        gallery: {{ page.gallery | jsonify }}
+    };
+
+    let rotation = 0;
+    let offset = 0;
+
+    function updateBlocks() {
+        const container = document.getElementById('tetris-container');
+        container.style.transform = `rotate(${rotation}deg)`;
+
+        const blocks = document.querySelectorAll('.tetris-block');
+        blocks.forEach((block, i) => {
+            const imgData = data.gallery[(offset + i) % data.gallery.length];
+            const img = block.querySelector('.block-img');
+            const overlay = block.querySelector('.overlay');
+            
+            img.style.transform = `rotate(-${rotation}deg)`;
+            overlay.style.transform = `rotate(-${rotation}deg)`;
+            img.src = imgData.src;
+            
+            let content = `<span class="text-[7px] tracking-[0.3em] uppercase opacity-40 mb-2 font-bold">${imgData.label}</span>`;
+            const list = data[imgData.type];
+            if (Array.isArray(list)) {
+                list.forEach(item => content += `<div class="text-[10px] italic font-serif leading-none mb-1">${item}</div>`);
+            } else {
+                content += `<p class="text-[9px] italic font-serif leading-tight">${list}</p>`;
+            }
+            overlay.innerHTML = content;
+        });
+    }
+
+    document.getElementById('shuffle-btn').addEventListener('click', () => {
+        rotation += 90;
+        offset = (offset + 1) % data.gallery.length;
+        updateBlocks();
+    });
+
+    lucide.createIcons();
+    updateBlocks();
+</script>
