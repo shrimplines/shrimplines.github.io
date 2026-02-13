@@ -73,19 +73,20 @@ layout: default
     <div class="space-y-0">
       {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
       {% for post in artifacts %}
-        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: center;">
-          <div class="essay-info" style="flex: 1;">
+        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: flex-start;">
+          <div class="essay-info" style="flex: 1; padding-right: 2rem;">
             <div class="essay-date" style="font-size: 10px; color: #AAAAAA; margin-bottom: 4px;">{{ post.date | date: "%Y.%m.%d" }}</div>
-            <a href="{{ post.url | relative_url }}" class="essay-title lowercase" style="font-size: 1.75rem; font-weight: 300; display: block;">{{ post.title }}</a>
-            <div class="essay-description lowercase" style="font-size: 13px; color: #666666;">{{ post.description }}</div>
+            <a href="{{ post.url | relative_url }}" class="essay-title lowercase" style="font-size: 1.75rem; font-weight: 300; display: block; margin-bottom: 8px;">{{ post.title }}</a>
+            <div class="essay-description lowercase" style="font-size: 13px; color: #666666; max-width: 500px; line-height: 1.5;">{{ post.description }}</div>
           </div>
 
-          <div class="essay-image-area" style="display: flex; align-items: center; gap: 4rem;">
-            {% if post.image %}
-               <img src="{{ post.image | relative_url }}" class="w-32 h-20 object-cover border border-gray-100">
-            {% endif %}
-            <a href="{{ post.url | relative_url }}" class="open-log-btn" style="border: 1px solid #1A1A1A; padding: 0.5rem 1rem; font-size: 10px; text-transform: uppercase; white-space: nowrap;">open log</a>
+          {% if post.image %}
+          <div class="essay-image-side" style="flex-shrink: 0;">
+             <a href="{{ post.url | relative_url }}">
+                <img src="{{ post.image | relative_url }}" class="w-40 h-28 object-cover grayscale hover:grayscale-0 transition-all duration-500">
+             </a>
           </div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
@@ -98,19 +99,20 @@ layout: default
     <div class="space-y-0">
       {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
       {% for post in projects %}
-        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: center;">
-          <div class="essay-info" style="flex: 1;">
-            <div class="essay-date" style="font-size: 10px; color: #AAAAAA; margin-bottom: 4px;">{{ post.status | default: "Internal Build" }}</div>
-            <a href="{{ post.url | relative_url }}" class="essay-title lowercase" style="font-size: 1.75rem; font-weight: 300; display: block;">{{ post.title }}</a>
-            <div class="essay-description lowercase" style="font-size: 13px; color: #666666;">{{ post.description }}</div>
+        <div class="essay-preview" style="padding: 1.5rem 0; border-bottom: 1px solid #F0F0F0; display: flex; justify-content: space-between; align-items: flex-start;">
+          <div class="essay-info" style="flex: 1; padding-right: 2rem;">
+            <div class="essay-date" style="font-size: 10px; color: #AAAAAA; margin-bottom: 4px;">{{ post.status | default: "build log" }}</div>
+            <a href="{{ post.url | relative_url }}" class="essay-title lowercase" style="font-size: 1.75rem; font-weight: 300; display: block; margin-bottom: 8px;">{{ post.title }}</a>
+            <div class="essay-description lowercase" style="font-size: 13px; color: #666666; max-width: 500px; line-height: 1.5;">{{ post.description }}</div>
           </div>
 
-          <div class="essay-image-area" style="display: flex; align-items: center; gap: 4rem;">
-            {% if post.image %}
-               <img src="{{ post.image | relative_url }}" class="w-32 h-20 object-cover border border-gray-100">
-            {% endif %}
-            <a href="{{ post.url | relative_url }}" class="open-log-btn" style="border: 1px solid #1A1A1A; padding: 0.5rem 1rem; font-size: 10px; text-transform: uppercase; white-space: nowrap;">view build</a>
+          {% if post.image %}
+          <div class="essay-image-side" style="flex-shrink: 0;">
+             <a href="{{ post.url | relative_url }}">
+                <img src="{{ post.image | relative_url }}" class="w-40 h-28 object-cover grayscale hover:grayscale-0 transition-all duration-500">
+             </a>
           </div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
