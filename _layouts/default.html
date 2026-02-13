@@ -40,15 +40,6 @@
         }
         .nav-link.active, .nav-link:hover { color: #1A1A1A; }
 
-        .sidebar-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #CCCCCC;
-            margin-bottom: 1rem;
-            margin-top: 2rem;
-        }
-
         /* Essay Preview Styles */
         .essay-preview {
             display: flex;
@@ -106,18 +97,7 @@
             <a href="#evergreens" data-url="/artifacts" class="nav-link">evergreens</a>
             <a href="#projects" data-url="/projects" class="nav-link">projects</a>
             <a href="#spotlights" data-url="/spotlights" class="nav-link">spotlights</a>
-        </nav>
-
-        <div class="sidebar-label">recaps</div>
-        <nav class="flex flex-col space-y-3">
-            {% assign recaps = site.posts | where_exp: "item", "item.categories contains 'recaps'" %}
-            {% for post in recaps %}
-                <a href="{{ post.url | relative_url }}" class="nav-link">{{ post.date | date: "%B %Y" }}</a>
-            {% endfor %}
-            
-            {% if recaps.size == 0 %}
-                <span class="nav-link" style="opacity: 0.5;">coming soon...</span>
-            {% endif %}
+            <a href="/recaps" class="nav-link">monthly recap</a>
         </nav>
     </aside>
 
