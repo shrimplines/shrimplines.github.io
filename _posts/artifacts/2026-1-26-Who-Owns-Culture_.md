@@ -1,8 +1,10 @@
 ---
 layout: post
 title: "Atomic Apes - Who owns culture?"
-date: 2025-1-27
+date: 2026-01-27
 categories: artifacts
+description: "Do we really own the things we make... if anything at all?"
+image: "/assets/images/posts/apes-thumbnail.png"
 ---
 
 Who owns culture?
