@@ -1,0 +1,28 @@
+---
+layout: default
+title: monthly recaps
+---
+
+<div class="py-20 px-[5vw]">
+    <h1 class="text-6xl italic mb-20" style="font-family: 'Cormorant Garamond', serif;">archives</h1>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-16">
+        {% assign recaps = site.posts | where_exp: "item", "item.categories contains 'recaps'" %}
+        {% for post in recaps %}
+        <a href="{{ post.url | relative_url }}" class="group block">
+            <div class="relative w-32 h-40 mb-6 group-hover:scale-105 transition-transform duration-500">
+                <div class="grid grid-cols-3 gap-1 bg-gray-100 p-1 border border-gray-200 shadow-sm">
+                    <div class="aspect-square bg-black"></div>
+                    <div class="aspect-square opacity-0"></div>
+                    <div class="aspect-square opacity-0"></div>
+                    <div class="aspect-square bg-black"></div>
+                    <div class="aspect-square bg-black"></div>
+                    <div class="aspect-square bg-black"></div>
+                </div>
+            </div>
+            <h3 class="text-xl italic" style="font-family: 'Cormorant Garamond', serif;">{{ post.date | date: "%B" }}</h3>
+            <p class="text-[10px] tracking-widest text-gray-400 uppercase">{{ post.date | date: "%Y" }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
