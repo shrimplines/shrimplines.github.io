@@ -78,18 +78,25 @@ layout: default
 
 <section id="evergreens" class="min-h-screen py-32 px-[10vw]">
     <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">evergreens</h2>
-    <div class="space-y-4">
+    <div class="space-y-0">
       {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
       {% for post in artifacts %}
-        <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.date | date: "%Y.%m.%d" }}</span>
-                    <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
-                </div>
-                <div class="text-[10px] border border-current px-3 py-1 uppercase">Open Log</div>
+        <div class="essay-preview">
+          <div class="essay-info">
+            <div class="essay-date">{{ post.date | date: "%Y.%m.%d" }}</div>
+            <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
+            <div class="essay-description lowercase">{{ post.description }}</div>
+          </div>
+
+          <div class="essay-image-area">
+            <a href="{{ post.url | relative_url }}" class="open-log-btn">open log</a>
+            {% if post.image %}
+            <div class="postcard-container" style="padding: 10px;">
+               <img src="{{ post.image | relative_url }}" class="pixel-image no-pixel" style="width: 80px; height: 50px;">
             </div>
-        </a>
+            {% endif %}
+          </div>
+        </div>
       {% endfor %}
     </div>
 </section>
@@ -98,19 +105,25 @@ layout: default
 
 <section id="projects" class="min-h-screen py-32 px-[10vw]">
     <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">projects</h2>
-    <div class="grid grid-cols-1 gap-4">
+    <div class="space-y-0">
       {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
       {% for post in projects %}
-        <a href="{{ post.url | relative_url }}" class="group block border border-gray-100 p-8 hover:bg-black hover:text-white transition-all duration-500">
-          <div class="flex justify-between items-start">
-            <div>
-              <span class="text-[10px] opacity-50 uppercase tracking-widest">{{ post.status | default: "Internal Build" }}</span>
-              <h3 class="text-4xl font-light tracking-tight mt-1">{{ post.title }}</h3>
-              <p class="text-gray-400 font-light mt-4 max-w-xl lowercase leading-relaxed">{{ post.description }}</p>
-            </div>
-            <div class="text-[10px] border border-current px-3 py-1 uppercase opacity-20 group-hover:opacity-100">View Build</div>
+        <div class="essay-preview">
+          <div class="essay-info">
+            <div class="essay-date">{{ post.status | default: "Internal Build" }}</div>
+            <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
+            <div class="essay-description lowercase">{{ post.description }}</div>
           </div>
-        </a>
+
+          <div class="essay-image-area">
+            <a href="{{ post.url | relative_url }}" class="open-log-btn">view build</a>
+            {% if post.image %}
+            <div class="postcard-container" style="padding: 10px;">
+               <img src="{{ post.image | relative_url }}" class="pixel-image no-pixel" style="width: 80px; height: 50px;">
+            </div>
+            {% endif %}
+          </div>
+        </div>
       {% endfor %}
     </div>
 </section>
@@ -136,6 +149,3 @@ layout: default
         {% endfor %}
     </div>
 </section>
-
-
-
