@@ -51,22 +51,15 @@ layout: default
         <h2 class="text-5xl mb-12 italic" style="font-family: 'Cormorant Garamond', serif;">about</h2>
         <div class="text-lg text-gray-500 font-light leading-relaxed lowercase">
             <p>after months of planning, overthinking, and a considerable amount of late night music dives, it's finally time for the little blog to be live :]</p>
-            
-            <p class="mt-4">think of this as a refined version of the notes app. a space for documenting stuff, projects, shiny things, or whatever else has my attention. little snapshots of my mind, organized enough to make sense of later.</p>
-            
-            <p class="mt-4">some posts are quick reflections, others projects updates, others observations i don't want to forget. all of it lives here, ready for me to revisit or you to stumble across.</p>
-            
+            <p class="mt-4">think of this as a refined version of the notes app. a space for documenting stuff, projects, shiny things, or whatever else has my attention.</p>
             <p class="mt-4">read what you like, skim what you don't... this space is for me first, second for anyone else.</p>
-            
             <p class="mt-4">welcome<3</p>
         </div>
     </div>
 
     <div class="flex flex-col items-center mt-20">
-        <div class="postcard-container postcard-stamp-edge">
-            <div class="w-80 h-52 overflow-hidden border border-gray-100 bg-white group">
-                <img src="/assets/images/home/seattle.jpg" class="pixel-image">
-            </div>
+        <div class="w-80 h-52 overflow-hidden border border-gray-100 bg-white">
+            <img src="/assets/images/home/seattle.jpg" class="pixel-image">
         </div>
         <div class="mt-6 text-xl text-gray-400 italic" style="font-family: 'Cormorant Garamond', serif;">
             made with <span class="text-red-300">♡</span> in seattle
@@ -81,7 +74,7 @@ layout: default
     <div class="space-y-0">
       {% assign artifacts = site.posts | where_exp: "item", "item.categories contains 'artifacts'" %}
       {% for post in artifacts %}
-        <div class="essay-preview">
+        <div class="essay-preview" style="padding: 1.5rem 0;">
           <div class="essay-info">
             <div class="essay-date">{{ post.date | date: "%Y.%m.%d" }}</div>
             <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
@@ -91,9 +84,7 @@ layout: default
           <div class="essay-image-area">
             <a href="{{ post.url | relative_url }}" class="open-log-btn">open log</a>
             {% if post.image %}
-            <div class="postcard-container" style="padding: 10px;">
-               <img src="{{ post.image | relative_url }}" class="pixel-image no-pixel" style="width: 80px; height: 50px;">
-            </div>
+               <img src="{{ post.image | relative_url }}" class="w-24 h-16 object-cover border border-gray-100">
             {% endif %}
           </div>
         </div>
@@ -108,7 +99,7 @@ layout: default
     <div class="space-y-0">
       {% assign projects = site.posts | where_exp: "item", "item.categories contains 'projects'" %}
       {% for post in projects %}
-        <div class="essay-preview">
+        <div class="essay-preview" style="padding: 1.5rem 0;">
           <div class="essay-info">
             <div class="essay-date">{{ post.status | default: "Internal Build" }}</div>
             <a href="{{ post.url | relative_url }}" class="essay-title lowercase">{{ post.title }}</a>
@@ -118,9 +109,7 @@ layout: default
           <div class="essay-image-area">
             <a href="{{ post.url | relative_url }}" class="open-log-btn">view build</a>
             {% if post.image %}
-            <div class="postcard-container" style="padding: 10px;">
-               <img src="{{ post.image | relative_url }}" class="pixel-image no-pixel" style="width: 80px; height: 50px;">
-            </div>
+               <img src="{{ post.image | relative_url }}" class="w-24 h-16 object-cover border border-gray-100">
             {% endif %}
           </div>
         </div>
