@@ -3,12 +3,14 @@ layout: default
 title: monthly recaps
 ---
 
-<div class="py-20 px-[10vw] w-[calc(100vw-240px)]">
+<section class="min-h-screen flex flex-col justify-center px-[10vw]">
     <header class="mb-20">
-        <h1 class="text-8xl lowercase mb-8 tracking-tighter leading-[0.85]" style="font-family: 'Cormorant Garamond', serif;">archives</h1>
+        <h1 class="text-8xl lowercase mb-8 tracking-tighter leading-[0.85]" style="font-family: 'Cormorant Garamond', serif;">
+            archives
+        </h1>
     </header>
     
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-16 max-w-5xl">
         {% assign recaps = site.posts | where_exp: "item", "item.categories contains 'recaps'" %}
         {% for post in recaps %}
         <a href="{{ post.url | relative_url }}" class="group block">
@@ -17,9 +19,9 @@ title: monthly recaps
                     <div class="aspect-square bg-black"></div>
                     <div class="aspect-square opacity-0"></div>
                     <div class="aspect-square opacity-0"></div>
-                    <div class="bg-black aspect-square"></div>
-                    <div class="bg-black aspect-square"></div>
-                    <div class="bg-black aspect-square"></div>
+                    <div class="aspect-square bg-black"></div>
+                    <div class="aspect-square bg-black"></div>
+                    <div class="aspect-square bg-black"></div>
                 </div>
             </div>
             <h3 class="text-xl italic" style="font-family: 'Cormorant Garamond', serif;">{{ post.date | date: "%B" }}</h3>
@@ -27,4 +29,4 @@ title: monthly recaps
         </a>
         {% endfor %}
     </div>
-</div>
+</section>
