@@ -11,7 +11,7 @@ title: monthly recaps
     <div class="grid grid-cols-2 md:grid-cols-4 gap-16">
         {% assign recaps = site.posts | where_exp: "item", "item.categories contains 'recaps'" %}
         {% for post in recaps %}
-        <a href="{{ post.url | relative_url }}" class="group block no-underline">
+        <a href="{{ post.url | relative_url }}" class="group block">
             <div class="relative w-32 h-40 mb-6 group-hover:scale-105 transition-transform duration-500">
                 <div class="grid grid-cols-3 gap-1 bg-gray-100 p-1 border border-gray-200 shadow-sm">
                     <div class="aspect-square bg-black"></div>
@@ -22,8 +22,8 @@ title: monthly recaps
                     <div class="aspect-square bg-black"></div>
                 </div>
             </div>
-            <h3 class="text-xl italic text-[#1A1A1A]" style="font-family: 'Cormorant Garamond', serif;">{{ post.date | date: "%B" }}</h3>
-            <p class="text-[10px] tracking-widest text-gray-400 uppercase font-mono mt-1">{{ post.date | date: "%Y" }}</p>
+            <h3 class="text-xl italic" style="font-family: 'Cormorant Garamond', serif;">{{ post.date | date: "%B" }}</h3>
+            <p class="text-[10px] tracking-widest text-gray-400 uppercase font-mono">{{ post.date | date: "%Y" }}</p>
         </a>
         {% endfor %}
     </div>
